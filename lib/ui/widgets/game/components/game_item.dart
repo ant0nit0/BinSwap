@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/models/item.dart';
+import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/widgets/game/components/game_bin.dart';
 import 'package:recycling_master/ui/widgets/game/kgame.dart';
 
@@ -35,6 +35,7 @@ class GameItem extends SpriteComponent
         game.lifeNotifier.value -= 1;
         if (game.lifeNotifier.value == 0) {
           game.pauseEngine();
+          game.overlays.add(GameScreen.endGameDialogKey);
         }
       }
       gameRef.remove(this);
@@ -49,22 +50,31 @@ class GameItem extends SpriteComponent
       await Flame.images.load('icons/${item.category.name}/${item.name}.png'),
       srcSize: Vector2(136, 136),
     );
-    // Adjust the size to account for padding
+
+    // Adjust the size  for padding
     size = Vector2(sprite!.originalSize.x + padding * 2,
         sprite!.originalSize.y + padding * 2);
 
+    // Randomly choose a column index
     final rand = Random().nextInt(gameRef.state.nbCol);
-
+    // The position of the top left corner of the random column
     final columnPosition = gameRef.size.x * (1 / gameRef.state.nbCol) * rand;
+
+    // To center items, we need to first add the half a to the left position
+    // and then subtract half of the item size.
+    // In this way, the center of the item will be at the center of the column
     final halfOfColumnWidth = (gameRef.size.x * (1 / gameRef.state.nbCol)) / 2;
     final halfOfItemSize = (size.x / 2 - padding) / 2;
-
+    // Niw we can set the position of the item
     position = Vector2(
       columnPosition + halfOfColumnWidth - halfOfItemSize,
-      gameRef.size.y * .25 + (padding + size.y / 2) / 2, // - size.y,
+      gameRef.size.y * .25 + (padding + size.y / 2) / 2,
     );
 
-    await add(CircleHitbox(radius: (size.x / 2)));
+    await add(CircleHitbox(
+      radius: (size.x / 2 + padding * 2),
+      anchor: Anchor.center,
+    ));
   }
 
   @override
