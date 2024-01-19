@@ -23,12 +23,13 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buttons(BuildContext context) => Positioned(
         bottom: kDefaultSmallPadding,
-        left: 0,
-        right: 0,
+        left: kDefaultLargePadding,
+        right: kDefaultLargePadding,
         child: Column(
           children: [
             KButton.blue(
               text: 'Play',
+              isExpanded: false,
               onPressed: () =>
                   navigatorKey.currentState?.pushNamed(Routes.gameScreen),
             ),
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const KButton.green(
               text: 'About',
+              isExpanded: false,
             ),
           ],
         ).separated(
