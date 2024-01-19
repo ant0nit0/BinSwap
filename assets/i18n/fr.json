@@ -32,5 +32,14 @@
                 "how-to": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !"
             }
         }     
-}
+    },
+    "endGame": {
+        "title": "GAME OVER",
+        "score": "Votre score : ",
+        "highScore": "Votre meilleur score : ",
+        "buttons": {
+            "restart": "Recommencer",
+            "home": "Accueil"
+        }
+    }
 }
