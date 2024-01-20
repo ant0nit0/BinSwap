@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/theme.dart';
 

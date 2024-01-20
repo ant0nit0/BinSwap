@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/kgame.dart';
 
 class GameBackground extends SpriteComponent with HasGameRef<KGame> {
   GameBackground();

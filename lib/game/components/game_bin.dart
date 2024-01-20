@@ -4,7 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:recycling_master/models/bin.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class GameBin extends SpriteComponent

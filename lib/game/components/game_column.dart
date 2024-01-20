@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/colors.dart';
 
 class GameColumn extends PositionComponent with HasGameRef<KGame> {

@@ -2,8 +2,8 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/ui/screens/end_game_screen.dart';
-import 'package:recycling_master/ui/widgets/game/game_header.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/game_header.dart';
+import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/constants.dart';
 
 class GameScreen extends StatelessWidget {

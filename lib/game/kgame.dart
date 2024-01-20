@@ -5,11 +5,11 @@ import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/models/game_state.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_background.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_bin.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_column.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_item.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_life_bar.dart';
+import 'package:recycling_master/game/components/game_background.dart';
+import 'package:recycling_master/game/components/game_bin.dart';
+import 'package:recycling_master/game/components/game_column.dart';
+import 'package:recycling_master/game/components/game_item.dart';
+import 'package:recycling_master/game/components/game_life_bar.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/utils.dart';
 

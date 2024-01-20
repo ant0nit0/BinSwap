@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recycling_master/ui/widgets/game/game_top_icons.dart';
-import 'package:recycling_master/ui/widgets/game/score_widget.dart';
-import 'package:recycling_master/ui/widgets/game/timer_widget.dart';
+import 'package:recycling_master/game/game_top_icons.dart';
+import 'package:recycling_master/game/score_widget.dart';
+import 'package:recycling_master/game/timer_widget.dart';
 import 'package:recycling_master/ui/widgets/ksvg.dart';
 import 'package:recycling_master/ui/widgets/rounded_icon_button.dart';
 import 'package:recycling_master/utils/theme.dart';

@@ -16,6 +16,6 @@ class GameState {
   const GameState({
     required this.bins,
     required this.items,
-    this.itemSpeed = 50,
+    this.itemSpeed = 100,
   }) : nbCol = bins.length;
 }

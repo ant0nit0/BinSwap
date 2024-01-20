@@ -7,8 +7,8 @@ import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
-import 'package:recycling_master/ui/widgets/game/components/game_bin.dart';
-import 'package:recycling_master/ui/widgets/game/kgame.dart';
+import 'package:recycling_master/game/components/game_bin.dart';
+import 'package:recycling_master/game/kgame.dart';
 
 class GameItem extends SpriteComponent
     with HasGameRef<KGame>, CollisionCallbacks {
