@@ -11,7 +11,7 @@ class GameTopIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding)
-          .copyWith(bottom: kDefaultSmallPadding),
+          .copyWith(top: kDefaultLargePadding),
       child: const Row(
         children: [
           RoundedIconButton(

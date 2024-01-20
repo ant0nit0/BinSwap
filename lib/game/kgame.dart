@@ -10,7 +10,9 @@ import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/components/game_column.dart';
 import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_life_bar.dart';
+import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/utils/constants.dart';
+import 'package:recycling_master/utils/theme.dart';
 import 'package:recycling_master/utils/utils.dart';
 
 class KGame extends FlameGame
@@ -67,6 +69,9 @@ class KGame extends FlameGame
 
     // Launch the spawing of the items
     await _initItemSpawner();
+
+    overlays.add(GameScreen.topIconsKey);
+    overlays.add(GameScreen.pausePlayKey);
   }
 
   Future<void> _loadTimeComponent() async {
@@ -82,7 +87,7 @@ class KGame extends FlameGame
 
     final timeComponent = TextComponent(
       text: timeText,
-      position: Vector2(30, 75),
+      position: Vector2(kDefaultPadding, size.y * 0.2),
       textRenderer: textRenderer,
     );
 
@@ -107,7 +112,7 @@ class KGame extends FlameGame
 
     final scoreComponent = TextComponent(
       text: scoreText,
-      position: Vector2.all(30),
+      position: Vector2(kDefaultPadding, size.y * 0.15),
       textRenderer: textRenderer,
     );
 
@@ -185,6 +190,13 @@ class KGame extends FlameGame
   @override
   void update(double dt) {
     super.update(dt);
+    // // Check if the game is playing
+    // if (isPlaying) {
+    //   // Update the time
+    //   _updateTime(dt);
+    // }
+
+    // Update the time
     timeNotifier.value += dt;
     // Set only 2 decimals and put a 0 before if the number is < 10
     timeNotifier.value = double.parse(timeNotifier.value.toStringAsFixed(2));

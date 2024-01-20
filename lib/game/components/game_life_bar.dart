@@ -10,7 +10,7 @@ class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
-    position = Vector2(kDefaultPadding, gameRef.size.y * 0.2);
+    position = Vector2(kDefaultPadding, gameRef.size.y * 0.23);
     size = Vector2(gameRef.size.x - 2 * kDefaultPadding, 8);
   }
 

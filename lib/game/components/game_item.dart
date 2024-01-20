@@ -12,7 +12,7 @@ import 'package:recycling_master/game/kgame.dart';
 
 class GameItem extends SpriteComponent
     with HasGameRef<KGame>, CollisionCallbacks {
-  static const double padding = 4.0;
+  static const double padding = 2.0;
   final Item item;
   final Color color;
 
@@ -31,7 +31,7 @@ class GameItem extends SpriteComponent
         gameRef.scoreNotifier.value += item.score;
       } else {
         // Wrong category, remove the score
-        // gameRef.score -= item.score;
+        gameRef.scoreNotifier.value = max(0, gameRef.scoreNotifier.value - 1);
         game.lifeNotifier.value -= 1;
         if (game.lifeNotifier.value == 0) {
           game.pauseEngine();

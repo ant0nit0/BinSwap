@@ -5,9 +5,6 @@ class GameState {
   /// The list of selected bins categories for the current game
   final List<Bin> bins;
 
-  /// The number of columns for the current game
-  final int nbCol;
-
   /// The speed of the items in the game
   final double itemSpeed;
 
@@ -17,5 +14,8 @@ class GameState {
     required this.bins,
     required this.items,
     this.itemSpeed = 100,
-  }) : nbCol = bins.length;
+  });
+
+  /// The number of columns for the current game
+  int get nbCol => bins.length;
 }

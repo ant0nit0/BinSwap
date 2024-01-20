@@ -1,25 +1,25 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:recycling_master/models/game_state.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/game/components/pause_button.dart';
+import 'package:recycling_master/game/game_top_icons.dart';
+import 'package:recycling_master/providers/game_state_provider.dart';
 import 'package:recycling_master/ui/screens/end_game_screen.dart';
 import 'package:recycling_master/game/game_header.dart';
 import 'package:recycling_master/game/kgame.dart';
-import 'package:recycling_master/utils/constants.dart';
+import 'package:recycling_master/utils/theme.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends HookConsumerWidget {
   const GameScreen({super.key});
 
   static const String endGameDialogKey = 'win_dialog';
+  static const String topIconsKey = 'top_icons';
+  static const String pausePlayKey = 'pause_play';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.of(context).size.width;
-    const bins = sampleBins;
-    final categories = bins.map((e) => e.category).toSet();
-    final items = allItems
-        .where((element) => categories.contains(element.category))
-        .toList();
-    final state = GameState(bins: bins, items: items);
+    final state = ref.watch(gameStateNotifierProvider);
     return Scaffold(
       body: Stack(
         children: [
@@ -34,6 +34,16 @@ class GameScreen extends StatelessWidget {
               overlayBuilderMap: {
                 endGameDialogKey: (BuildContext context, KGame game) {
                   return EndGameScreen(game.scoreNotifier.value, game: game);
+                },
+                topIconsKey: (BuildContext context, KGame game) {
+                  return const GameTopIcons();
+                },
+                pausePlayKey: (BuildContext context, KGame game) {
+                  return Positioned(
+                    top: MediaQuery.of(context).size.height * .15,
+                    right: kDefaultPadding,
+                    child: PauseButton(game),
+                  );
                 },
               },
             ),
