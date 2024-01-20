@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/components/pause_button.dart';
 import 'package:recycling_master/game/game_top_icons.dart';
-import 'package:recycling_master/providers/game_state_provider.dart';
+import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/ui/screens/end_game_screen.dart';
 import 'package:recycling_master/game/game_header.dart';
 import 'package:recycling_master/game/kgame.dart';
