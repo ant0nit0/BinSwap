@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
-import 'package:recycling_master/game/overlays/end_game_buttons.dart';
+import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
+import 'package:recycling_master/game/widgets/end_game_buttons.dart';
+import 'package:recycling_master/game/widgets/game_leaderboard.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
@@ -24,75 +26,34 @@ class EndGameScreen extends StatelessWidget {
       fontWeight: FontWeight.w600,
       color: neutralLight,
     );
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(.75),
-          ),
-          width: double.infinity,
-          padding: const EdgeInsets.all(kDefaultLargePadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                translate('endGame.title'),
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: neutralLight,
-                      fontSize: 36.0,
-                      fontFamily: 'LilitaOne',
-                    ),
-              ),
-              const SizedBox(height: kDefaultSmallPadding),
-              const Divider(
-                color: grayBorderColor,
-                thickness: 1.0,
-              ),
-              const SizedBox(height: kDefaultPadding),
-              Row(
-                children: [
-                  Text(
-                    translate('endGame.score'),
-                    style: textSyle,
-                  ),
-                  const SizedBox(width: kDefaultSmallPadding),
-                  Text(
-                    '$score',
-                    style: textSyle,
-                  ),
-                ],
-              ),
-              const SizedBox(height: kDefaultTinyPadding),
-              Row(
-                children: [
-                  Text(
-                    translate('endGame.highScore'),
-                    style: textSyle,
-                  ),
-                  const SizedBox(width: kDefaultSmallPadding),
-                  const Text(
-                    '0',
-                    style: textSyle,
-                  ),
-                ],
-              ),
-              const SizedBox(height: kDefaultLargePadding),
-              Container(
-                decoration: BoxDecoration(
-                  color: neutralLight,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                height: 260.0,
-                width: double.infinity,
-              ),
-              const SizedBox(height: kDefaultLargePadding),
-              const EndGameButtons(),
-            ],
-          ),
-        ),
+    return BlurredScaffold(
+      title: translate('endGame.title'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _texts(translate('endGame.score'), '$score', textSyle),
+          const SizedBox(height: kDefaultTinyPadding),
+          _texts(translate('endGame.highScore'), 'TO DO', textSyle),
+          const GameLeaderboard(),
+          const EndGameButtons(),
+        ],
       ),
+    );
+  }
+
+  Widget _texts(String text1, String text2, TextStyle ts) {
+    return Row(
+      children: [
+        Text(
+          text1,
+          style: ts,
+        ),
+        const SizedBox(width: kDefaultSmallPadding),
+        Text(
+          text2,
+          style: ts,
+        ),
+      ],
     );
   }
 }

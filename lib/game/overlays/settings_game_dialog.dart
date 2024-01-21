@@ -1,27 +1,16 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:recycling_master/utils/theme.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 
 class SettingsGameOverlay extends StatelessWidget {
   const SettingsGameOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(.75),
-          ),
-          width: double.infinity,
-          padding: const EdgeInsets.all(kDefaultLargePadding),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-        ),
+    return BlurredScaffold(
+      title: translate('game.settings.title'),
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
       ),
     );
   }
