@@ -1,8 +1,9 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:recycling_master/game/overlays/pause_button.dart';
-import 'package:recycling_master/game/overlays/game_top_icons.dart';
+import 'package:recycling_master/game/widgets/pause_button.dart';
+import 'package:recycling_master/game/widgets/game_top_icons.dart';
+import 'package:recycling_master/game/overlays/settings_game_dialog.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/game/overlays/end_game_screen.dart';
 import 'package:recycling_master/game/kgame.dart';
@@ -41,7 +42,7 @@ class GameScreen extends HookConsumerWidget {
                   );
                 },
                 settingsDialogKey: (BuildContext context, KGame game) {
-                  return Container();
+                  return const SettingsGameOverlay();
                 },
                 infosMainKey: (BuildContext context, KGame game) {
                   return Container();

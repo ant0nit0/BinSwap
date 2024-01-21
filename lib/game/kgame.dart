@@ -190,12 +190,6 @@ class KGame extends FlameGame
   @override
   void update(double dt) {
     super.update(dt);
-    // // Check if the game is playing
-    // if (isPlaying) {
-    //   // Update the time
-    //   _updateTime(dt);
-    // }
-
     // Update the time
     timeNotifier.value += dt;
     // Set only 2 decimals and put a 0 before if the number is < 10

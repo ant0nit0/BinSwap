@@ -21,7 +21,7 @@ class GameTopIcons extends StatelessWidget {
             icon: const KSVG('gear'),
             onPressed: () {
               game.pauseEngine();
-              game.overlays.add(GameScreen.endGameDialogKey);
+              game.overlays.add(GameScreen.settingsDialogKey);
             },
           ),
           const SizedBox(
@@ -44,7 +44,7 @@ class GameTopIcons extends StatelessWidget {
             ),
             onPressed: () {
               game.pauseEngine();
-              game.overlays.add(GameScreen.topIconsKey);
+              game.overlays.add(GameScreen.infosMainKey);
             },
           ),
         ],
