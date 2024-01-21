@@ -20,6 +20,7 @@ class GameTopIcons extends StatelessWidget {
           RoundedIconButton(
             icon: const KSVG('gear'),
             onPressed: () {
+              game.pauseEngine();
               game.overlays.add(GameScreen.endGameDialogKey);
             },
           ),
@@ -42,6 +43,7 @@ class GameTopIcons extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              game.pauseEngine();
               game.overlays.add(GameScreen.topIconsKey);
             },
           ),

@@ -7,7 +7,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 const defaultLife = 3;
 
-const sampleBins = [
+const allBins = [
   Bin(
     category: BinCategory.organics,
     color: BinColor.green,
@@ -20,10 +20,18 @@ const sampleBins = [
     category: BinCategory.glass,
     color: BinColor.gray,
   ),
-  // Bin(
-  //   category: BinCategory.papers,
-  //   color: BinColor.orange,
-  // ),
+  Bin(
+    category: BinCategory.papers,
+    color: BinColor.orange,
+  ),
+  Bin(
+    category: BinCategory.textiles,
+    color: BinColor.purple,
+  ),
+  Bin(
+    category: BinCategory.electronics,
+    color: BinColor.red,
+  ),
 ];
 
 final electronicsItems = [

@@ -3,10 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
-import 'package:recycling_master/ui/widgets/kbutton.dart';
+import 'package:recycling_master/game/overlays/end_game_buttons.dart';
 import 'package:recycling_master/utils/colors.dart';
-import 'package:recycling_master/utils/constants.dart';
-import 'package:recycling_master/utils/router.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class EndGameScreen extends StatelessWidget {
@@ -90,33 +88,7 @@ class EndGameScreen extends StatelessWidget {
                 width: double.infinity,
               ),
               const SizedBox(height: kDefaultLargePadding),
-              KButton.green(
-                text: translate('endGame.buttons.restart'),
-                onPressed: () {
-                  // Pop all the routes until the first one
-                  // to avoid having multiple game screens
-                  navigatorKey.currentState
-                      ?.popUntil((route) => route.isFirst && route.isCurrent);
-                  // Push the game screen
-                  navigatorKey.currentState?.pushNamed(
-                    Routes.gameScreen,
-                  );
-                },
-              ),
-              const SizedBox(height: kDefaultPadding),
-              KButton.blue(
-                text: translate('endGame.buttons.home'),
-                onPressed: () {
-                  // Pop all the routes until the first one
-                  // to avoid having multiple game screens
-                  navigatorKey.currentState
-                      ?.popUntil((route) => route.isFirst && route.isCurrent);
-                  // Push the home screen
-                  navigatorKey.currentState?.pushReplacementNamed(
-                    Routes.homeScreen,
-                  );
-                },
-              ),
+              const EndGameButtons(),
             ],
           ),
         ),

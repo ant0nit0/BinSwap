@@ -1,3 +1,4 @@
+import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,19 +9,32 @@ part 'game_state_notifier.g.dart';
 class GameStateNotifier extends _$GameStateNotifier {
   @override
   GameState build() {
-    initState();
+    _initState();
     return state;
   }
 
-  void initState() {
-    const bins = sampleBins;
+  void _initState() {
+    final bins = chooseBins();
     final categories = bins.map((e) => e.category).toSet();
     final items = allItems
         .where((element) => categories.contains(element.category))
         .toList();
+
     state = GameState(
       bins: bins,
       items: items,
     );
+  }
+
+  List<Bin> chooseBins() {
+    List<Bin> bins = [...allBins];
+    // Randomly pick 3 bins
+    bins.shuffle();
+    bins.removeRange(3, bins.length);
+    return bins;
+  }
+
+  void refresh() {
+    _initState();
   }
 }

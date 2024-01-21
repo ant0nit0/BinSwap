@@ -27,7 +27,6 @@ class GameItem extends SpriteComponent
     if (other is GameBin) {
       // Same category, add the score
       if (other.bin.category == item.category) {
-        print('Item falls in the correct bin : ${item.category.name}');
         gameRef.scoreNotifier.value += item.score;
       } else {
         // Wrong category, remove the score
