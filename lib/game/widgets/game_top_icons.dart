@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/game/overlays/infos_main_overlay.dart';
+import 'package:recycling_master/game/widgets/sound_toggle.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/widgets/ksvg.dart';
 import 'package:recycling_master/ui/widgets/rounded_icon_button.dart';
@@ -27,11 +29,7 @@ class GameTopIcons extends StatelessWidget {
           const SizedBox(
             width: kDefaultSmallPadding,
           ),
-          RoundedIconButton(
-            // FIXME: when sound is implemented
-            icon: const KSVG('sound_on'),
-            onPressed: () {},
-          ),
+          const SoundToggleButton(),
           const Spacer(),
           RoundedIconButton(
             icon: const Text(
@@ -42,9 +40,15 @@ class GameTopIcons extends StatelessWidget {
                 fontFamily: 'LilitaOne',
               ),
             ),
-            onPressed: () {
+            onPressed: () async {
               game.pauseEngine();
-              game.overlays.add(GameScreen.infosMainKey);
+              await showModalBottomSheet(
+                context: context,
+                builder: (ctx) {
+                  return InfosMainOverlay(game);
+                },
+              );
+              game.resumeEngine();
             },
           ),
         ],

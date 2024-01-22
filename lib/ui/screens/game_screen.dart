@@ -16,7 +16,6 @@ class GameScreen extends HookConsumerWidget {
   static const String topIconsKey = 'top_icons';
   static const String pausePlayKey = 'pause_play';
   static const String settingsDialogKey = 'settings_dialog';
-  static const String infosMainKey = 'infos_main';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,10 +41,7 @@ class GameScreen extends HookConsumerWidget {
                   );
                 },
                 settingsDialogKey: (BuildContext context, KGame game) {
-                  return const SettingsGameOverlay();
-                },
-                infosMainKey: (BuildContext context, KGame game) {
-                  return Container();
+                  return SettingsGameOverlay(game);
                 },
               },
             ),

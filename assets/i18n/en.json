@@ -25,11 +25,42 @@
                 "current-title": "Dans la partie actuelle",
                 "other-title": "Les autres catégories"
             },
+            "buttons": {
+                "recycling": "Recycling guide",
+                "how-to": "How to play ?"
+            },
             "how-to-play": {
                 "title": "Comment jouer ?",
                 "goal-title": "Le but du jeu",
                 "goal-description": "Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
-                "how-to": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !"
+                "how-to-description": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !",
+                "how-to-title": "Okay, but how ?"
+            },
+            "bins": {
+                "plastics": {
+                    "title": "Plastics",
+                    "description": "Recycling plastics reduces pollution, conserves resources, and minimizes the impact on wildlife and the environment."
+                },
+                "organics": {
+                    "title": "Organics",
+                    "description": "Recycling organic waste into compost enriches soil, reduces the need for chemical fertilizers, and decreases methane emissions from landfills."
+                },
+                "electronics": {
+                    "title": "Electronics",
+                    "description": "Proper recycling of e-waste prevents the release of toxic substances into the environment and recovers valuable materials."
+                },
+                "glass": {
+                    "title": "Glass",
+                    "description": "Glass can be recycled indefinitely without loss of quality, reducing raw material use and lowering energy consumption."
+                },
+                "papers": {
+                    "title": "Papers",
+                    "description": "Recycling paper conserves trees and forest habitats, reduces greenhouse gas emissions, and saves energy compared to producing new paper."
+                },
+                "textiles": {
+                    "title": "Textiles",
+                    "description": "Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
+                }
             }
         }     
     },
