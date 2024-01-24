@@ -92,9 +92,9 @@ class BlurredScaffold extends StatelessWidget {
                 child: Padding(
                   padding: padding,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (title != null) ...[
+                        const SizedBox(height: kDefaultPadding),
                         Text(
                           title!,
                           style: Theme.of(context)
