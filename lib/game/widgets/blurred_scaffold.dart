@@ -41,6 +41,18 @@ class BlurredScaffold extends StatelessWidget {
   /// [onClose] should not be null if this is true.
   final bool automaticallyImplementClosing;
 
+  /// Path of the background image.
+  ///
+  /// If null, no image will be displayed.
+  ///
+  /// If provided, the image will be displayed behind the blur, in fullscreen.
+  final String? backgroundImagePath;
+
+  /// Main axis alignment of the [Column] that contains the [title] and the [child].
+  ///
+  /// Default is [MainAxisAlignment.start].
+  final MainAxisAlignment mainAxisAlignment;
+
   const BlurredScaffold({
     this.child,
     this.padding = const EdgeInsets.symmetric(
@@ -50,6 +62,8 @@ class BlurredScaffold extends StatelessWidget {
     this.bgOpacity = .75,
     this.sigma = 2.5,
     this.automaticallyImplementClosing = false,
+    this.backgroundImagePath,
+    this.mainAxisAlignment = MainAxisAlignment.start,
     this.title,
     this.onClose,
     super.key,
@@ -61,66 +75,74 @@ class BlurredScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
-      body: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(bgOpacity),
+      body: Stack(
+        children: [
+          if (backgroundImagePath != null)
+            Positioned.fill(
+              child: Image.asset(
+                backgroundImagePath!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(bgOpacity),
+                ),
+              ),
+            ),
           ),
-          width: double.infinity,
-          child: Stack(
-            children: [
-              if (automaticallyImplementClosing)
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  // We set it to top: 0 and right: 0 to use padding instead
-                  // This allow users to have a bigger tap detection on the icon
-                  child: GestureDetector(
-                    onTap: onClose,
-                    child: const Padding(
-                      padding: EdgeInsets.all(kDefaultPadding),
-                      child: KSVG(
-                        'close',
-                        color: neutralLight,
-                      ),
-                    ),
+          if (automaticallyImplementClosing)
+            Positioned(
+              top: 0,
+              right: 0,
+              // We set it to top: 0 and right: 0 to use padding instead
+              // This allow users to have a bigger tap detection on the icon
+              child: GestureDetector(
+                onTap: onClose,
+                child: const Padding(
+                  padding: EdgeInsets.all(kDefaultPadding),
+                  child: KSVG(
+                    'close',
+                    color: neutralLight,
                   ),
                 ),
-              Positioned.fill(
-                child: Padding(
-                  padding: padding,
-                  child: Column(
-                    children: [
-                      if (title != null) ...[
-                        const SizedBox(height: kDefaultPadding),
-                        Text(
-                          title!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(
+              ),
+            ),
+          Positioned.fill(
+            child: Padding(
+              padding: padding,
+              child: Column(
+                mainAxisAlignment: mainAxisAlignment,
+                children: [
+                  if (title != null) ...[
+                    const SizedBox(height: kDefaultPadding),
+                    Text(
+                      title!,
+                      style:
+                          Theme.of(context).textTheme.headlineLarge?.copyWith(
                                 color: neutralLight,
                                 fontSize: 36.0,
                                 fontFamily: 'LilitaOne',
                               ),
-                        ),
-                        const SizedBox(height: kDefaultSmallPadding),
-                        const Divider(
-                          color: grayBorderColor,
-                          thickness: 1.0,
-                        ),
-                        const SizedBox(height: kDefaultPadding),
-                      ],
-                      if (child != null) child!,
-                    ],
-                  ),
-                ),
+                    ),
+                    const SizedBox(height: kDefaultSmallPadding),
+                    const Divider(
+                      color: grayBorderColor,
+                      thickness: 1.0,
+                    ),
+                    const SizedBox(height: kDefaultPadding),
+                  ],
+                  if (child != null) child!,
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

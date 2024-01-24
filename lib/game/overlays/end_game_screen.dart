@@ -27,6 +27,7 @@ class EndGameScreen extends StatelessWidget {
       color: neutralLight,
     );
     return BlurredScaffold(
+      mainAxisAlignment: MainAxisAlignment.center,
       title: translate('endGame.title'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

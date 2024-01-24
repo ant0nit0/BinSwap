@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +20,11 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  // Transparent status bar
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final delegate = await LocalizationDelegate.create(
@@ -28,8 +36,17 @@ void main() async {
 }
 
 void appRunner(LocalizationDelegate delegate) async {
+  // Fetch the current language from the delegate
+  String currentLang = delegate.currentLocale.languageCode;
   initializeDateFormatting().then((_) => // For intl package
-      runApp(ProviderScope(child: LocalizedApp(delegate, const MyApp()))));
+
+      runApp(ProviderScope(
+
+          // Pass the current language to the LangProvider
+          overrides: [
+            langProvider.overrideWith((_) => LangProvider(currentLang)),
+          ],
+          child: LocalizedApp(delegate, const MyApp()))));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,8 +54,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var localizationDelegate = LocalizedApp.of(context).delegate;
     return MaterialApp(
-      title: 'MyApp',
+      title: 'Recycling Master',
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
           // FIXME: using a provider
@@ -46,6 +64,13 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        localizationDelegate
+      ],
+      supportedLocales: localizationDelegate.supportedLocales,
+      locale: localizationDelegate.currentLocale,
       initialRoute: Routes.homeScreen,
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,

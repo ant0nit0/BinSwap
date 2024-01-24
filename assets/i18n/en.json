@@ -2,38 +2,38 @@
     "home": {
         "title": "Recycling Master",
         "buttons": {
-            "play": "Jouer",
-            "settings": "Paramètres",
-            "about": "A propos"
+            "play": "Play",
+            "settings": "Settings",
+            "about": "About"
         }	
     },
     "game": {
-        "score": "Sore",
-        "time": "Temps",
+        "score": "Score : ",
+        "time": "Time : ",
         "settings": {
-            "title": "Paramètres",
-            "lang": "Langue",
+            "title": "Settings",
+            "lang": "Lang",
             "audio": "Audio",
-            "restart": "Recommencer",
-        "quit": "Quitter"
+            "restart": "Restart",
+            "quit": "Quit"
         },
         "infos": {
-            "title": "Besoin d'aide ?",
+            "title": "Need some help ?",
             "recycling-guide": {
-                "title": "Guide de recyclage",
+                "title": "Recycling guide",
                 "note": "Note : If you want to change the color attributions, it is possible after your game in the settings screen",
-                "current-title": "Dans la partie actuelle",
-                "other-title": "Les autres catégories"
+                "current-title": "In the current game",
+                "other-title": "Other categories"
             },
             "buttons": {
                 "recycling": "Recycling guide",
                 "how-to": "How to play ?"
             },
             "how-to-play": {
-                "title": "Comment jouer ?",
-                "goal-title": "Le but du jeu",
-                "goal-description": "Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
-                "how-to-description": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !",
+                "title": "How to play ?",
+                "goal-title": "Game's goal",
+                "goal-description": "TODO: Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
+                "how-to-description": "TODO: Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !",
                 "how-to-title": "Okay, but how ?"
             },
             "bins": {
@@ -69,8 +69,8 @@
         "score": "Your score :",
         "highScore": "Your highScore :",
         "buttons": {
-            "restart": "Recommencer",
-            "home": "Accueil"
+            "restart": "Restart",
+            "home": "Home"
         }
     },
     "settings": {

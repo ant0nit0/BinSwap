@@ -4,6 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/game/components/game_background.dart';
 import 'package:recycling_master/game/components/game_bin.dart';
@@ -83,19 +84,16 @@ class KGame extends FlameGame
       ),
     );
 
-    final timeText = 'Time : ${timeNotifier.value}';
-
     final timeComponent = TextComponent(
-      text: timeText,
+      text: '${translate('game.time')} 0',
       position: Vector2(kDefaultPadding, size.y * 0.2),
       textRenderer: textRenderer,
     );
 
     timeNotifier.addListener(() {
       timeComponent.text =
-          'Time : ${timeNotifier.value < 10 ? '0' : ''}${timeNotifier.value}';
+          '${translate('game.time')} ${timeNotifier.value < 10 ? '0' : ''}${timeNotifier.value}';
     });
-    timeComponent.text = 'Time : 0';
     return await add(timeComponent);
   }
 

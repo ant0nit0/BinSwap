@@ -24,6 +24,8 @@ dependencies:
   flutter_riverpod: ^2.3.6
   flutter_svg: ^2.0.5
   flutter_translate: ^4.0.4
+  flutter_localizations:
+    sdk: flutter
   freezed_annotation: ^2.2.0
   hooks_riverpod: ^2.3.6
   intl: ^0.18.1

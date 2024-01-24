@@ -26,9 +26,9 @@ class LangSettingsSelector extends HookConsumerWidget {
         GestureDetector(
           onTap: () {
             if (currentLang == 'en') {
-              ref.read(langProvider.notifier).changeLang('fr');
+              ref.read(langProvider.notifier).changeLang('fr', context);
             } else {
-              ref.read(langProvider.notifier).changeLang('en');
+              ref.read(langProvider.notifier).changeLang('en', context);
             }
           },
           child: KSVG(

@@ -8,8 +8,8 @@
         }	
     },
     "game": {
-        "score": "Sore",
-        "time": "Temps",
+        "score": "Score : ",
+        "time": "Temps : ",
         "settings": {
             "title": "Paramètres",
             "lang": "Langue",
@@ -21,7 +21,7 @@
             "title": "Besoin d'aide ?",
             "recycling-guide": {
                 "title": "Guide de recyclage",
-                "note": "Note : If you want to change the color attributions, it is possible after your game in the settings screen",
+                "note": "Note : Vous pouvez changer la distribution des couleurs dans les paramètres à la fin de votre partie.",
                 "current-title": "Dans la partie actuelle",
                 "other-title": "Les autres catégories"
             },
@@ -39,27 +39,27 @@
             "bins": {
                 "plastics": {
                     "title": "Plastics",
-                    "description": "Recycling plastics reduces pollution, conserves resources, and minimizes the impact on wildlife and the environment."
+                    "description": "TODO: Recycling plastics reduces pollution, conserves resources, and minimizes the impact on wildlife and the environment."
                 },
                 "organics": {
                     "title": "Organics",
-                    "description": "Recycling organic waste into compost enriches soil, reduces the need for chemical fertilizers, and decreases methane emissions from landfills."
+                    "description": "TODO: Recycling organic waste into compost enriches soil, reduces the need for chemical fertilizers, and decreases methane emissions from landfills."
                 },
                 "electronics": {
                     "title": "Electronics",
-                    "description": "Proper recycling of e-waste prevents the release of toxic substances into the environment and recovers valuable materials."
+                    "description": "TODO: Proper recycling of e-waste prevents the release of toxic substances into the environment and recovers valuable materials."
                 },
                 "glass": {
                     "title": "Glass",
-                    "description": "Glass can be recycled indefinitely without loss of quality, reducing raw material use and lowering energy consumption."
+                    "description": "TODO: Glass can be recycled indefinitely without loss of quality, reducing raw material use and lowering energy consumption."
                 },
                 "papers": {
                     "title": "Papers",
-                    "description": "Recycling paper conserves trees and forest habitats, reduces greenhouse gas emissions, and saves energy compared to producing new paper."
+                    "description": "TODO: Recycling paper conserves trees and forest habitats, reduces greenhouse gas emissions, and saves energy compared to producing new paper."
                 },
                 "textiles": {
                     "title": "Textiles",
-                    "description": "Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
+                    "description": "TODO: Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
                 }
             }
         }     
@@ -74,8 +74,8 @@
         }
     },
     "settings": {
-        "title": "Settings",
-        "lang": "Lang",
+        "title": "Paramètres",
+        "lang": "Langue",
         "audio": "Musique",
         "sfx": "SFX"
     }
