@@ -72,5 +72,11 @@
             "restart": "Recommencer",
             "home": "Accueil"
         }
+    },
+    "settings": {
+        "title": "Settings",
+        "lang": "Lang",
+        "audio": "Music",
+        "sfx": "SFX"
     }
 }
