@@ -29,7 +29,7 @@ void main() async {
 
   final delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
-    supportedLocales: ['fr', 'en'],
+    supportedLocales: LangProvider.langs,
   );
 
   return appRunner(delegate);
@@ -38,15 +38,20 @@ void main() async {
 void appRunner(LocalizationDelegate delegate) async {
   // Fetch the current language from the delegate
   String currentLang = delegate.currentLocale.languageCode;
-  initializeDateFormatting().then((_) => // For intl package
-
-      runApp(ProviderScope(
-
-          // Pass the current language to the LangProvider
-          overrides: [
-            langProvider.overrideWith((_) => LangProvider(currentLang)),
-          ],
-          child: LocalizedApp(delegate, const MyApp()))));
+  // For intl package
+  initializeDateFormatting().then(
+    (_) => runApp(
+      // Riverpod
+      ProviderScope(
+        // Pass the current language to the LangProvider
+        overrides: [
+          langProvider.overrideWith((_) => LangProvider(currentLang)),
+        ],
+        // Internationalization
+        child: LocalizedApp(delegate, const MyApp()),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

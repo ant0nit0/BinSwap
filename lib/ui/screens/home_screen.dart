@@ -14,6 +14,7 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Rebuild the widget when the language changes
     ref.watch(langProvider);
 
     return Scaffold(
