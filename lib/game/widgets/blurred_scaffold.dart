@@ -55,17 +55,19 @@ class BlurredScaffold extends StatelessWidget {
 
   const BlurredScaffold({
     this.child,
-    this.padding = const EdgeInsets.symmetric(
-      horizontal: kDefaultLargePadding,
-      vertical: kDefaultSmallPadding,
+    this.padding = const EdgeInsets.fromLTRB(
+      kDefaultLargePadding,
+      kDefaultLargePadding,
+      kDefaultLargePadding,
+      kDefaultSmallPadding,
     ),
     this.bgOpacity = .75,
     this.sigma = 2.5,
-    this.automaticallyImplementClosing = false,
     this.backgroundImagePath,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.title,
     this.onClose,
+    this.automaticallyImplementClosing = false,
     super.key,
   }) : assert(
           !automaticallyImplementClosing || onClose != null,

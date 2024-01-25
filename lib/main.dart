@@ -70,13 +70,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
         localizationDelegate
       ],
       supportedLocales: localizationDelegate.supportedLocales,
       locale: localizationDelegate.currentLocale,
-      initialRoute: Routes.homeScreen,
+      initialRoute: Routes.splashScreen,
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,

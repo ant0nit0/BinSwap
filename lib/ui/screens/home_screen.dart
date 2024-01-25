@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
@@ -21,13 +22,13 @@ class HomeScreen extends HookConsumerWidget {
       body: Stack(
         children: [
           const BackgroundImage('home'),
-          _buttons(context),
+          _buttons(context, ref),
         ],
       ),
     );
   }
 
-  Widget _buttons(BuildContext context) => Positioned(
+  Widget _buttons(BuildContext context, WidgetRef ref) => Positioned(
         bottom: kDefaultSmallPadding,
         left: kDefaultLargePadding,
         right: kDefaultLargePadding,
@@ -36,8 +37,10 @@ class HomeScreen extends HookConsumerWidget {
             KButton.blue(
               text: translate('home.buttons.play'),
               isExpanded: false,
-              onPressed: () =>
-                  navigatorKey.currentState?.pushNamed(Routes.gameScreen),
+              onPressed: () {
+                ref.read(isUserPlayingProvider.notifier).state = true;
+                navigatorKey.currentState?.pushNamed(Routes.gameScreen);
+              },
             ),
             KButton.yellow(
               text: translate('home.buttons.settings'),

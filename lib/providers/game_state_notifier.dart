@@ -1,3 +1,4 @@
+import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/utils/constants.dart';
@@ -36,5 +37,11 @@ class GameStateNotifier extends _$GameStateNotifier {
 
   void refresh() {
     _initState();
+    ref.read(backgroundAudioStateNotifierProvider.notifier).refreshGameMusic();
+  }
+
+  void reset() {
+    _initState();
+    ref.read(backgroundAudioStateNotifierProvider.notifier).resetGameMusic();
   }
 }

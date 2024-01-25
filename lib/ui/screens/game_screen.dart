@@ -20,6 +20,7 @@ class GameScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameStateNotifierProvider);
+
     return Scaffold(
       body: Stack(
         children: [

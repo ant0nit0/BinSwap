@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/screens/home_screen.dart';
 import 'package:recycling_master/ui/screens/settings_screen.dart';
+import 'package:recycling_master/ui/screens/splash_screen.dart';
 
 class Routes {
   static const homeScreen = '/home';
   static const settingsScreen = '/settings';
   static const gameScreen = '/game';
+  static const splashScreen = '/splash';
 }
 
 class RouteGenerator {
@@ -28,6 +30,11 @@ class RouteGenerator {
         return PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const GameScreen(),
+        );
+      case Routes.splashScreen:
+        return PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => const SplashScreen(),
         );
       default:
         return _errorRoute(settings.name ?? '', settings);
