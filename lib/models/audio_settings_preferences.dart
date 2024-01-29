@@ -5,7 +5,7 @@ part 'audio_settings_preferences.freezed.dart';
 @freezed
 class AudioSettingsPreferences with _$AudioSettingsPreferences {
   const factory AudioSettingsPreferences({
-    @Default(true) bool isBackgroundAudioActivated,
-    @Default(true) bool areSfxsEffectsActivated,
+    required bool isBackgroundAudioActivated,
+    required bool areSfxsEffectsActivated,
   }) = _AudioSettingsPreferences;
 }

@@ -7,9 +7,17 @@ part of 'background_audio_state_notifier.dart';
 // **************************************************************************
 
 String _$backgroundAudioStateNotifierHash() =>
-    r'169953010b8891951c5908619cd7c9e438ee8854';
+    r'beafa1c79f90729d5f81dde762cac1448811c075';
 
-/// See also [BackgroundAudioStateNotifier].
+/// The [BackgroundAudioStateNotifier] is responsible for playing the audio in the background.
+///
+/// It uses the [BackgroundAudioService] to play the audio.
+///
+/// It listens to the [AudioSettingsNotifier] to pause or play the audio.
+///
+/// It listens to the [isUserPlayingProvider] to play the game music or the non-game music.
+///
+/// Copied from [BackgroundAudioStateNotifier].
 @ProviderFor(BackgroundAudioStateNotifier)
 final backgroundAudioStateNotifierProvider = AsyncNotifierProvider<
     BackgroundAudioStateNotifier, BackgroundAudioMode>.internal(

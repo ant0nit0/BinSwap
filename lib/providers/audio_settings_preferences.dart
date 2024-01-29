@@ -1,4 +1,5 @@
 import 'package:recycling_master/models/audio_settings_preferences.dart';
+import 'package:recycling_master/providers/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'audio_settings_preferences.g.dart';
@@ -6,29 +7,60 @@ part 'audio_settings_preferences.g.dart';
 @Riverpod(keepAlive: true)
 class AudioSettingsNotifier extends _$AudioSettingsNotifier {
   @override
-  FutureOr<AudioSettingsPreferences> build() {
+  FutureOr<AudioSettingsPreferences> build() async {
     state = const AsyncLoading();
-    // TODO: Get it from the local storage
-    state = const AsyncData(AudioSettingsPreferences());
+
+    await _loadFromLocalStorage();
+
     return state.requireValue;
   }
 
-  void deactivateBackgroundAudio() {
+  Future<void> _loadFromLocalStorage() async {
+    final storage = ref.read(storageServiceProvider).storage;
+    final audioBackground =
+        await storage.read(key: StorageKeys.audioBackground);
+    final sfxsEffects = await storage.read(key: StorageKeys.sfxsEffects);
+
+    state = AsyncData(
+      AudioSettingsPreferences(
+        isBackgroundAudioActivated: audioBackground == 'true',
+        areSfxsEffectsActivated: sfxsEffects == 'true',
+      ),
+    );
+  }
+
+  Future<void> deactivateBackgroundAudio() async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.audioBackground, value: 'false');
     state = AsyncData(
         state.requireValue.copyWith(isBackgroundAudioActivated: false));
   }
 
-  void activateBackgroundAudio() {
+  Future<void> activateBackgroundAudio() async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.audioBackground, value: 'true');
     state = AsyncData(
         state.requireValue.copyWith(isBackgroundAudioActivated: true));
   }
 
-  void deactivateSfxsEffects() {
+  Future<void> deactivateSfxsEffects() async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.sfxsEffects, value: 'false');
     state =
         AsyncData(state.requireValue.copyWith(areSfxsEffectsActivated: false));
   }
 
-  void activateSfxsEffects() {
+  Future<void> activateSfxsEffects() async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.sfxsEffects, value: 'true');
     state =
         AsyncData(state.requireValue.copyWith(areSfxsEffectsActivated: true));
   }

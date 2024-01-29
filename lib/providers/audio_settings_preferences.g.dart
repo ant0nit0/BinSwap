@@ -7,7 +7,7 @@ part of 'audio_settings_preferences.dart';
 // **************************************************************************
 
 String _$audioSettingsNotifierHash() =>
-    r'd41e91c6dc298ef19bdc6fe0578910051df423eb';
+    r'90a57eb8a53e13cb3d4dd762013daf184c018dcc';
 
 /// See also [AudioSettingsNotifier].
 @ProviderFor(AudioSettingsNotifier)

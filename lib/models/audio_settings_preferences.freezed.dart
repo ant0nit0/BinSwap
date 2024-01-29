@@ -108,14 +108,12 @@ class __$$AudioSettingsPreferencesImplCopyWithImpl<$Res>
 
 class _$AudioSettingsPreferencesImpl implements _AudioSettingsPreferences {
   const _$AudioSettingsPreferencesImpl(
-      {this.isBackgroundAudioActivated = true,
-      this.areSfxsEffectsActivated = true});
+      {required this.isBackgroundAudioActivated,
+      required this.areSfxsEffectsActivated});
 
   @override
-  @JsonKey()
   final bool isBackgroundAudioActivated;
   @override
-  @JsonKey()
   final bool areSfxsEffectsActivated;
 
   @override
@@ -151,8 +149,9 @@ class _$AudioSettingsPreferencesImpl implements _AudioSettingsPreferences {
 
 abstract class _AudioSettingsPreferences implements AudioSettingsPreferences {
   const factory _AudioSettingsPreferences(
-      {final bool isBackgroundAudioActivated,
-      final bool areSfxsEffectsActivated}) = _$AudioSettingsPreferencesImpl;
+          {required final bool isBackgroundAudioActivated,
+          required final bool areSfxsEffectsActivated}) =
+      _$AudioSettingsPreferencesImpl;
 
   @override
   bool get isBackgroundAudioActivated;

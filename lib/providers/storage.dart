@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class StorageKeys {
   static const audioBackground = 'audioBackground';
+  static const sfxsEffects = 'sfxsEffects';
 }
 
 class StorageService {
@@ -14,6 +16,16 @@ class StorageService {
         aOptions: AndroidOptions(encryptedSharedPreferences: true));
 
     _checkInit();
+
+    if (kDebugMode) {
+      _printAll();
+    }
+  }
+
+  void _printAll() async {
+    final all = await _storage.readAll();
+    // ignore: avoid_print
+    print(all);
   }
 
   _checkInit() async {
