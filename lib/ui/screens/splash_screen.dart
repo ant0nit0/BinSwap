@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/background_audio_state_notifier.dart';
@@ -14,7 +16,7 @@ class SplashScreen extends HookConsumerWidget {
       // Initialize the background audio service
       ref.read(backgroundAudioStateNotifierProvider.notifier);
       // Iniitalize the language (if a preference is stored and is different than the device default language)
-      await ref.read(langProvider.notifier).initLang(context);
+      unawaited(ref.read(langProvider.notifier).initLang(context));
     });
     Future.delayed(const Duration(seconds: 2), () {
       // Navigate to the home screen
