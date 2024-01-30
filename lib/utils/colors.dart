@@ -14,6 +14,7 @@ const blueShadowColor = Color(0xff1A5A8D);
 const yellowMainColor = Color(0xffF5DF6D);
 const yellowSecondaryColor = Color(0xffD1A430);
 const yellowShadowColor = Color(0xff8A6A18);
+const yellowWinColor = Color.fromARGB(199, 251, 255, 43);
 
 const greenMainColor = Color(0xff2EE040);
 const greenSecondaryColor = Color(0xff1BA729);

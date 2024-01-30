@@ -5,7 +5,7 @@ import 'package:recycling_master/utils/bin_enums.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-const defaultLife = 3;
+const defaultLife = 1;
 
 const kNumberOfStoredScores = 5;
 

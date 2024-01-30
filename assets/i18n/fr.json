@@ -71,6 +71,9 @@
         "buttons": {
             "restart": "Recommencer",
             "home": "Accueil"
+        },
+        "leaderboard": {
+            "title": "Vos meilleurs scores"
         }
     },
     "settings": {

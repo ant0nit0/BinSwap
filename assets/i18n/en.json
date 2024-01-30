@@ -71,6 +71,9 @@
         "buttons": {
             "restart": "Restart",
             "home": "Home"
+        },
+        "leaderboard": {
+            "title": "Your best scores"
         }
     },
     "settings": {
