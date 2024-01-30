@@ -33,10 +33,24 @@ class Leaderboard extends _$Leaderboard {
   }
 
   Future<void> addScore(Score score) async {
-    // await _loadFromStorage();
     final scores = [...state.value ?? <Score>[]];
     scores.add(score);
-    // Sort scores on value, and on time if values are equals
+    final sortedScores = _sortAndCrop([...scores]);
+
+    await ref.read(storageServiceProvider).storage.write(
+          key: StorageKeys.leaderboard,
+          value: json.encode(sortedScores),
+        );
+
+    state = AsyncData([...sortedScores]);
+  }
+
+  /// Sorts the [scores] according to their value, and time if the value is the same.
+  ///
+  /// Then crops the list to the maximum number of stored scores, according to [kNumberOfStoredScores].
+  ///
+  /// Returns the sorted and cropped list.
+  List<Score> _sortAndCrop(List<Score> scores) {
     scores.sort((a, b) {
       final valueComparison = b.value.compareTo(a.value);
       if (valueComparison != 0) {
@@ -49,12 +63,7 @@ class Leaderboard extends _$Leaderboard {
       scores.removeRange(kNumberOfStoredScores, scores.length);
     }
 
-    await ref.read(storageServiceProvider).storage.write(
-          key: StorageKeys.leaderboard,
-          value: json.encode(scores),
-        );
-
-    state = AsyncData([...scores]);
+    return scores;
   }
 
   Score? get highScore {
