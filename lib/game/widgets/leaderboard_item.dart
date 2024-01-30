@@ -17,6 +17,11 @@ class LeaderboardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: neutralDark,
+        fontSize: 14.0,
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w600);
     return Container(
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultTinyPadding),
@@ -25,29 +30,17 @@ class LeaderboardItem extends StatelessWidget {
         children: [
           Text(
             '$index.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: neutralDark,
-                fontSize: 14.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600),
+            style: textStyle,
           ),
           const SizedBox(width: kDefaultSmallPadding),
           Text(
             '${score.value}',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: neutralDark,
-                fontSize: 14.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600),
+            style: textStyle,
           ),
           const Spacer(),
           Text(
             '${formatTime(score.timeInSec.toInt())} s',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: neutralDark,
-                fontSize: 14.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600),
+            style: textStyle,
           ),
         ],
       ),
