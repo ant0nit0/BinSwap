@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class StorageKeys {
   static const audioBackground = 'audioBackground';
+  static const leaderboard = 'leaderboard';
   static const sfxsEffects = 'sfxsEffects';
 }
 

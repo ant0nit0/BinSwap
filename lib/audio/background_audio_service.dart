@@ -44,10 +44,10 @@ class BackgroundAudioService {
     await _nonGameplayAudioPlayer.pause();
   }
 
-  Future<void> refreshGameMusic() async {
+  Future<void> refreshGameMusic({bool play = true}) async {
     await _nonGameplayAudioPlayer.pause();
-    await _gameplayAudioPlayer.stop();
-    await _gameplayAudioPlayer.play(AssetSource(_gameplayMusicPath));
+    resetGameMusic();
+    if (play) await _gameplayAudioPlayer.resume();
   }
 
   Future<void> resetGameMusic() async {

@@ -18,6 +18,7 @@ class EndGameButtons extends HookConsumerWidget {
         KButton.green(
           text: translate('endGame.buttons.restart'),
           onPressed: () {
+            ref.read(isUserPlayingProvider.notifier).state = true;
             ref.read(gameStateNotifierProvider.notifier).refresh();
             // Pop all the routes until the first one
             // to avoid having multiple game screens
@@ -33,7 +34,6 @@ class EndGameButtons extends HookConsumerWidget {
         KButton.blue(
           text: translate('endGame.buttons.home'),
           onPressed: () {
-            ref.read(isUserPlayingProvider.notifier).state = false;
             ref.read(gameStateNotifierProvider.notifier).reset();
             // Pop all the routes until the first one
             // to avoid having multiple game screens

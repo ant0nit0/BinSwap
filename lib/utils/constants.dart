@@ -7,6 +7,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 const defaultLife = 3;
 
+const kNumberOfStoredScores = 5;
+
 const allBins = [
   Bin(
     category: BinCategory.organics,

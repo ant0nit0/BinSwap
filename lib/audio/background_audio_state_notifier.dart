@@ -78,7 +78,8 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
 
   Future<void> refreshGameMusic() async {
     final audioService = await ref.read(backgroundAudioServiceProvider.future);
-    audioService.refreshGameMusic();
+    audioService.refreshGameMusic(
+        play: _audioSettingsPreferences.isBackgroundAudioActivated);
   }
 
   Future<void> resetGameMusic() async {

@@ -4,9 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/pause_button.dart';
 import 'package:recycling_master/game/widgets/game_top_icons.dart';
 import 'package:recycling_master/game/overlays/settings_game_dialog.dart';
+import 'package:recycling_master/models/score.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/game/overlays/end_game_screen.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class GameScreen extends HookConsumerWidget {
@@ -21,6 +23,16 @@ class GameScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameStateNotifierProvider);
 
+    // We get the highscore in order to know if the user as already played the game
+    // If not, we show the onBoarding
+    //
+    // This also allow the leaderboard to load the previous scores when the game screen loads,
+    // So that going to the endGameScreen will not be waiting while loading the scores
+    final highScore = ref.watch(leaderboardProvider.notifier).highScore;
+    if (highScore == null) {
+      // TODO: Implement the onBoarding
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -29,7 +41,11 @@ class GameScreen extends HookConsumerWidget {
               game: KGame(state),
               overlayBuilderMap: {
                 endGameDialogKey: (BuildContext context, KGame game) {
-                  return EndGameScreen(game.scoreNotifier.value, game: game);
+                  return EndGameScreen(
+                      Score(
+                          value: game.scoreNotifier.value,
+                          timeInSec: game.timeNotifier.value),
+                      game: game);
                 },
                 topIconsKey: (BuildContext context, KGame game) {
                   return GameTopIcons(game);
