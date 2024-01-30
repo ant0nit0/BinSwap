@@ -23,7 +23,7 @@ class SplashScreen extends HookConsumerWidget {
       );
     });
 
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Splash Screen'),
       ),

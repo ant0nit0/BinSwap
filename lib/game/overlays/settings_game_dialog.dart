@@ -22,7 +22,6 @@ class SettingsGameOverlay extends HookConsumerWidget {
       automaticallyImplementClosing: true,
       onClose: () {
         game.overlays.remove(GameScreen.settingsDialogKey);
-        game.resumeEngine();
       },
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
