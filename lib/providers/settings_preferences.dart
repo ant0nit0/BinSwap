@@ -20,13 +20,30 @@ class SettingsNotifier extends _$SettingsNotifier {
     final audioBackground =
         await storage.read(key: StorageKeys.audioBackground);
     final sfxsEffects = await storage.read(key: StorageKeys.sfxsEffects);
+    final lang = await storage.read(key: StorageKeys.lang);
 
     state = AsyncData(
       SettingsPreferences(
         isBackgroundAudioActivated: audioBackground == 'true',
         areSfxsEffectsActivated: sfxsEffects == 'true',
+        language: lang,
       ),
     );
+  }
+
+  Future<void> storeLang(String lang) async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.lang, value: lang);
+    state = AsyncData(state.requireValue.copyWith(language: lang));
+  }
+
+  Future<String?> getLang() async {
+    return await ref
+        .read(storageServiceProvider)
+        .storage
+        .read(key: StorageKeys.lang);
   }
 
   Future<void> deactivateBackgroundAudio() async {

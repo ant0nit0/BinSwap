@@ -45,7 +45,9 @@ void appRunner(LocalizationDelegate delegate) async {
       ProviderScope(
         // Pass the current language to the LangProvider
         overrides: [
-          langProvider.overrideWith((_) => LangProvider(currentLang)),
+          langProvider.overrideWith((ref) {
+            return LangProvider(ref, currentLang);
+          }),
         ],
         // Internationalization
         child: LocalizedApp(delegate, const MyApp()),

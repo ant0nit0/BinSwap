@@ -34,8 +34,9 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     _audioSettingsPreferences =
         await ref.read(settingsNotifierProvider.future) ??
             const SettingsPreferences(
-                isBackgroundAudioActivated: true,
-                areSfxsEffectsActivated: true);
+              isBackgroundAudioActivated: true,
+              areSfxsEffectsActivated: true,
+            );
 
     _listenToPreferences(audioService);
     await _updateAudioState(audioService);

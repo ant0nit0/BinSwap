@@ -7,5 +7,6 @@ class SettingsPreferences with _$SettingsPreferences {
   const factory SettingsPreferences({
     required bool isBackgroundAudioActivated,
     required bool areSfxsEffectsActivated,
+    String? language,
   }) = _SettingsPreferences;
 }

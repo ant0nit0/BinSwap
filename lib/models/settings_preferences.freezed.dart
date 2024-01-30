@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsPreferences {
   bool get isBackgroundAudioActivated => throw _privateConstructorUsedError;
   bool get areSfxsEffectsActivated => throw _privateConstructorUsedError;
+  String? get language => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsPreferencesCopyWith<SettingsPreferences> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $SettingsPreferencesCopyWith<$Res> {
           SettingsPreferences value, $Res Function(SettingsPreferences) then) =
       _$SettingsPreferencesCopyWithImpl<$Res, SettingsPreferences>;
   @useResult
-  $Res call({bool isBackgroundAudioActivated, bool areSfxsEffectsActivated});
+  $Res call(
+      {bool isBackgroundAudioActivated,
+      bool areSfxsEffectsActivated,
+      String? language});
 }
 
 /// @nodoc
@@ -48,6 +52,7 @@ class _$SettingsPreferencesCopyWithImpl<$Res, $Val extends SettingsPreferences>
   $Res call({
     Object? isBackgroundAudioActivated = null,
     Object? areSfxsEffectsActivated = null,
+    Object? language = freezed,
   }) {
     return _then(_value.copyWith(
       isBackgroundAudioActivated: null == isBackgroundAudioActivated
@@ -58,6 +63,10 @@ class _$SettingsPreferencesCopyWithImpl<$Res, $Val extends SettingsPreferences>
           ? _value.areSfxsEffectsActivated
           : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -70,7 +79,10 @@ abstract class _$$SettingsPreferencesImplCopyWith<$Res>
       __$$SettingsPreferencesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isBackgroundAudioActivated, bool areSfxsEffectsActivated});
+  $Res call(
+      {bool isBackgroundAudioActivated,
+      bool areSfxsEffectsActivated,
+      String? language});
 }
 
 /// @nodoc
@@ -86,6 +98,7 @@ class __$$SettingsPreferencesImplCopyWithImpl<$Res>
   $Res call({
     Object? isBackgroundAudioActivated = null,
     Object? areSfxsEffectsActivated = null,
+    Object? language = freezed,
   }) {
     return _then(_$SettingsPreferencesImpl(
       isBackgroundAudioActivated: null == isBackgroundAudioActivated
@@ -96,6 +109,10 @@ class __$$SettingsPreferencesImplCopyWithImpl<$Res>
           ? _value.areSfxsEffectsActivated
           : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -105,16 +122,19 @@ class __$$SettingsPreferencesImplCopyWithImpl<$Res>
 class _$SettingsPreferencesImpl implements _SettingsPreferences {
   const _$SettingsPreferencesImpl(
       {required this.isBackgroundAudioActivated,
-      required this.areSfxsEffectsActivated});
+      required this.areSfxsEffectsActivated,
+      this.language});
 
   @override
   final bool isBackgroundAudioActivated;
   @override
   final bool areSfxsEffectsActivated;
+  @override
+  final String? language;
 
   @override
   String toString() {
-    return 'SettingsPreferences(isBackgroundAudioActivated: $isBackgroundAudioActivated, areSfxsEffectsActivated: $areSfxsEffectsActivated)';
+    return 'SettingsPreferences(isBackgroundAudioActivated: $isBackgroundAudioActivated, areSfxsEffectsActivated: $areSfxsEffectsActivated, language: $language)';
   }
 
   @override
@@ -128,12 +148,14 @@ class _$SettingsPreferencesImpl implements _SettingsPreferences {
                     isBackgroundAudioActivated) &&
             (identical(
                     other.areSfxsEffectsActivated, areSfxsEffectsActivated) ||
-                other.areSfxsEffectsActivated == areSfxsEffectsActivated));
+                other.areSfxsEffectsActivated == areSfxsEffectsActivated) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isBackgroundAudioActivated, areSfxsEffectsActivated);
+  int get hashCode => Object.hash(runtimeType, isBackgroundAudioActivated,
+      areSfxsEffectsActivated, language);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +168,15 @@ class _$SettingsPreferencesImpl implements _SettingsPreferences {
 abstract class _SettingsPreferences implements SettingsPreferences {
   const factory _SettingsPreferences(
       {required final bool isBackgroundAudioActivated,
-      required final bool areSfxsEffectsActivated}) = _$SettingsPreferencesImpl;
+      required final bool areSfxsEffectsActivated,
+      final String? language}) = _$SettingsPreferencesImpl;
 
   @override
   bool get isBackgroundAudioActivated;
   @override
   bool get areSfxsEffectsActivated;
+  @override
+  String? get language;
   @override
   @JsonKey(ignore: true)
   _$$SettingsPreferencesImplCopyWith<_$SettingsPreferencesImpl> get copyWith =>

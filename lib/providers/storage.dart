@@ -7,6 +7,7 @@ class StorageKeys {
   static const audioBackground = 'audioBackground';
   static const leaderboard = 'leaderboard';
   static const sfxsEffects = 'sfxsEffects';
+  static const lang = 'lang';
 }
 
 class StorageService {
@@ -36,6 +37,10 @@ class StorageService {
       // Workaround for https://github.com/mogol/flutter_secure_storage/issues/43
       await _storage.deleteAll();
     }
+  }
+
+  void clearAll() async {
+    await _storage.deleteAll();
   }
 
   FlutterSecureStorage get storage => _storage;
