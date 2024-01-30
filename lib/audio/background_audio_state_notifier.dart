@@ -1,6 +1,6 @@
 import 'package:recycling_master/audio/background_audio_service.dart';
-import 'package:recycling_master/models/audio_settings_preferences.dart';
-import 'package:recycling_master/providers/audio_settings_preferences.dart';
+import 'package:recycling_master/models/settings_preferences.dart';
+import 'package:recycling_master/providers/settings_preferences.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,13 +10,13 @@ part 'background_audio_state_notifier.g.dart';
 ///
 /// It uses the [BackgroundAudioService] to play the audio.
 ///
-/// It listens to the [AudioSettingsNotifier] to pause or play the audio.
+/// It listens to the [SettingsNotifier] to pause or play the audio.
 ///
 /// It listens to the [isUserPlayingProvider] to play the game music or the non-game music.
 @Riverpod(keepAlive: true)
 class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
   late bool _isUserPlaying;
-  late AudioSettingsPreferences _audioSettingsPreferences;
+  late SettingsPreferences _audioSettingsPreferences;
 
   @override
   FutureOr<BackgroundAudioMode> build() async {
@@ -32,8 +32,8 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
 
     _isUserPlaying = ref.read(isUserPlayingProvider);
     _audioSettingsPreferences =
-        await ref.read(audioSettingsNotifierProvider.future) ??
-            const AudioSettingsPreferences(
+        await ref.read(settingsNotifierProvider.future) ??
+            const SettingsPreferences(
                 isBackgroundAudioActivated: true,
                 areSfxsEffectsActivated: true);
 
@@ -41,11 +41,11 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     await _updateAudioState(audioService);
   }
 
-  /// Listen to the [AudioSettingsNotifier] and the [isUserPlayingProvider] to update the audio state.
+  /// Listen to the [SettingsNotifier] and the [isUserPlayingProvider] to update the audio state.
   void _listenToPreferences(BackgroundAudioService audioService) {
-    ref.listen(audioSettingsNotifierProvider, (_, next) {
+    ref.listen(settingsNotifierProvider, (_, next) {
       _audioSettingsPreferences = next.value ??
-          const AudioSettingsPreferences(
+          const SettingsPreferences(
               isBackgroundAudioActivated: true, areSfxsEffectsActivated: true);
       _updateAudioState(audioService);
     });
@@ -56,7 +56,7 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     });
   }
 
-  /// Update the audio state according to the [AudioSettingsNotifier] and the [isUserPlayingProvider].
+  /// Update the audio state according to the [SettingsNotifier] and the [isUserPlayingProvider].
   Future<void> _updateAudioState(BackgroundAudioService audioService) async {
     // final pref = audioPreferences ??
     //     await ref.watch(audioSettingsNotifierProvider.future);

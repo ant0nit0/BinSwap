@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:recycling_master/providers/audio_settings_preferences.dart';
+import 'package:recycling_master/providers/settings_preferences.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/kswitch.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -11,7 +11,7 @@ class BackgroundAudioSwitch extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioPreferences = ref.watch(audioSettingsNotifierProvider);
+    final audioPreferences = ref.watch(settingsNotifierProvider);
 
     // Thiw widgets being in the settings page, we need to watch the langProvider
     // to be able to rebuild the widget when the language changes.
@@ -34,10 +34,10 @@ class BackgroundAudioSwitch extends HookConsumerWidget {
           initialValue:
               audioPreferences.valueOrNull?.isBackgroundAudioActivated ?? true,
           onActivate: () => ref
-              .read(audioSettingsNotifierProvider.notifier)
+              .read(settingsNotifierProvider.notifier)
               .activateBackgroundAudio(),
           onDeactivate: () => ref
-              .read(audioSettingsNotifierProvider.notifier)
+              .read(settingsNotifierProvider.notifier)
               .deactivateBackgroundAudio(),
         )
       ],

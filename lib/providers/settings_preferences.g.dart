@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'audio_settings_preferences.dart';
+part of 'settings_preferences.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$audioSettingsNotifierHash() =>
-    r'90a57eb8a53e13cb3d4dd762013daf184c018dcc';
+String _$settingsNotifierHash() => r'1c0653f77556605e4261e87903244ebd9139ad99';
 
-/// See also [AudioSettingsNotifier].
-@ProviderFor(AudioSettingsNotifier)
-final audioSettingsNotifierProvider = AsyncNotifierProvider<
-    AudioSettingsNotifier, AudioSettingsPreferences>.internal(
-  AudioSettingsNotifier.new,
-  name: r'audioSettingsNotifierProvider',
+/// See also [SettingsNotifier].
+@ProviderFor(SettingsNotifier)
+final settingsNotifierProvider =
+    AsyncNotifierProvider<SettingsNotifier, SettingsPreferences>.internal(
+  SettingsNotifier.new,
+  name: r'settingsNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$audioSettingsNotifierHash,
+      : _$settingsNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AudioSettingsNotifier = AsyncNotifier<AudioSettingsPreferences>;
+typedef _$SettingsNotifier = AsyncNotifier<SettingsPreferences>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

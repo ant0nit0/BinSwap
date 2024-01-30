@@ -1,13 +1,13 @@
-import 'package:recycling_master/models/audio_settings_preferences.dart';
+import 'package:recycling_master/models/settings_preferences.dart';
 import 'package:recycling_master/providers/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'audio_settings_preferences.g.dart';
+part 'settings_preferences.g.dart';
 
 @Riverpod(keepAlive: true)
-class AudioSettingsNotifier extends _$AudioSettingsNotifier {
+class SettingsNotifier extends _$SettingsNotifier {
   @override
-  FutureOr<AudioSettingsPreferences> build() async {
+  FutureOr<SettingsPreferences> build() async {
     state = const AsyncLoading();
 
     await _loadFromLocalStorage();
@@ -22,7 +22,7 @@ class AudioSettingsNotifier extends _$AudioSettingsNotifier {
     final sfxsEffects = await storage.read(key: StorageKeys.sfxsEffects);
 
     state = AsyncData(
-      AudioSettingsPreferences(
+      SettingsPreferences(
         isBackgroundAudioActivated: audioBackground == 'true',
         areSfxsEffectsActivated: sfxsEffects == 'true',
       ),
