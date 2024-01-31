@@ -35,9 +35,11 @@ class GameStateNotifier extends _$GameStateNotifier {
     return bins;
   }
 
-  void refresh() {
+  Future<void> refresh() async {
     _initState();
-    ref.read(backgroundAudioStateNotifierProvider.notifier).refreshGameMusic();
+    await ref
+        .read(backgroundAudioStateNotifierProvider.notifier)
+        .refreshGameMusic();
   }
 
   void reset() {
