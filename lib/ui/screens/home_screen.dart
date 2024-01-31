@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
+import 'package:recycling_master/ui/widgets/home_title.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/extensions.dart';
@@ -29,11 +30,14 @@ class HomeScreen extends HookConsumerWidget {
   }
 
   Widget _buttons(BuildContext context, WidgetRef ref) => Positioned(
-        bottom: kDefaultSmallPadding,
+        bottom: kDefaultLargePadding,
         left: kDefaultLargePadding,
         right: kDefaultLargePadding,
+        top: kDefaultLargePadding * 3,
         child: Column(
           children: [
+            const HomeTitle(),
+            const Spacer(),
             KButton.blue(
               text: translate('home.buttons.play'),
               isExpanded: false,
@@ -47,10 +51,10 @@ class HomeScreen extends HookConsumerWidget {
               onPressed: () =>
                   navigatorKey.currentState?.pushNamed(Routes.settingsScreen),
             ),
-            KButton.green(
-              text: translate('home.buttons.about'),
-              isExpanded: false,
-            ),
+            // KButton.green(
+            //   text: translate('home.buttons.about'),
+            //   isExpanded: false,
+            // ),
           ],
         ).separated(
           separator: const SizedBox(height: kDefaultTinyPadding),
