@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/utils/bin_enums.dart';
@@ -9,30 +10,42 @@ const defaultLife = 1;
 
 const kNumberOfStoredScores = 5;
 
-const allBins = [
+final allBins = [
   Bin(
     category: BinCategory.organics,
     color: BinColor.green,
+    description: translate('game.infos.bins.organics.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
   Bin(
     category: BinCategory.plastics,
     color: BinColor.blue,
+    description: translate('game.infos.bins.plastics.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
   Bin(
     category: BinCategory.glass,
     color: BinColor.gray,
+    description: translate('game.infos.bins.glass.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
   Bin(
     category: BinCategory.papers,
     color: BinColor.orange,
+    description: translate('game.infos.bins.papers.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
   Bin(
     category: BinCategory.textiles,
     color: BinColor.purple,
+    description: translate('game.infos.bins.textiles.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
   Bin(
     category: BinCategory.electronics,
     color: BinColor.red,
+    description: translate('game.infos.bins.electronics.description'),
+    title: translate('game.infos.bins.organics.title'),
   ),
 ];
 
