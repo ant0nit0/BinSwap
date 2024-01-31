@@ -139,7 +139,7 @@ class BlurredScaffold extends StatelessWidget {
                     ),
                     const SizedBox(height: kDefaultPadding),
                   ],
-                  if (child != null) child!,
+                  if (child != null) Expanded(child: child!),
                 ],
               ),
             ),

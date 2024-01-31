@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:recycling_master/ui/screens/dev_settings.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/screens/home_screen.dart';
 import 'package:recycling_master/ui/screens/settings_screen.dart';
@@ -10,6 +11,7 @@ class Routes {
   static const settingsScreen = '/settings';
   static const gameScreen = '/game';
   static const splashScreen = '/splash';
+  static const devSettingsScreen = '/dev';
 }
 
 class RouteGenerator {
@@ -35,6 +37,11 @@ class RouteGenerator {
         return PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const SplashScreen(),
+        );
+      case Routes.devSettingsScreen:
+        return PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => const DevSettingsScreen(),
         );
       default:
         return _errorRoute(settings.name ?? '', settings);

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
+import 'package:recycling_master/ui/widgets/credentials.dart';
 import 'package:recycling_master/ui/widgets/kswitch.dart';
 import 'package:recycling_master/ui/widgets/lang_settings_selector.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -48,6 +49,8 @@ class SettingsScreen extends HookConsumerWidget {
               )
             ],
           ),
+          const Spacer(),
+          const CredentialsWidget(),
         ],
       ).separated(
         separator: const SizedBox(

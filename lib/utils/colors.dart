@@ -6,6 +6,7 @@ const neutralDark = Color(0xff2d2d2d);
 const grayBorderColor = Color(0xffD9D9D9);
 const grayDraggerColor = Color(0xff79747E);
 const grayTextColor = Color(0xff757373);
+const grayTextLightColor = Color(0xffCBCBCB);
 
 const blueMainColor = Color(0xff6DB9F5);
 const blueSecondaryColor = Color(0xff308AD1);

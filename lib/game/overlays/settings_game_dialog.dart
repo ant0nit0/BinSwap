@@ -6,6 +6,7 @@ import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
+import 'package:recycling_master/ui/widgets/credentials.dart';
 import 'package:recycling_master/ui/widgets/lang_settings_selector.dart';
 import 'package:recycling_master/utils/extensions.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -28,6 +29,8 @@ class SettingsGameOverlay extends HookConsumerWidget {
         children: [
           LangSettingsSelector(),
           BackgroundAudioSwitch(),
+          Spacer(),
+          CredentialsWidget(),
         ],
       ).separated(
         separator: const SizedBox(height: kDefaultPadding),
