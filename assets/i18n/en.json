@@ -70,7 +70,8 @@
         "highScore": "Your highScore :",
         "buttons": {
             "restart": "Restart",
-            "home": "Home"
+            "home": "Home",
+            "quit": "Quit"
         },
         "leaderboard": {
             "title": "Your best scores"

@@ -70,7 +70,8 @@
         "highScore": "Votre meilleur score : ",
         "buttons": {
             "restart": "Recommencer",
-            "home": "Accueil"
+            "home": "Accueil",
+            "quit": "Quitter"
         },
         "leaderboard": {
             "title": "Vos meilleurs scores"

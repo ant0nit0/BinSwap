@@ -21,6 +21,10 @@ const greenMainColor = Color(0xff2EE040);
 const greenSecondaryColor = Color(0xff1BA729);
 const greenShadowColor = Color(0xff0D6D22);
 
+const redMainColor = Color(0xffF56D6D);
+const redSecondaryColor = Color(0xffC33232);
+const redShadowColor = Color(0xff8F0000);
+
 const greenbgColor = Color(0xff7BD179);
 const greenTextColor = Color(0xff195608);
 
