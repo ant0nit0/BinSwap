@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/providers/lang.dart';
+import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
 import 'package:recycling_master/utils/widgets_utils.dart';
 
@@ -20,7 +21,7 @@ class SplashScreen extends HookConsumerWidget {
     });
     Future.delayed(const Duration(seconds: 2), () {
       // Navigate to the home screen
-      Navigator.of(context).pushNamedAndRemoveUntil(
+      navigatorKey.currentState!.pushNamedAndRemoveUntil(
         Routes.homeScreen,
         (route) => false,
       );
