@@ -26,6 +26,13 @@ class KSVG extends StatelessWidget {
   /// If true, the svg will not have any color aand the [color] parameter will be ignored.
   final bool noColor;
 
+  /// The prefix path of the svg.
+  ///
+  /// If null, the default [path] is used.
+  ///
+  /// If provided, the [path] is ignored.
+  final String? prefixPath;
+
   /// The border radius of the svg.
   ///
   /// Default is 0.0.
@@ -37,15 +44,17 @@ class KSVG extends StatelessWidget {
     this.height = 24.0,
     this.borderRadius = 0.0,
     this.noColor = false,
+    this.prefixPath,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (name.isEmpty) return const SizedBox.shrink();
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: SvgPicture.asset(
-        '$path$name.svg',
+        '${prefixPath ?? path}$name.svg',
         colorFilter: noColor
             ? null
             : ColorFilter.mode(color ?? neutralDark, BlendMode.srcIn),
