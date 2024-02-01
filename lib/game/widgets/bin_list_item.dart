@@ -1,37 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:recycling_master/ui/widgets/ksvg.dart';
-import 'package:recycling_master/utils/bin_enums.dart';
+import 'package:recycling_master/models/bin.dart';
+import 'package:recycling_master/utils/colors.dart';
+import 'package:recycling_master/utils/theme.dart';
 
 class BinListItem extends StatelessWidget {
-  final BinCategory category;
+  final Bin bin;
   const BinListItem(
-    this.category, {
+    this.bin, {
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Implement UI
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: binBlueColor,
         borderRadius: BorderRadius.all(
-          Radius.circular(10.0),
+          Radius.circular(8.0),
         ),
       ),
-      child: const Column(
-        children: [
-          Row(
-            children: [
-              KSVG(''),
-              Text(''),
-              Text(''),
-            ],
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(.8),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(8.0),
           ),
-          Row(
-            children: [],
-          ),
-        ],
+        ),
+        clipBehavior: Clip.hardEdge,
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultSmallPadding, vertical: kDefaultTinyPadding),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Image.asset(
+                  // FIXME: Turn it into another widget, creating the bins from the colors preferences and adding the icons to the bins
+                  'assets/images/icons/bins/blue.png',
+                  width: 46.0,
+                  height: 46.0,
+                ),
+                const SizedBox(width: kDefaultSmallPadding),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        bin.title,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: neutralDark,
+                            fontSize: 14.0,
+                            fontFamily: 'LilitaOne'),
+                      ),
+                      Text(
+                        bin.description,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: neutralDark, fontSize: 10.0),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [],
+            ),
+          ],
+        ),
       ),
     );
   }

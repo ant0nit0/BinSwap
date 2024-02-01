@@ -21,31 +21,31 @@ final allBins = [
     category: BinCategory.plastics,
     color: BinColor.blue,
     description: translate('game.infos.bins.plastics.description'),
-    title: translate('game.infos.bins.organics.title'),
+    title: translate('game.infos.bins.plastics.title'),
   ),
   Bin(
     category: BinCategory.glass,
     color: BinColor.gray,
     description: translate('game.infos.bins.glass.description'),
-    title: translate('game.infos.bins.organics.title'),
+    title: translate('game.infos.bins.glass.title'),
   ),
   Bin(
     category: BinCategory.papers,
     color: BinColor.orange,
     description: translate('game.infos.bins.papers.description'),
-    title: translate('game.infos.bins.organics.title'),
+    title: translate('game.infos.bins.papers.title'),
   ),
   Bin(
     category: BinCategory.textiles,
     color: BinColor.purple,
     description: translate('game.infos.bins.textiles.description'),
-    title: translate('game.infos.bins.organics.title'),
+    title: translate('game.infos.bins.textiles.title'),
   ),
   Bin(
     category: BinCategory.electronics,
     color: BinColor.red,
     description: translate('game.infos.bins.electronics.description'),
-    title: translate('game.infos.bins.organics.title'),
+    title: translate('game.infos.bins.electronics.title'),
   ),
 ];
 

@@ -30,3 +30,10 @@ const greenTextColor = Color(0xff195608);
 
 const orangebgColor = Color(0xffEEC384);
 const orangeTextColor = Color(0xffB06118);
+
+const binBlueColor = Color(0xff4A94EB);
+const binGreenColor = Color(0xff38DB2A);
+const binRedColor = Color(0xffE05252);
+const binOrangeColor = Color(0xffFF942A);
+const binGrayColor = Color(0xffB7B4B4);
+const binPurpleColor = Color(0xffAA66E0);

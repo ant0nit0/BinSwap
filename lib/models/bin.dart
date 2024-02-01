@@ -4,14 +4,14 @@ class Bin {
   final BinCategory category;
   final BinColor color;
   final String? imagePath;
-  final String? description;
-  final String? title;
+  final String description;
+  final String title;
 
   const Bin({
     required this.category,
     required this.color,
-    this.title,
-    this.description,
+    required this.title,
+    required this.description,
     this.imagePath,
   });
 }

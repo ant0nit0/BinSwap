@@ -21,6 +21,7 @@ class InfosMainOverlay extends HookWidget {
     return GameModalOverlay(
       title: translate('game.infos.title'),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _button(
               context,
@@ -32,6 +33,7 @@ class InfosMainOverlay extends HookWidget {
               mainColor: greenTextColor, onTap: () {
             showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 builder: (context) {
                   return const RecyclingGuideOverlay();
                 });

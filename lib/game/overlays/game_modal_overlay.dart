@@ -27,15 +27,17 @@ class GameModalOverlay extends HookWidget {
       padding: const EdgeInsets.symmetric(
               horizontal: kDefaultPadding, vertical: kDefaultSmallPadding)
           .copyWith(bottom: kDefaultPadding),
-      child: Wrap(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           _dragger(),
           if (title != null) ...[
             _title(context),
             _divider(),
-            const SizedBox(height: kDefaultSmallPadding),
+            const SizedBox(height: kDefaultTinyPadding),
           ],
-          child ?? const SizedBox.shrink(),
+          if (child != null) child!,
         ],
       ),
     );
