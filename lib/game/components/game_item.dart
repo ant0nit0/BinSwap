@@ -5,6 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
+import 'package:recycling_master/game/components/game_score_added_indicator_text.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/kgame.dart';
@@ -27,6 +28,10 @@ class GameItem extends SpriteComponent
       // Same category, add the score
       if (other.bin.category == item.category) {
         game.increaseScore(item.score);
+        _createScoreIndicator(
+            Vector2(
+                other.position.x + other.size.x, other.position.y - size.y / 2),
+            item.score.toString());
       } else {
         // Wrong category, decrease the score
         game.decreaseScore();
@@ -34,6 +39,14 @@ class GameItem extends SpriteComponent
       // Remove the item from the game
       gameRef.itemSpawner.remove(this);
     }
+  }
+
+  Future<void> _createScoreIndicator(
+      Vector2 startPosition, String scoreText) async {
+    final scoreIndicator = GameScoreAddedIndicator(
+        startPosition: startPosition, scoreText: scoreText);
+    // We add it directly into the game because this item component is going to be removed soon
+    return await game.add(scoreIndicator);
   }
 
   @override
