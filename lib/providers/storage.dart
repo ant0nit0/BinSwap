@@ -39,8 +39,8 @@ class StorageService {
     }
   }
 
-  void clearAll() async {
-    await _storage.deleteAll();
+  Future<void> clearAll() async {
+    return await _storage.deleteAll();
   }
 
   FlutterSecureStorage get storage => _storage;
