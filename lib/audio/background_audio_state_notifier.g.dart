@@ -7,7 +7,7 @@ part of 'background_audio_state_notifier.dart';
 // **************************************************************************
 
 String _$backgroundAudioStateNotifierHash() =>
-    r'ab919ccd52aa2b8b171983f530ab51a610b28df4';
+    r'2df0ed9fd088e8143a83eccc60dc5cc794ee683f';
 
 /// The [BackgroundAudioStateNotifier] is responsible for playing the audio in the background.
 ///

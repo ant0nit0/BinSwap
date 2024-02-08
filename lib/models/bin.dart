@@ -3,7 +3,6 @@ import 'package:recycling_master/utils/bin_enums.dart';
 class Bin {
   final BinCategory category;
   final BinColor color;
-  final String? imagePath;
   final String description;
   final String title;
 
@@ -12,6 +11,5 @@ class Bin {
     required this.color,
     required this.title,
     required this.description,
-    this.imagePath,
   });
 }

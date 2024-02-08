@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:recycling_master/game/components/game_bin_icon.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -17,7 +18,7 @@ class GameBin extends SpriteComponent
   GameBin({required this.bin, required this.columnIndex});
 
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
     super.onLoad();
     // Load the sprite image
     sprite =
@@ -36,6 +37,10 @@ class GameBin extends SpriteComponent
     position = Vector2(x, y);
 
     await add(RectangleHitbox());
+    final icon = GameBinIcon(iconName: bin.category.name);
+    icon.position = Vector2(size.x / 2 - GameBinIcon.iconSize / 2,
+        size.y / 2 - GameBinIcon.iconSize / 2);
+    await add(icon);
   }
 
   @override
