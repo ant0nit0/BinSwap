@@ -5,6 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class GameTextLevel extends TextComponent with HasGameRef<KGame> {
@@ -35,10 +36,11 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
     textRenderer = TextPaint(
       style: const TextStyle(
         fontSize: 30,
-        color: Colors.white,
+        color: neutralDark,
         fontFamily: 'LilitaOne',
       ),
     );
+    updateText();
   }
 
   @override
