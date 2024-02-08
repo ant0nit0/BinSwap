@@ -177,8 +177,8 @@ class KGame extends FlameGame
     final nextLevel = Level(
       number: levelNotifier.value.number + 1,
       nbItemsToSort: (levelNotifier.value.nbItemsToSort * 1.2).round(),
-      itemOpacity: max(0, levelNotifier.value.itemOpacity - .1),
-      itemSpeed: (levelNotifier.value.itemSpeed * 1.25).round(),
+      itemOpacity: max(0, levelNotifier.value.itemOpacity - .075),
+      itemSpeed: (levelNotifier.value.itemSpeed * 1.2).round(),
       score: (levelNotifier.value.score + 5),
       minPeriod: levelNotifier.value.minPeriod * 0.8,
       maxPeriod: levelNotifier.value.maxPeriod * 0.8,
