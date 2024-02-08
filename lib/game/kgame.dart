@@ -1,26 +1,30 @@
 import 'dart:math';
-import 'package:flame/components.dart';
+
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:recycling_master/game/components/game_item_spawner.dart';
+import 'package:recycling_master/game/components/game_text_level.dart';
+import 'package:recycling_master/game/components/game_text_score.dart';
+import 'package:recycling_master/game/components/game_text_time.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/game/components/game_background.dart';
 import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/components/game_column.dart';
-import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_life_bar.dart';
+import 'package:recycling_master/models/level.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/utils/constants.dart';
-import 'package:recycling_master/utils/theme.dart';
-import 'package:recycling_master/utils/utils.dart';
 
 class KGame extends FlameGame
     with HorizontalDragDetector, HasCollisionDetection {
   /// The position where the drag started.
   /// Used to determine the column where the drag started and calculate the bins to swap.
   Vector2? _dragStartPosition;
+
+  /// The [GameItemSpawner] used to spawn the items.
+  /// We need to keep a reference to it to be able to remove the items from it.
+  GameItemSpawner itemSpawner;
 
   /// The direction of the drag.
   /// 1 for right, -1 for left, 0 when idle
@@ -31,13 +35,21 @@ class KGame extends FlameGame
   /// can listen to it and act on the updated value.
   final scoreNotifier = ValueNotifier(0);
 
-  /// In the [timeNotifier] we keep track of the time elapsed since the game started
+  /// In the [timeNotifier] we keep track of the time elapsed since the game started.
   final timeNotifier = ValueNotifier(0.0);
 
   /// In the [lifeNotifier] we keep track of the number of lives left
   /// When an item fall in a wrong bin, we decrease the value by 1
   /// When the value reaches 0, the game is over
   final lifeNotifier = ValueNotifier(defaultLife);
+
+  /// Here we keep a track of the number of items that have
+  /// been correctly sorted in the right bin.
+  ///
+  /// It is used to increase the difficulty of the game
+  /// by decreasing the time between the spawn of the items
+  /// and by increasing the speed of the items
+  final sortedItemsNotifier = ValueNotifier(0);
 
   /// The state of the game, contains the categories selected for the game
   /// and the items corresponding to these categories
@@ -47,14 +59,17 @@ class KGame extends FlameGame
   /// Used to keep track of the bins positions when swapping them
   final Map<int, GameBin> columnBinMap = {};
 
-  /// The random generator used to generate the items
-  /// If not provided, a new one will be created
-  final Random _random;
+  /// The level notifier, used to keep track of the current level
+  final levelNotifier = ValueNotifier(Level.one());
+
+  /// The numbers of items sorted for the current level.
+  /// Used to increase the level when the number of items sorted
+  /// reaches the number of items to sort for the current level.
+  final itemCountForLevel = ValueNotifier(0);
 
   KGame(
-    this.state, {
-    Random? random,
-  }) : _random = random ?? Random();
+    this.state,
+  ) : itemSpawner = GameItemSpawner(state.items);
 
   @override
   Future<void> onLoad() async {
@@ -64,61 +79,16 @@ class KGame extends FlameGame
     await _loadColumnsAndBins();
 
     // Adding the score, time and lifeBar components
-    await _loadScoreComponent();
-    await _loadTimeComponent();
+    await add(GameTextScore());
+    await add(GameTextTime());
+    await add(GameTextLevel());
     await add(GameLifeBar());
 
     // Launch the spawing of the items
-    await _initItemSpawner();
+    await add(itemSpawner);
 
     overlays.add(GameScreen.topIconsKey);
     overlays.add(GameScreen.pausePlayKey);
-  }
-
-  Future<void> _loadTimeComponent() async {
-    final textRenderer = TextPaint(
-      style: const TextStyle(
-        fontSize: 16,
-        color: Colors.white,
-        fontFamily: 'Montserrat',
-      ),
-    );
-
-    final timeComponent = TextComponent(
-      text: '${translate('game.time')} 0',
-      position: Vector2(kDefaultPadding, size.y * 0.2),
-      textRenderer: textRenderer,
-    );
-
-    timeNotifier.addListener(() {
-      timeComponent.text =
-          '${translate('game.time')} ${timeNotifier.value < 10 ? '0' : ''}${timeNotifier.value}';
-    });
-    return await add(timeComponent);
-  }
-
-  Future<void> _loadScoreComponent() async {
-    final textRenderer = TextPaint(
-      style: const TextStyle(
-        fontSize: 30,
-        color: Colors.white,
-        fontFamily: 'LilitaOne',
-      ),
-    );
-
-    final scoreText = 'Score : $scoreNotifier';
-
-    final scoreComponent = TextComponent(
-      text: scoreText,
-      position: Vector2(kDefaultPadding, size.y * 0.15),
-      textRenderer: textRenderer,
-    );
-
-    scoreNotifier.addListener(() {
-      scoreComponent.text = 'Score : ${scoreNotifier.value}';
-    });
-    scoreComponent.text = 'Score : 0';
-    return await add(scoreComponent);
   }
 
   Future<void> _loadColumnsAndBins() async {
@@ -131,24 +101,6 @@ class KGame extends FlameGame
       // Add the column to the game
       await addAll([column, bin]);
     }
-  }
-
-  Future<void> _initItemSpawner() async {
-    return await add(
-      SpawnComponent.periodRange(
-        factory: (_) {
-          final i = state.items[_random.nextInt(state.items.length)];
-          return GameItem(
-            item: i,
-            color: getColorFromBin(i.category),
-          );
-        },
-        minPeriod: 1,
-        maxPeriod: 3, // FIXME : Change this to increase difficulty
-        selfPositioning: false,
-        random: _random,
-      ),
-    );
   }
 
   @override
@@ -167,7 +119,7 @@ class KGame extends FlameGame
 
     if (_dragStartPosition != null) {
       // Calculate the index of the column where the drag started
-      int columnIndex =
+      final columnIndex =
           (_dragStartPosition!.x / (size.x / state.nbCol)).floor();
 
       // Determine the bins to swap
@@ -208,10 +160,42 @@ class KGame extends FlameGame
     // Swap the bins in the map
     columnBinMap[index1] = bin2Component;
     columnBinMap[index2] = bin1Component;
+  }
 
-    if (kDebugMode) {
-      print(
-          'Swapping bins ${bin1Component.bin.category.name} and ${bin2Component.bin.category.name}');
+  void increaseScore(int score) {
+    scoreNotifier.value += score;
+    sortedItemsNotifier.value += 1;
+    itemCountForLevel.value += 1;
+    if (itemCountForLevel.value >= levelNotifier.value.nbItemsToSort) {
+      itemCountForLevel.value = 0;
+      scoreNotifier.value += levelNotifier.value.score;
+      _increaseLevel();
+    }
+  }
+
+  void _increaseLevel() {
+    final nextLevel = Level(
+      number: levelNotifier.value.number + 1,
+      nbItemsToSort: (levelNotifier.value.nbItemsToSort * 1.2).round(),
+      itemOpacity: max(0, levelNotifier.value.itemOpacity - .1),
+      itemSpeed: (levelNotifier.value.itemSpeed * 1.25).round(),
+      score: (levelNotifier.value.score + 5),
+      minPeriod: levelNotifier.value.minPeriod * 0.8,
+      maxPeriod: levelNotifier.value.maxPeriod * 0.8,
+    );
+    levelNotifier.value = nextLevel;
+    itemSpawner.updatePeriods(
+      levelNotifier.value.minPeriod,
+      levelNotifier.value.maxPeriod,
+    );
+  }
+
+  void decreaseScore() {
+    scoreNotifier.value = max(0, scoreNotifier.value - 1);
+    lifeNotifier.value -= 1;
+    if (lifeNotifier.value <= 0) {
+      pauseEngine();
+      overlays.add(GameScreen.endGameDialogKey);
     }
   }
 }

@@ -6,7 +6,6 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/models/item.dart';
-import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/kgame.dart';
 
@@ -27,17 +26,13 @@ class GameItem extends SpriteComponent
     if (other is GameBin) {
       // Same category, add the score
       if (other.bin.category == item.category) {
-        gameRef.scoreNotifier.value += item.score;
+        game.increaseScore(item.score);
       } else {
-        // Wrong category, remove the score
-        gameRef.scoreNotifier.value = max(0, gameRef.scoreNotifier.value - 1);
-        game.lifeNotifier.value -= 1;
-        if (game.lifeNotifier.value == 0) {
-          game.pauseEngine();
-          game.overlays.add(GameScreen.endGameDialogKey);
-        }
+        // Wrong category, decrease the score
+        game.decreaseScore();
       }
-      gameRef.remove(this);
+      // Remove the item from the game
+      gameRef.itemSpawner.remove(this);
     }
   }
 
@@ -84,8 +79,9 @@ class GameItem extends SpriteComponent
         Offset(size.x / 4.4, size.y / 4.4); // Center of the sprite
 
     // Draw the background circle
-    final whitePaint = Paint()..color = Colors.white.withOpacity(.75);
-    final paint = Paint()..color = color.withOpacity(.5);
+    final whitePaint = Paint()..color = Colors.white.withOpacity(.5);
+    final paint = Paint()
+      ..color = color.withOpacity(game.levelNotifier.value.itemOpacity);
     canvas.drawCircle(circleOffset, circleRadius, whitePaint);
     canvas.drawCircle(circleOffset, circleRadius, paint);
 
@@ -95,6 +91,6 @@ class GameItem extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    position.y += gameRef.state.itemSpeed * dt;
+    position.y += gameRef.levelNotifier.value.itemSpeed * dt;
   }
 }
