@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:recycling_master/utils/bin_enums.dart';
+import 'package:recycling_master/utils/colors.dart';
 
 /// Transform an int [nbSeconds] into a String with the format mm:ss
 String formatTime(int nbSeconds) {
@@ -49,18 +50,38 @@ String getColorStringFromBin(BinCategory binCategory) {
 Color getColorFromBin(BinCategory binCategory) {
   switch (binCategory) {
     case BinCategory.electronics:
-      return Colors.red;
+      return binRedColor;
     case BinCategory.glass:
-      return Colors.grey;
+      return binGrayColor;
     case BinCategory.papers:
-      return Colors.orange;
+      return binOrangeColor;
     case BinCategory.plastics:
-      return Colors.blue;
+      return binBlueColor;
     case BinCategory.textiles:
-      return Colors.purple;
+      return binPurpleColor;
     case BinCategory.organics:
-      return Colors.green;
+      return binGreenColor;
     default:
-      return Colors.red;
+      return binRedColor;
+  }
+}
+
+/// Returns a [Color] according to the [BinCategory] given
+Color getColorFromBinColor(BinColor binColor) {
+  switch (binColor) {
+    case BinColor.red:
+      return binRedColor;
+    case BinColor.gray:
+      return binGrayColor;
+    case BinColor.orange:
+      return binOrangeColor;
+    case BinColor.blue:
+      return binBlueColor;
+    case BinColor.purple:
+      return binPurpleColor;
+    case BinColor.green:
+      return binGreenColor;
+    default:
+      return binRedColor;
   }
 }

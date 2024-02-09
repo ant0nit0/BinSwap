@@ -17,10 +17,7 @@ class GameStateNotifier extends _$GameStateNotifier {
 
   void _initState() {
     final bins = chooseBins();
-    final categories = bins.map((e) => e.category).toSet();
-    final items = allItems
-        .where((element) => categories.contains(element.category))
-        .toList();
+    final items = bins.map((e) => e.items).expand((e) => e).toList();
 
     state = GameState(
       bins: bins,
@@ -41,6 +38,7 @@ class GameStateNotifier extends _$GameStateNotifier {
         color: color,
         title: e.title,
         description: e.description,
+        items: e.items,
       );
     }).toList();
 

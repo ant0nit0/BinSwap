@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/game/widgets/bin_image.dart';
 import 'package:recycling_master/models/bin.dart';
+import 'package:recycling_master/providers/bin_colors.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
+import 'package:recycling_master/utils/utils.dart';
 
-class BinListItem extends StatelessWidget {
+class BinListItem extends HookConsumerWidget {
   final Bin bin;
   const BinListItem(
     this.bin, {
@@ -11,11 +15,16 @@ class BinListItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final binColor =
+        ref.read(binColorsProvider.notifier).getColor(bin.category);
+
+    final color = getColorFromBinColor(binColor);
+
     return Container(
-      decoration: const BoxDecoration(
-        color: binBlueColor,
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: const BorderRadius.all(
           Radius.circular(8.0),
         ),
       ),
@@ -30,15 +39,11 @@ class BinListItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             horizontal: kDefaultSmallPadding, vertical: kDefaultTinyPadding),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Image.asset(
-                  // FIXME: Turn it into another widget, creating the bins from the colors preferences and adding the icons to the bins
-                  'assets/images/icons/bins/blue.png',
-                  width: 46.0,
-                  height: 46.0,
-                ),
+                BinImage(color: bin.color, category: bin.category),
                 const SizedBox(width: kDefaultSmallPadding),
                 Expanded(
                   child: Column(
@@ -63,8 +68,32 @@ class BinListItem extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [],
+            const SizedBox(height: kDefaultTinyPadding),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  for (final item in bin.items)
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        margin:
+                            const EdgeInsets.only(right: kDefaultTinyPadding),
+                        padding: const EdgeInsets.all(kDefaultTinyPadding),
+                        child: Image.asset(
+                          'assets/images/icons/${bin.category.name}/${item.name}.png',
+                          width: 20.0,
+                          height: 20.0,
+                        ),
+                      ),
+                    )
+                ],
+              ),
             ),
           ],
         ),

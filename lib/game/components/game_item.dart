@@ -13,8 +13,10 @@ import 'package:recycling_master/game/kgame.dart';
 class GameItem extends SpriteComponent
     with HasGameRef<KGame>, CollisionCallbacks {
   static const double padding = 2.0;
+  late final int _columnIndex;
   final Item item;
   final Color color;
+  final isAccelerate = ValueNotifier(false);
 
   GameItem({
     required this.item,
@@ -36,7 +38,6 @@ class GameItem extends SpriteComponent
         // Wrong category, decrease the score
         game.decreaseScore();
       }
-      // Remove the item from the game
       removeFromParent();
     }
   }
@@ -47,6 +48,17 @@ class GameItem extends SpriteComponent
         startPosition: startPosition, scoreText: scoreText);
     // We add it directly into the game because this item component is going to be removed soon
     return await game.add(scoreIndicator);
+  }
+
+  void accelerate() {
+    isAccelerate.value = true;
+  }
+
+  @override
+  void onRemove() {
+    super.onRemove();
+    // Remove the item from the game
+    gameRef.removeLastItemPerColumn(_columnIndex);
   }
 
   @override
@@ -64,6 +76,7 @@ class GameItem extends SpriteComponent
 
     // Randomly choose a column index
     final rand = Random().nextInt(gameRef.state.nbCol);
+    _columnIndex = rand;
     // The position of the top left corner of the random column
     final columnPosition = gameRef.size.x * (1 / gameRef.state.nbCol) * rand;
 
@@ -77,6 +90,9 @@ class GameItem extends SpriteComponent
       columnPosition + halfOfColumnWidth - halfOfItemSize,
       gameRef.size.y * .25 + (padding + size.y / 2) / 2,
     );
+
+    // Store this as the last item of the column
+    gameRef.addLastItemPerColumn(_columnIndex, this);
 
     await add(CircleHitbox(
       radius: (size.x / 2 + padding * 2),
@@ -104,6 +120,8 @@ class GameItem extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    position.y += gameRef.levelNotifier.value.itemSpeed * dt;
+    position.y += gameRef.levelNotifier.value.itemSpeed *
+        dt *
+        (isAccelerate.value ? 3 : 1);
   }
 }

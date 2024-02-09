@@ -13,7 +13,11 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gameBins = ref.watch(gameStateNotifierProvider).bins;
-    final otherBins = allBins.where((e) => !gameBins.contains(e)).toList();
+    final List otherBins = [...allBins]
+        .map((e) =>
+            gameBins.map((f) => f.title).toList().contains(e.title) ? null : e)
+        .where((element) => element != null)
+        .toList();
 
     const miniTitleTextStyle = TextStyle(
       fontFamily: 'LilitaOne',
@@ -59,7 +63,6 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
             return BinListItem(otherBins[index]);
           },
         ),
-        Container(height: 300.0, color: Colors.red)
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_item_spawner.dart';
 import 'package:recycling_master/game/components/game_text_level.dart';
 import 'package:recycling_master/game/components/game_text_score.dart';
@@ -17,7 +18,7 @@ import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/utils/constants.dart';
 
 class KGame extends FlameGame
-    with HorizontalDragDetector, HasCollisionDetection {
+    with HorizontalDragDetector, VerticalDragDetector, HasCollisionDetection {
   /// The position where the drag started.
   /// Used to determine the column where the drag started and calculate the bins to swap.
   Vector2? _dragStartPosition;
@@ -58,6 +59,8 @@ class KGame extends FlameGame
   /// A map of the columns indexes and their corresponding bins
   /// Used to keep track of the bins positions when swapping them
   final Map<int, GameBin> columnBinMap = {};
+
+  final Map<int, GameItem?> lastItemPerColumn = {};
 
   /// The level notifier, used to keep track of the current level
   final levelNotifier = ValueNotifier(Level.one());
@@ -111,6 +114,34 @@ class KGame extends FlameGame
   @override
   void onHorizontalDragUpdate(DragUpdateInfo info) {
     _dragDirection = info.delta.global.x.sign.toInt();
+  }
+
+  @override
+  void onVerticalDragStart(DragStartInfo info) {
+    super.onVerticalDragStart(info);
+
+    // Get the column index where the drag started
+    final columnIndex =
+        (info.eventPosition.global.x / (size.x / state.nbCol)).floor();
+
+    final item = lastItemPerColumn[columnIndex];
+    if (item != null) item.accelerate();
+  }
+
+  void addLastItemPerColumn(int columnIndex, GameItem item) {
+    // Check if a value is already set for the column
+    if (!lastItemPerColumn.containsKey(columnIndex)) {
+      lastItemPerColumn[columnIndex] = item;
+    } else {
+      // Or if the value is null
+      if (lastItemPerColumn[columnIndex] == null) {
+        lastItemPerColumn[columnIndex] = item;
+      }
+    }
+  }
+
+  void removeLastItemPerColumn(int columnIndex) {
+    lastItemPerColumn[columnIndex] = null;
   }
 
   @override
