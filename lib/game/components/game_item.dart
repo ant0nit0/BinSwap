@@ -37,7 +37,7 @@ class GameItem extends SpriteComponent
         game.decreaseScore();
       }
       // Remove the item from the game
-      gameRef.itemSpawner.remove(this);
+      removeFromParent();
     }
   }
 

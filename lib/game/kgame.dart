@@ -24,7 +24,7 @@ class KGame extends FlameGame
 
   /// The [GameItemSpawner] used to spawn the items.
   /// We need to keep a reference to it to be able to remove the items from it.
-  GameItemSpawner itemSpawner;
+  final GameItemSpawner _itemSpawner;
 
   /// The direction of the drag.
   /// 1 for right, -1 for left, 0 when idle
@@ -69,7 +69,7 @@ class KGame extends FlameGame
 
   KGame(
     this.state,
-  ) : itemSpawner = GameItemSpawner(state.items);
+  ) : _itemSpawner = GameItemSpawner(state.items);
 
   @override
   Future<void> onLoad() async {
@@ -85,7 +85,7 @@ class KGame extends FlameGame
     await add(GameLifeBar());
 
     // Launch the spawing of the items
-    await add(itemSpawner);
+    await add(_itemSpawner);
 
     overlays.add(GameScreen.topIconsKey);
     overlays.add(GameScreen.pausePlayKey);
@@ -184,7 +184,7 @@ class KGame extends FlameGame
       maxPeriod: levelNotifier.value.maxPeriod * 0.8,
     );
     levelNotifier.value = nextLevel;
-    itemSpawner.updatePeriods(
+    _itemSpawner.updatePeriods(
       levelNotifier.value.minPeriod,
       levelNotifier.value.maxPeriod,
     );
