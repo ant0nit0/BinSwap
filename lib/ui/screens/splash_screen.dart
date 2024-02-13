@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/background_audio_state_notifier.dart';
+import 'package:recycling_master/providers/bin_colors.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
@@ -18,6 +19,8 @@ class SplashScreen extends HookConsumerWidget {
       ref.read(backgroundAudioStateNotifierProvider.notifier);
       // Iniitalize the language (if a preference is stored and is different than the device default language)
       unawaited(ref.read(langProvider.notifier).initLang(context));
+      // Load the color distributions preferences
+      ref.read(binColorsProvider.notifier);
     });
     Future.delayed(const Duration(seconds: 2), () {
       // Navigate to the home screen

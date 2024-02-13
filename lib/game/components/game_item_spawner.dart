@@ -1,11 +1,14 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:recycling_master/game/components/game_item.dart';
+import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/utils/utils.dart';
 
-class GameItemSpawner extends Component {
+class GameItemSpawner extends Component with HasGameRef<KGame> {
   /// The random generator used to generate the items
   /// If not provided, a new one will be created
   final Random _random;
@@ -35,9 +38,11 @@ class GameItemSpawner extends Component {
     _spawner = SpawnComponent.periodRange(
       factory: (_) {
         final i = _items[_random.nextInt(_items.length)];
+        final _color =
+            getColorFromBinColor(game.state.colorDistribution[i.category]!);
         return GameItem(
           item: i,
-          color: getColorFromBin(i.category),
+          color: _color,
         );
       },
       minPeriod: _minPeriod,

@@ -17,8 +17,7 @@ class BinListItem extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final binColor =
-        ref.read(binColorsProvider.notifier).getColor(bin.category);
-
+        ref.read(binColorsProvider.notifier).getBinColor(bin.category);
     final color = getColorFromBinColor(binColor);
 
     return Container(

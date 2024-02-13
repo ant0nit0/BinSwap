@@ -39,23 +39,23 @@
             },
             "bins": {
                 "plastics": {
-                    "title": "Plastics",
+                    "title": "Plastique",
                     "description": "TODO: Recycling plastics reduces pollution, conserves resources, and minimizes the impact on wildlife and the environment."
                 },
                 "organics": {
-                    "title": "Organics",
+                    "title": "Compost",
                     "description": "TODO: Recycling organic waste into compost enriches soil, reduces the need for chemical fertilizers, and decreases methane emissions from landfills."
                 },
                 "electronics": {
-                    "title": "Electronics",
+                    "title": "Electronique",
                     "description": "TODO: Proper recycling of e-waste prevents the release of toxic substances into the environment and recovers valuable materials."
                 },
                 "glass": {
-                    "title": "Glass",
+                    "title": "Verre",
                     "description": "TODO: Glass can be recycled indefinitely without loss of quality, reducing raw material use and lowering energy consumption."
                 },
                 "papers": {
-                    "title": "Papers",
+                    "title": "Papiers",
                     "description": "TODO: Recycling paper conserves trees and forest habitats, reduces greenhouse gas emissions, and saves energy compared to producing new paper."
                 },
                 "textiles": {
@@ -79,9 +79,14 @@
         }
     },
     "settings": {
+            "color-attributions":"Couleurs des poubelles",
         "title": "Paramètres",
         "lang": "Langue",
         "audio": "Musique",
-        "sfx": "SFX"
+        "sfx": "SFX",
+        "colors": {
+            "title": "Répartition des couleurs",
+            "subtitle": "Faites correspondre les couleurs des poubelles de votre région avec celles du jeu ! Cliquez sur une catégorie pour changer sa couleur."
+        }
     }
 }

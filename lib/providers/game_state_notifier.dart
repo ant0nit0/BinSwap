@@ -16,12 +16,14 @@ class GameStateNotifier extends _$GameStateNotifier {
   }
 
   void _initState() {
+    final colorDistribution = ref.watch(binColorsProvider);
     final bins = chooseBins();
     final items = bins.map((e) => e.items).expand((e) => e).toList();
 
     state = GameState(
       bins: bins,
       items: items,
+      colorDistribution: colorDistribution.valueOrNull ?? BinColors.base,
     );
   }
 
@@ -32,7 +34,8 @@ class GameStateNotifier extends _$GameStateNotifier {
     bins.removeRange(3, bins.length);
     // Create new bin instances with their colors fetched from the BinColors provider
     final list = bins.map((e) {
-      final color = ref.read(binColorsProvider.notifier).getColor(e.category);
+      final color =
+          ref.read(binColorsProvider.notifier).getBinColor(e.category);
       return Bin(
         category: e.category,
         color: color,

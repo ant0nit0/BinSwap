@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:recycling_master/ui/screens/color_distribution_screen.dart';
 import 'package:recycling_master/ui/screens/dev_settings.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/screens/home_screen.dart';
@@ -12,6 +13,7 @@ class Routes {
   static const gameScreen = '/game';
   static const splashScreen = '/splash';
   static const devSettingsScreen = '/dev';
+  static const colorAttributions = '/colors';
 }
 
 class RouteGenerator {
@@ -42,6 +44,11 @@ class RouteGenerator {
         return PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const DevSettingsScreen(),
+        );
+      case Routes.colorAttributions:
+        return PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => const ColorDistributionScreen(),
         );
       default:
         return _errorRoute(settings.name ?? '', settings);

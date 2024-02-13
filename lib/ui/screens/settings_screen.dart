@@ -7,6 +7,7 @@ import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
 import 'package:recycling_master/ui/widgets/credentials.dart';
 import 'package:recycling_master/ui/widgets/kswitch.dart';
 import 'package:recycling_master/ui/widgets/lang_settings_selector.dart';
+import 'package:recycling_master/ui/widgets/settings_bin_attributions_button.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/extensions.dart';
@@ -49,6 +50,7 @@ class SettingsScreen extends HookConsumerWidget {
               )
             ],
           ),
+          const SettingsBinColorAttributionsButton(),
           const Spacer(),
           const CredentialsWidget(),
         ],

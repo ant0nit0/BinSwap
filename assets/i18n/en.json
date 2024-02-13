@@ -79,9 +79,14 @@
         }
     },
     "settings": {
+        "color-attributions": "Bin colors",
         "title": "Settings",
         "lang": "Lang",
         "audio": "Music",
-        "sfx": "SFX"
+        "sfx": "SFX",
+        "colors": {
+            "title": "Color distribution",
+            "subtitle": "Match the colors of your region with the game ! Click on a category to choose its color."
+        }
     }
 }

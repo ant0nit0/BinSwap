@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recycling_master/ui/widgets/ksvg.dart';
 import 'package:recycling_master/utils/bin_enums.dart';
 
 class BinImage extends StatelessWidget {
@@ -20,11 +21,11 @@ class BinImage extends StatelessWidget {
           width: 46.0,
           height: 46.0,
         ),
-        Image.asset(
-          'assets/images/icons/bins/${category.name}.png',
+        KSVG(
+          category.name,
           width: 18.0,
           height: 18.0,
-          alignment: Alignment.center,
+          prefixPath: 'assets/images/icons/bins/',
         ),
       ],
     );
