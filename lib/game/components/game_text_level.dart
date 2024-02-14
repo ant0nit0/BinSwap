@@ -21,7 +21,7 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
   final velocity = 200.0;
 
   /// The initial position of the text
-  static const initialY = kDefaultLargePadding;
+  static const initialY = kDefaultLargePadding * .75;
 
   /// Value used to delay the animation.
   ///
@@ -29,7 +29,7 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
   final _animationDelayer = ValueNotifier(1.0);
 
   @override
-  FutureOr<void> onLoad() {
+  FutureOr<void> onLoad() async {
     super.onLoad();
     text = '${translate('game.level')}${game.levelNotifier.value.number}';
     position = Vector2(game.size.x / 2 - size.x / 2, initialY);
