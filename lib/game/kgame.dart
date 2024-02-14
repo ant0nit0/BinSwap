@@ -5,6 +5,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_item_spawner.dart';
+import 'package:recycling_master/game/components/game_level_bar.dart';
 import 'package:recycling_master/game/components/game_text_level.dart';
 import 'package:recycling_master/game/components/game_text_score.dart';
 import 'package:recycling_master/game/components/game_text_time.dart';
@@ -60,7 +61,7 @@ class KGame extends FlameGame
   /// Used to keep track of the bins positions when swapping them
   final Map<int, GameBin> columnBinMap = {};
 
-  final Map<int, GameItem?> lastItemPerColumn = {};
+  final Map<int, List<GameItem?>> lastItemPerColumn = {};
 
   /// The level notifier, used to keep track of the current level
   final levelNotifier = ValueNotifier(Level.one());
@@ -85,6 +86,7 @@ class KGame extends FlameGame
     await add(GameTextScore());
     await add(GameTextTime());
     await add(GameTextLevel());
+    await add(GameLevelBar());
     await add(GameLifeBar());
 
     // Launch the spawing of the items
@@ -124,24 +126,23 @@ class KGame extends FlameGame
     final columnIndex =
         (info.eventPosition.global.x / (size.x / state.nbCol)).floor();
 
-    final item = lastItemPerColumn[columnIndex];
-    if (item != null) item.accelerate();
+    final itemList = lastItemPerColumn[columnIndex];
+    final firstItem = itemList?.first;
+    if (firstItem != null) firstItem.accelerate();
   }
 
   void addLastItemPerColumn(int columnIndex, GameItem item) {
-    // Check if a value is already set for the column
-    if (!lastItemPerColumn.containsKey(columnIndex)) {
-      lastItemPerColumn[columnIndex] = item;
+    // Check if a list is already present for this index
+    if (lastItemPerColumn.containsKey(columnIndex)) {
+      lastItemPerColumn[columnIndex]!.add(item);
     } else {
-      // Or if the value is null
-      if (lastItemPerColumn[columnIndex] == null) {
-        lastItemPerColumn[columnIndex] = item;
-      }
+      lastItemPerColumn[columnIndex] = [item];
     }
   }
 
-  void removeLastItemPerColumn(int columnIndex) {
-    lastItemPerColumn[columnIndex] = null;
+  void removeLastItemPerColumn(int columnIndex, GameItem item) {
+    if (!lastItemPerColumn.containsKey(columnIndex)) return;
+    lastItemPerColumn[columnIndex]!.remove(item);
   }
 
   @override
@@ -221,12 +222,14 @@ class KGame extends FlameGame
     );
   }
 
-  void decreaseScore() {
+  Future<void> decreaseScore() async {
     scoreNotifier.value = max(0, scoreNotifier.value - 1);
     lifeNotifier.value -= 1;
     if (lifeNotifier.value <= 0) {
       pauseEngine();
-      overlays.add(GameScreen.endGameDialogKey);
+      await Future.delayed(const Duration(milliseconds: 1000), () {
+        overlays.add(GameScreen.endGameDialogKey);
+      });
     }
   }
 }

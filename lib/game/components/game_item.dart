@@ -24,7 +24,8 @@ class GameItem extends SpriteComponent
   });
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollision(
+      Set<Vector2> intersectionPoints, PositionComponent other) async {
     super.onCollision(intersectionPoints, other);
     if (other is GameBin) {
       // Same category, add the score
@@ -36,7 +37,7 @@ class GameItem extends SpriteComponent
             item.score.toString());
       } else {
         // Wrong category, decrease the score
-        game.decreaseScore();
+        await game.decreaseScore();
       }
       removeFromParent();
     }
@@ -58,7 +59,7 @@ class GameItem extends SpriteComponent
   void onRemove() {
     super.onRemove();
     // Remove the item from the game
-    gameRef.removeLastItemPerColumn(_columnIndex);
+    gameRef.removeLastItemPerColumn(_columnIndex, this);
   }
 
   @override
