@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class GameTextTime extends TextComponent with HasGameRef<KGame> {
@@ -15,7 +16,8 @@ class GameTextTime extends TextComponent with HasGameRef<KGame> {
     textRenderer = TextPaint(
       style: const TextStyle(
         fontSize: 16,
-        color: Colors.white,
+        color: neutralDark,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat',
       ),
     );
