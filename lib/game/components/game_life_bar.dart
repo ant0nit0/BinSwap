@@ -10,18 +10,20 @@ import 'package:recycling_master/utils/theme.dart';
 
 class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
   static const refillSpeed = 0.05;
+  double _width = 0.0;
 
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
+    size = Vector2((gameRef.size.x - 2 * kDefaultPadding), 8);
     position = Vector2(kDefaultPadding, gameRef.size.y * 0.23);
-    size = Vector2(gameRef.size.x - 2 * kDefaultPadding, 8);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    if (gameRef.lifeNotifier.value < defaultLife) {
+    _width = size.x * (max(0, gameRef.lifeNotifier.value) / defaultLife);
+    if (_width < size.x) {
       gameRef.lifeNotifier.value += refillSpeed * dt;
     }
   }
@@ -31,25 +33,18 @@ class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
     super.render(canvas);
 
     final bgPaint = Paint()
-      ..color = const Color.fromARGB(255, 255, 0, 0)
+      ..color = const Color.fromARGB(255, 255, 25, 25)
       ..style = PaintingStyle.fill;
 
     final paint = Paint()
-      ..color = const Color.fromARGB(255, 0, 255, 0)
+      ..color = const Color.fromARGB(255, 25, 255, 25)
       ..style = PaintingStyle.fill;
-
-    final width = size.x;
-
-    final lifeWidth =
-        // The max is used to avoid overflows in the bar when the party is over
-        // (Seen in background, but still visible)
-        width * (max(0, gameRef.lifeNotifier.value) / defaultLife);
 
     canvas.drawRect(
       Rect.fromLTWH(
         0,
         0,
-        width,
+        size.x,
         height,
       ),
       bgPaint,
@@ -59,7 +54,7 @@ class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
       Rect.fromLTWH(
         0,
         0,
-        lifeWidth,
+        _width,
         height,
       ),
       paint,
