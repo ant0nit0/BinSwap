@@ -26,4 +26,24 @@ class Level {
         minPeriod: 1,
         maxPeriod: 3,
       );
+
+  factory Level.tutorial() => const Level(
+        number: 1,
+        nbItemsToSort: 2,
+        itemOpacity: .5,
+        itemSpeed: 100,
+        score: 10,
+        minPeriod: 1,
+        maxPeriod: 1.2,
+      );
+
+  factory Level.tutorialFixed() => const Level(
+        number: 1,
+        nbItemsToSort: 200,
+        itemOpacity: .75,
+        itemSpeed: 1,
+        score: 0,
+        minPeriod: 10,
+        maxPeriod: 12,
+      );
 }

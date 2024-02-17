@@ -9,6 +9,8 @@ import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/utils/utils.dart';
 
 class GameItemSpawner extends Component with HasGameRef<KGame> {
+  final List<GameItem> _spawnedItems = [];
+
   /// The random generator used to generate the items
   /// If not provided, a new one will be created
   final Random _random;
@@ -40,10 +42,12 @@ class GameItemSpawner extends Component with HasGameRef<KGame> {
         final i = _items[_random.nextInt(_items.length)];
         final _color =
             getColorFromBinColor(game.state.colorDistribution[i.category]!);
-        return GameItem(
+        final gameItem = GameItem(
           item: i,
           color: _color,
         );
+        _spawnedItems.add(gameItem);
+        return gameItem;
       },
       minPeriod: _minPeriod,
       maxPeriod: _maxPeriod,
@@ -61,5 +65,12 @@ class GameItemSpawner extends Component with HasGameRef<KGame> {
     // Update the spawner with new period values
     _spawner?.minPeriod = minPeriod;
     _spawner?.maxPeriod = maxPeriod;
+  }
+
+  void clear() {
+    for (var element in _spawnedItems) {
+      element.removeFromParent();
+    }
+    _spawnedItems.clear();
   }
 }

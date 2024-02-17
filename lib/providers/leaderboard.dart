@@ -74,4 +74,12 @@ class Leaderboard extends _$Leaderboard {
 
     return scores.first;
   }
+
+  void clear() async {
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .delete(key: StorageKeys.leaderboard);
+    state = const AsyncData(<Score>[]);
+  }
 }
