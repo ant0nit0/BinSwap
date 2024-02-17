@@ -25,17 +25,19 @@ class SettingsGameOverlay extends HookConsumerWidget {
       onClose: () {
         game.overlays.remove(GameScreen.settingsDialogKey);
       },
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LangSettingsSelector(),
-          BackgroundAudioSwitch(),
-          Spacer(),
-          EndGameButtons(inGame: true),
-          CredentialsWidget(),
-        ],
-      ).separated(
-        separator: const SizedBox(height: kDefaultPadding),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const LangSettingsSelector(),
+            const BackgroundAudioSwitch(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            const EndGameButtons(inGame: true),
+            const CredentialsWidget(),
+          ],
+        ).separated(
+          separator: const SizedBox(height: kDefaultPadding),
+        ),
       ),
     );
   }

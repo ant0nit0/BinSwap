@@ -21,7 +21,7 @@ class TutorialStep5 extends HookConsumerWidget {
     );
     return SizedBox(
       height: MediaQuery.of(context).size.height * size,
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
         child: Column(

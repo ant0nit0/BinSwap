@@ -49,6 +49,7 @@ class InfosMainOverlay extends HookWidget {
               mainColor: orangeTextColor, onTap: () {
             showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 builder: (context) {
                   return const HowToPlayOverlay();
                 });

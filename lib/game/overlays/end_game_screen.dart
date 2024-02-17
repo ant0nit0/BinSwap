@@ -28,13 +28,15 @@ class EndGameScreen extends HookConsumerWidget {
     return BlurredScaffold(
       mainAxisAlignment: MainAxisAlignment.center,
       title: translate('endGame.title'),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          EndGameScoreWidget(score),
-          GameLeaderboard(score),
-          const EndGameButtons(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            EndGameScoreWidget(score),
+            GameLeaderboard(score),
+            const EndGameButtons(),
+          ],
+        ),
       ),
     );
   }

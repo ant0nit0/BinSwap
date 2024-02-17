@@ -27,43 +27,46 @@ class TutorialStep6 extends HookConsumerWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
-              .copyWith(top: kDefaultLargePadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              KAnimate(
-                controller: t1AnimationController,
-                slideDirection: SlideDirection.downToUp,
-                child: const Text(
-                  'Well played, you completed the tutorial ! (I\'ve told you it will not be long !)',
-                  style: ts,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
+                    .copyWith(top: kDefaultLargePadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                KAnimate(
+                  controller: t1AnimationController,
+                  slideDirection: SlideDirection.downToUp,
+                  child: const Text(
+                    'Well played, you completed the tutorial ! (I\'ve told you it will not be long !)',
+                    style: ts,
+                  ),
                 ),
-              ),
-              const SizedBox(height: kDefaultLargePadding),
-              KAnimate(
-                controller: t2AnimationController,
-                slideDirection: SlideDirection.downToUp,
-                child: const Text(
-                  'You can always redo this tutorial in the home screen, or you can get some help in game by pressing the little I button on the top right of the screen',
-                  style: littleTs,
+                const SizedBox(height: kDefaultLargePadding),
+                KAnimate(
+                  controller: t2AnimationController,
+                  slideDirection: SlideDirection.downToUp,
+                  child: const Text(
+                    'You can always redo this tutorial in the home screen, or you can get some help in game by pressing the little I button on the top right of the screen',
+                    style: littleTs,
+                  ),
                 ),
-              ),
-              const SizedBox(height: kDefaultPadding),
-              NextButtonWidget(
-                text: 'PLAY',
-                controller: t2AnimationController,
-                beforeAnimationCallback: () {
-                  t1AnimationController.reverse();
-                  t2AnimationController.reverse();
-                },
-                afterAnimationCallback: () {
-                  game.launchGameAfterTutorial();
-                },
-              )
-            ],
+                const SizedBox(height: kDefaultPadding),
+                NextButtonWidget(
+                  text: 'PLAY',
+                  controller: t2AnimationController,
+                  beforeAnimationCallback: () {
+                    t1AnimationController.reverse();
+                    t2AnimationController.reverse();
+                  },
+                  afterAnimationCallback: () {
+                    game.launchGameAfterTutorial();
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

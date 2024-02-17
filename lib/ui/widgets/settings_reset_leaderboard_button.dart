@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/utils/colors.dart';
+import 'package:recycling_master/utils/theme.dart';
 
 class ResetLeaderboardTextButton extends HookConsumerWidget {
   const ResetLeaderboardTextButton({super.key});
@@ -18,7 +19,20 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: kDefaultSmallPadding,
+                        horizontal: kDefaultPadding),
                     title: const Text('Reset leaderboard'),
+                    titleTextStyle: const TextStyle(
+                      fontFamily: 'LilitaOne',
+                      fontSize: 20.0,
+                      color: neutralDark,
+                    ),
+                    backgroundColor: neutralLight,
+                    // actions
                     content: const Text(
                         'Are you sure you want to reset the leaderboard? This action cannot be undone.'),
                     actions: <Widget>[

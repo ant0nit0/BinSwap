@@ -85,15 +85,13 @@ class TutorialOverlay extends HookConsumerWidget {
     switch (state) {
       case TutorialStep.step1:
       case TutorialStep.step6:
+      case TutorialStep.step3_1:
+      case TutorialStep.step3_2:
         return 1;
       case TutorialStep.step2:
         return 0.75;
       case TutorialStep.step3:
-        return 0.4;
-      case TutorialStep.step3_1:
-        return 1;
-      case TutorialStep.step3_2:
-        return 1;
+        return TutorialStep3.size;
       case TutorialStep.step4:
         return TutorialStep4.size;
       case TutorialStep.step5:

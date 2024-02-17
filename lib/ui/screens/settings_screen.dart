@@ -33,35 +33,39 @@ class SettingsScreen extends HookConsumerWidget {
       title: translate('settings.title'),
       automaticallyImplementClosing: true,
       onClose: () => navigatorKey.currentState!.pop(),
-      child: Column(
-        children: [
-          const LangSettingsSelector(),
-          const BackgroundAudioSwitch(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                translate('settings.sfx'),
-                style: textStyle,
-              ),
-              KSwitch(
-                width: 60.0,
-                initialValue: true,
-                onActivate: () {},
-              )
-            ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const LangSettingsSelector(),
+            const BackgroundAudioSwitch(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  translate('settings.sfx'),
+                  style: textStyle,
+                ),
+                KSwitch(
+                  width: 60.0,
+                  initialValue: true,
+                  onActivate: () {},
+                )
+              ],
+            ),
+            const SettingsBinColorAttributionsButton(),
+            const SizedBox(
+              height: kDefaultSmallPadding,
+            ),
+            const ResetLeaderboardTextButton(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            const CredentialsWidget(),
+          ],
+        ).separated(
+          separator: const SizedBox(
+            height: kDefaultPadding,
           ),
-          const SettingsBinColorAttributionsButton(),
-          const SizedBox(
-            height: kDefaultSmallPadding,
-          ),
-          const ResetLeaderboardTextButton(),
-          const Spacer(),
-          const CredentialsWidget(),
-        ],
-      ).separated(
-        separator: const SizedBox(
-          height: kDefaultPadding,
         ),
       ),
     );

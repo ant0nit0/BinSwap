@@ -8,6 +8,7 @@ import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class TutorialStep3 extends HookConsumerWidget {
+  static const size = .4;
   const TutorialStep3({super.key});
 
   @override
