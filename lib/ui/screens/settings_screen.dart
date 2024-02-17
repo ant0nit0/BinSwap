@@ -12,6 +12,7 @@ import 'package:recycling_master/ui/widgets/settings_reset_leaderboard_button.da
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/extensions.dart';
+import 'package:recycling_master/utils/router.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class SettingsScreen extends HookConsumerWidget {
@@ -32,7 +33,8 @@ class SettingsScreen extends HookConsumerWidget {
       backgroundImagePath: 'assets/images/backgrounds/snow_bg.png',
       title: translate('settings.title'),
       automaticallyImplementClosing: true,
-      onClose: () => navigatorKey.currentState!.pop(),
+      onClose: () =>
+          navigatorKey.currentState!.pushReplacementNamed(Routes.homeScreen),
       child: SingleChildScrollView(
         child: Column(
           children: [

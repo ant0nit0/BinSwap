@@ -45,7 +45,7 @@ class EndGameButtons extends HookConsumerWidget {
             navigatorKey.currentState
                 ?.popUntil((route) => route.isFirst && route.isCurrent);
             // Push the game screen
-            navigatorKey.currentState?.pushNamed(
+            navigatorKey.currentState?.pushReplacementNamed(
               Routes.gameScreen,
             );
           },

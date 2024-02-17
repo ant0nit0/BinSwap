@@ -6,15 +6,29 @@ class HomeTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'RECYCLING\nMASTER',
-      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            color: greenTextColor,
-            fontFamily: 'Lilitaone',
-            fontSize: 48.0,
-            height: 1.0,
-          ),
-      textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          'BINSWAP',
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: neutralDark,
+                fontFamily: 'Lilitaone',
+                fontSize: 48.0,
+                height: 1.0,
+              ),
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          'Swipe & Sort',
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: neutralDark,
+                fontFamily: 'Lilitaone',
+                fontSize: 24.0,
+                height: 1.0,
+              ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

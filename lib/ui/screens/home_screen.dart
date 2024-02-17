@@ -1,4 +1,9 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
@@ -19,44 +24,77 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Rebuild the widget when the language changes
     ref.watch(langProvider);
+    final t1Controller = useAnimationController(
+      duration: const Duration(milliseconds: 500),
+    );
+    final t2Controller = useAnimationController(
+      duration: const Duration(milliseconds: 500),
+    );
+    final t3Controller = useAnimationController(
+      duration: const Duration(milliseconds: 500),
+    );
+
+    Future<void> _reverseAnimations() async {
+      unawaited(t1Controller.reverse());
+      unawaited(t2Controller.reverse());
+      await t3Controller.reverse().then((value) {
+        t1Controller.reset();
+        t2Controller.reset();
+        t3Controller.reset();
+      });
+    }
 
     return Scaffold(
       body: Stack(
         children: [
           const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
-          _buttons(context, ref),
+          _buttons(context, ref, t1Controller, t2Controller, t3Controller,
+              _reverseAnimations),
         ],
       ),
     );
   }
 
-  Widget _buttons(BuildContext context, WidgetRef ref) => Positioned(
+  Widget _buttons(
+          BuildContext context,
+          WidgetRef ref,
+          AnimationController t1Controller,
+          AnimationController t2Controller,
+          AnimationController t3Controller,
+          Future<void> Function() funcBeforeCallBack) =>
+      Positioned(
         bottom: kDefaultLargePadding,
         left: kDefaultLargePadding,
         right: kDefaultLargePadding,
         top: kDefaultLargePadding * 3,
         child: Column(
           children: [
-            const KAnimate(child: HomeTitle()),
+            KAnimate(controller: t1Controller, child: const HomeTitle()),
             const Spacer(),
             KAnimate(
+              controller: t2Controller,
               slideDirection: SlideDirection.downToUp,
               child: KButton.blue(
                 text: translate('home.buttons.play'),
                 isExpanded: false,
-                onPressed: () {
+                onPressed: () async {
+                  await funcBeforeCallBack();
                   ref.read(isUserPlayingProvider.notifier).state = true;
-                  navigatorKey.currentState?.pushNamed(Routes.gameScreen);
+                  navigatorKey.currentState
+                      ?.pushReplacementNamed(Routes.gameScreen);
                 },
               ),
             ),
             KAnimate(
+              controller: t3Controller,
               slideDirection: SlideDirection.downToUp,
               delay: 200,
               child: KButton.yellow(
                 text: translate('home.buttons.settings'),
-                onPressed: () =>
-                    navigatorKey.currentState?.pushNamed(Routes.settingsScreen),
+                onPressed: () async => funcBeforeCallBack().then(
+                  (_) => navigatorKey.currentState
+                      ?.pushReplacementNamed(Routes.settingsScreen),
+                ),
               ),
             ),
             // KButton.green(
