@@ -5,6 +5,7 @@ import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
 import 'package:recycling_master/ui/widgets/home_title.dart';
+import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/extensions.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends HookConsumerWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const BackgroundImage('home'),
+          const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
           _buttons(context, ref),
         ],
       ),
@@ -36,20 +37,27 @@ class HomeScreen extends HookConsumerWidget {
         top: kDefaultLargePadding * 3,
         child: Column(
           children: [
-            const HomeTitle(),
+            const KAnimate(child: HomeTitle()),
             const Spacer(),
-            KButton.blue(
-              text: translate('home.buttons.play'),
-              isExpanded: false,
-              onPressed: () {
-                ref.read(isUserPlayingProvider.notifier).state = true;
-                navigatorKey.currentState?.pushNamed(Routes.gameScreen);
-              },
+            KAnimate(
+              slideDirection: SlideDirection.downToUp,
+              child: KButton.blue(
+                text: translate('home.buttons.play'),
+                isExpanded: false,
+                onPressed: () {
+                  ref.read(isUserPlayingProvider.notifier).state = true;
+                  navigatorKey.currentState?.pushNamed(Routes.gameScreen);
+                },
+              ),
             ),
-            KButton.yellow(
-              text: translate('home.buttons.settings'),
-              onPressed: () =>
-                  navigatorKey.currentState?.pushNamed(Routes.settingsScreen),
+            KAnimate(
+              slideDirection: SlideDirection.downToUp,
+              delay: 200,
+              child: KButton.yellow(
+                text: translate('home.buttons.settings'),
+                onPressed: () =>
+                    navigatorKey.currentState?.pushNamed(Routes.settingsScreen),
+              ),
             ),
             // KButton.green(
             //   text: translate('home.buttons.about'),
