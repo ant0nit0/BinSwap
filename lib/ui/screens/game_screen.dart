@@ -1,6 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/game/overlays/tutorial_overlay.dart';
 import 'package:recycling_master/game/widgets/pause_button.dart';
 import 'package:recycling_master/game/widgets/game_top_icons.dart';
 import 'package:recycling_master/game/overlays/settings_game_dialog.dart';
@@ -18,11 +20,13 @@ class GameScreen extends HookConsumerWidget {
   static const String topIconsKey = 'top_icons';
   static const String pausePlayKey = 'pause_play';
   static const String settingsDialogKey = 'settings_dialog';
+  static const String tutorial1 = 'tuto1';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameStateNotifierProvider);
 
+    final showTutorial = useState(false);
     // We get the highscore in order to know if the user as already played the game
     // If not, we show the onBoarding
     //
@@ -30,7 +34,7 @@ class GameScreen extends HookConsumerWidget {
     // So that going to the endGameScreen will not be waiting while loading the scores
     final highScore = ref.watch(leaderboardProvider.notifier).highScore;
     if (highScore == null) {
-      // TODO: Implement the onBoarding
+      showTutorial.value = true;
     }
 
     return Scaffold(
@@ -38,7 +42,11 @@ class GameScreen extends HookConsumerWidget {
         children: [
           Positioned.fill(
             child: GameWidget(
-              game: KGame(state),
+              game: KGame(
+                state,
+                ref,
+                isTutorial: showTutorial.value,
+              ),
               overlayBuilderMap: {
                 endGameDialogKey: (BuildContext context, KGame game) {
                   return EndGameScreen(
@@ -59,6 +67,9 @@ class GameScreen extends HookConsumerWidget {
                 },
                 settingsDialogKey: (BuildContext context, KGame game) {
                   return SettingsGameOverlay(game);
+                },
+                tutorial1: (BuildContext context, KGame game) {
+                  return TutorialOverlay(game);
                 },
               },
             ),

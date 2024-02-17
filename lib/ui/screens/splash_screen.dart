@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/providers/bin_colors.dart';
 import 'package:recycling_master/providers/lang.dart';
+import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
 import 'package:recycling_master/utils/widgets_utils.dart';
@@ -21,6 +22,8 @@ class SplashScreen extends HookConsumerWidget {
       unawaited(ref.read(langProvider.notifier).initLang(context));
       // Load the color distributions preferences
       ref.read(binColorsProvider.notifier);
+      // Load the leaderboard
+      ref.read(leaderboardProvider.notifier);
     });
     Future.delayed(const Duration(seconds: 2), () {
       // Navigate to the home screen

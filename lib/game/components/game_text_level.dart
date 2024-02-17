@@ -28,6 +28,11 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
   /// Basically it corresponds to the time the text stays in the center of the screen.
   final _animationDelayer = ValueNotifier(1.0);
 
+  /// Whether to launch the animation on the first level or not.
+  final bool launchAnimationOnFirstLevel;
+
+  GameTextLevel({this.launchAnimationOnFirstLevel = true});
+
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -40,7 +45,9 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
         fontFamily: 'LilitaOne',
       ),
     );
-    updateText();
+    if (launchAnimationOnFirstLevel) {
+      updateText();
+    }
   }
 
   @override

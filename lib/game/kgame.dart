@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_item_spawner.dart';
 import 'package:recycling_master/game/components/game_level_bar.dart';
@@ -15,11 +16,17 @@ import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/components/game_column.dart';
 import 'package:recycling_master/game/components/game_life_bar.dart';
 import 'package:recycling_master/models/level.dart';
+import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/utils/constants.dart';
 
 class KGame extends FlameGame
     with HorizontalDragDetector, VerticalDragDetector, HasCollisionDetection {
+  final WidgetRef ref;
+
+  final bool isTutorial;
+  final tutorialHasBeenDone = ValueNotifier(false);
+
   /// The position where the drag started.
   /// Used to determine the column where the drag started and calculate the bins to swap.
   Vector2? _dragStartPosition;
@@ -73,24 +80,48 @@ class KGame extends FlameGame
 
   KGame(
     this.state,
-  ) : _itemSpawner = GameItemSpawner(state.items);
+    this.ref, {
+    this.isTutorial = false,
+  }) : _itemSpawner = GameItemSpawner(state.items);
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
+    if (isTutorial && !tutorialHasBeenDone.value) {
+      levelNotifier.value = Level.tutorial();
+    }
+    _addAllComponents();
+  }
+
+  Future<void> _launchTutorial() async {
+    ref.read(tutorialStateNotifierProvider.notifier).reset();
+    await Future.delayed(const Duration(milliseconds: 2500), () {
+      pauseEngine();
+      overlays.add(GameScreen.tutorial1);
+    });
+  }
+
+  Future<void> _addAllComponents() async {
     // Adding the background, columns and bins
     await add(GameBackground());
     await _loadColumnsAndBins();
+    await _loadTopComponents();
 
+    // Launch the spawning of the items
+    await add(_itemSpawner);
+
+    if (isTutorial && !tutorialHasBeenDone.value) {
+      _launchTutorial();
+    }
+  }
+
+  Future<void> _loadTopComponents() async {
     // Adding the score, time and lifeBar components
     await add(GameTextScore());
     await add(GameTextTime());
-    await add(GameTextLevel());
+    await add(GameTextLevel(launchAnimationOnFirstLevel: !isTutorial));
     await add(GameLevelBar());
     await add(GameLifeBar());
-
-    // Launch the spawing of the items
-    await add(_itemSpawner);
 
     overlays.add(GameScreen.topIconsKey);
     overlays.add(GameScreen.pausePlayKey);
@@ -231,5 +262,22 @@ class KGame extends FlameGame
         overlays.add(GameScreen.endGameDialogKey);
       });
     }
+  }
+
+  Future<void> launchGameAfterTutorial() async {
+    overlays.remove(GameScreen.tutorial1);
+    levelNotifier.value = Level.one();
+    _itemSpawner.updatePeriods(
+      levelNotifier.value.minPeriod,
+      levelNotifier.value.maxPeriod,
+    );
+    _itemSpawner.clear();
+    lifeNotifier.value = defaultLife;
+    scoreNotifier.value = 0;
+    timeNotifier.value = 0;
+    sortedItemsNotifier.value = 0;
+    itemCountForLevel.value = 0;
+    tutorialHasBeenDone.value = true;
+    resumeEngine();
   }
 }
