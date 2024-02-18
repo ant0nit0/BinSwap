@@ -9,8 +9,6 @@ import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class ShopItemWidget extends HookConsumerWidget {
-  static const size = 140.0;
-
   final ShopItem item;
 
   const ShopItemWidget({
@@ -22,6 +20,10 @@ class ShopItemWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final coinsState = ref.watch(coinsProvider);
     final selectedBgState = ref.watch(selectedBackgroundProvider);
+    final size = (MediaQuery.of(context).size.width -
+            (kDefaultLargePadding * 2) -
+            kDefaultSmallPadding) /
+        2;
     return GestureDetector(
       onTap: () async {
         if (item.isBought != null && item.isBought!) {

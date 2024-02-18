@@ -154,4 +154,14 @@ const backgrounds = <ShopItem>[
       price: 3000,
       imagePath: 'backgrounds/snow_bg.png',
       fullPath: 'assets/images/backgrounds/snow_bg.png'),
+  ShopItem(
+      name: 'Forest',
+      price: 6000,
+      imagePath: 'backgrounds/forest.png',
+      fullPath: 'assets/images/backgrounds/forest.png'),
+  ShopItem(
+      name: 'Space',
+      price: 10000,
+      imagePath: 'backgrounds/space.png',
+      fullPath: 'assets/images/backgrounds/space.png'),
 ];

@@ -11,12 +11,18 @@ class GameTextTime extends TextComponent with HasGameRef<KGame> {
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
+
+    final color = game.state.backgroundPath == 'backgrounds/space.png' ||
+            game.state.backgroundPath == 'backgrounds/forest.png'
+        ? neutralLight
+        : neutralDark;
+
     text = '${translate('game.time')} 0';
     position = Vector2(kDefaultPadding, game.size.y * 0.2);
     textRenderer = TextPaint(
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 16,
-        color: neutralDark,
+        color: color,
         fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat',
       ),
