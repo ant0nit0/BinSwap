@@ -53,6 +53,8 @@ class BlurredScaffold extends StatelessWidget {
   /// Default is [MainAxisAlignment.start].
   final MainAxisAlignment mainAxisAlignment;
 
+  final double contentTopPadding;
+
   const BlurredScaffold({
     this.child,
     this.padding = const EdgeInsets.fromLTRB(
@@ -68,6 +70,7 @@ class BlurredScaffold extends StatelessWidget {
     this.title,
     this.onClose,
     this.automaticallyImplementClosing = false,
+    this.contentTopPadding = kDefaultPadding,
     super.key,
   }) : assert(
           !automaticallyImplementClosing || onClose != null,
@@ -137,7 +140,7 @@ class BlurredScaffold extends StatelessWidget {
                       color: grayBorderColor,
                       thickness: 1.0,
                     ),
-                    const SizedBox(height: kDefaultPadding),
+                    SizedBox(height: contentTopPadding),
                   ],
                   if (child != null) Expanded(child: child!),
                 ],

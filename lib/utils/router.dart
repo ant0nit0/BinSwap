@@ -5,6 +5,7 @@ import 'package:recycling_master/ui/screens/dev_settings.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/screens/home_screen.dart';
 import 'package:recycling_master/ui/screens/settings_screen.dart';
+import 'package:recycling_master/ui/screens/shop_screen.dart';
 import 'package:recycling_master/ui/screens/splash_screen.dart';
 
 class Routes {
@@ -14,6 +15,7 @@ class Routes {
   static const splashScreen = '/splash';
   static const devSettingsScreen = '/dev';
   static const colorAttributions = '/colors';
+  static const shop = '/shop';
 }
 
 class RouteGenerator {
@@ -49,6 +51,11 @@ class RouteGenerator {
         return PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const ColorDistributionScreen(),
+        );
+      case Routes.shop:
+        return PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => const ShopScreen(),
         );
       default:
         return _errorRoute(settings.name ?? '', settings);

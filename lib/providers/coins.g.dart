@@ -1,25 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'leaderboard.dart';
+part of 'coins.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$leaderboardHash() => r'f03106f180ae47c1df3ec754929a08b114570ea9';
+String _$coinsHash() => r'6dac25aea04b1d0128c92e914d36a41389d99aa6';
 
-/// See also [Leaderboard].
-@ProviderFor(Leaderboard)
-final leaderboardProvider =
-    AsyncNotifierProvider<Leaderboard, List<Score>>.internal(
-  Leaderboard.new,
-  name: r'leaderboardProvider',
+/// See also [Coins].
+@ProviderFor(Coins)
+final coinsProvider = AsyncNotifierProvider<Coins, int>.internal(
+  Coins.new,
+  name: r'coinsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$leaderboardHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$coinsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Leaderboard = AsyncNotifier<List<Score>>;
+typedef _$Coins = AsyncNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

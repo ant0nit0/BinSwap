@@ -5,8 +5,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/providers/bin_colors.dart';
+import 'package:recycling_master/providers/coins.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
+import 'package:recycling_master/providers/selected_background.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
@@ -40,6 +42,9 @@ class SplashScreen extends HookConsumerWidget {
       ref.read(binColorsProvider.notifier);
       // Load the leaderboard
       ref.read(leaderboardProvider.notifier);
+      // Load selected background and coins
+      ref.read(coinsProvider.notifier);
+      ref.read(selectedBackgroundProvider.notifier);
     });
 
     if (!fakeLoadingAnimationController.isAnimating &&

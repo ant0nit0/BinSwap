@@ -7,7 +7,7 @@ part of 'tutorial_state.dart';
 // **************************************************************************
 
 String _$tutorialStateNotifierHash() =>
-    r'0e6961abb56eec415cdf2e0c52ab42039ddd6589';
+    r'f5d3e93077004c57607e07e555e8f14b0daad8c9';
 
 /// See also [TutorialStateNotifier].
 @ProviderFor(TutorialStateNotifier)

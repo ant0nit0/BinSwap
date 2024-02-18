@@ -10,10 +10,13 @@ class GameState {
 
   final Map<BinCategory, BinColor> colorDistribution;
 
+  final String backgroundPath;
+
   const GameState({
     required this.bins,
     required this.items,
     required this.colorDistribution,
+    required this.backgroundPath,
   });
 
   /// The number of columns for the current game

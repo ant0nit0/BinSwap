@@ -103,7 +103,7 @@ class KGame extends FlameGame
 
   Future<void> _addAllComponents() async {
     // Adding the background, columns and bins
-    await add(GameBackground());
+    await add(GameBackground(state.backgroundPath));
     await _loadColumnsAndBins();
     await _loadTopComponents();
 

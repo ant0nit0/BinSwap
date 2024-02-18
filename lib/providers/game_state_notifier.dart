@@ -2,6 +2,7 @@ import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/providers/bin_colors.dart';
+import 'package:recycling_master/providers/selected_background.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,21 +11,24 @@ part 'game_state_notifier.g.dart';
 @Riverpod(keepAlive: true)
 class GameStateNotifier extends _$GameStateNotifier {
   @override
-  GameState build() {
-    _initState();
-    return state;
+  FutureOr<GameState> build() async {
+    await _initState();
+    return state.requireValue;
   }
 
-  void _initState() {
-    final colorDistribution = ref.watch(binColorsProvider);
+  Future<void> _initState() async {
+    state = const AsyncLoading();
+    final colorDistribution = await ref.watch(binColorsProvider.future);
+    final background = await ref.watch(selectedBackgroundProvider.future);
     final bins = chooseBins();
     final items = bins.map((e) => e.items).expand((e) => e).toList();
 
-    state = GameState(
+    state = AsyncData(GameState(
       bins: bins,
       items: items,
-      colorDistribution: colorDistribution.valueOrNull ?? BinColors.base,
-    );
+      colorDistribution: colorDistribution,
+      backgroundPath: background.imagePath,
+    ));
   }
 
   List<Bin> chooseBins() {

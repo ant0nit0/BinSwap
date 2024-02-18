@@ -12,58 +12,68 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameBins = ref.watch(gameStateNotifierProvider).bins;
-    final List otherBins = [...allBins]
-        .map((e) =>
-            gameBins.map((f) => f.title).toList().contains(e.title) ? null : e)
-        .where((element) => element != null)
-        .toList();
+    final gameBinsState = ref.watch(gameStateNotifierProvider);
 
-    const miniTitleTextStyle = TextStyle(
-      fontFamily: 'LilitaOne',
-      color: neutralDark,
-      fontSize: 14.0,
-    );
+    return gameBinsState.when(
+      data: (gameBins) {
+        final bins = gameBins.bins;
+        final List otherBins = [...allBins]
+            .map((e) =>
+                bins.map((f) => f.title).toList().contains(e.title) ? null : e)
+            .where((element) => element != null)
+            .toList();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
-          child: Text(
-            translate('game.infos.recycling-guide.current-title'),
-            style: miniTitleTextStyle,
-          ),
-        ),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: gameBins.length,
-          separatorBuilder: (_, __) =>
-              const SizedBox(height: kDefaultTinyPadding),
-          itemBuilder: (context, index) {
-            return BinListItem(gameBins[index]);
-          },
-        ),
-        const SizedBox(height: kDefaultSmallPadding),
-        Padding(
-          padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
-          child: Text(
-            translate('game.infos.recycling-guide.other-title'),
-            style: miniTitleTextStyle,
-          ),
-        ),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: otherBins.length,
-          separatorBuilder: (_, __) =>
-              const SizedBox(height: kDefaultTinyPadding),
-          itemBuilder: (context, index) {
-            return BinListItem(otherBins[index]);
-          },
-        ),
-      ],
+        const miniTitleTextStyle = TextStyle(
+          fontFamily: 'LilitaOne',
+          color: neutralDark,
+          fontSize: 14.0,
+        );
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
+              child: Text(
+                translate('game.infos.recycling-guide.current-title'),
+                style: miniTitleTextStyle,
+              ),
+            ),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: bins.length,
+              separatorBuilder: (_, __) =>
+                  const SizedBox(height: kDefaultTinyPadding),
+              itemBuilder: (context, index) {
+                return BinListItem(bins[index]);
+              },
+            ),
+            const SizedBox(height: kDefaultSmallPadding),
+            Padding(
+              padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
+              child: Text(
+                translate('game.infos.recycling-guide.other-title'),
+                style: miniTitleTextStyle,
+              ),
+            ),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: otherBins.length,
+              separatorBuilder: (_, __) =>
+                  const SizedBox(height: kDefaultTinyPadding),
+              itemBuilder: (context, index) {
+                return BinListItem(otherBins[index]);
+              },
+            ),
+          ],
+        );
+      },
+      error: (_, __) => const SizedBox.shrink(),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

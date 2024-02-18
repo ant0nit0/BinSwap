@@ -4,7 +4,8 @@
         "buttons": {
             "play": "Play",
             "settings": "Settings",
-            "about": "About"
+            "about": "About",
+            "shop": "Shop"
         }	
     },
     "game": {

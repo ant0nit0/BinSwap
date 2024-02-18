@@ -5,10 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class StorageKeys {
   static const audioBackground = 'audioBackground';
+  static const coins = 'coins';
   static const colors = 'colors';
+  static const lang = 'lang';
   static const leaderboard = 'leaderboard';
   static const sfxsEffects = 'sfxsEffects';
-  static const lang = 'lang';
+  static const selectedBackground = 'selectedBackground';
+  static const shop = 'shop';
 }
 
 class StorageService {

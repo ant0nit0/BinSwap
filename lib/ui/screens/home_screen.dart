@@ -33,14 +33,19 @@ class HomeScreen extends HookConsumerWidget {
     final t3Controller = useAnimationController(
       duration: const Duration(milliseconds: 500),
     );
+    final t4Controller = useAnimationController(
+      duration: const Duration(milliseconds: 500),
+    );
 
     Future<void> _reverseAnimations() async {
       unawaited(t1Controller.reverse());
       unawaited(t2Controller.reverse());
-      await t3Controller.reverse().then((value) {
+      unawaited(t3Controller.reverse());
+      await t4Controller.reverse().then((value) {
         t1Controller.reset();
         t2Controller.reset();
         t3Controller.reset();
+        t4Controller.reset();
       });
     }
 
@@ -48,62 +53,61 @@ class HomeScreen extends HookConsumerWidget {
       body: Stack(
         children: [
           const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
-          _buttons(context, ref, t1Controller, t2Controller, t3Controller,
-              _reverseAnimations),
+          Positioned(
+            bottom: kDefaultLargePadding,
+            left: kDefaultLargePadding,
+            right: kDefaultLargePadding,
+            top: kDefaultLargePadding * 3,
+            child: Column(
+              children: [
+                KAnimate(controller: t1Controller, child: const HomeTitle()),
+                const Spacer(),
+                KAnimate(
+                  controller: t2Controller,
+                  slideDirection: SlideDirection.downToUp,
+                  child: KButton.blue(
+                    text: translate('home.buttons.play'),
+                    isExpanded: false,
+                    onPressed: () async {
+                      await _reverseAnimations();
+                      ref.read(isUserPlayingProvider.notifier).state = true;
+                      navigatorKey.currentState
+                          ?.pushReplacementNamed(Routes.gameScreen);
+                    },
+                  ),
+                ),
+                KAnimate(
+                  controller: t3Controller,
+                  slideDirection: SlideDirection.downToUp,
+                  delay: 200,
+                  child: KButton.yellow(
+                    text: translate('home.buttons.settings'),
+                    onPressed: () async => _reverseAnimations().then(
+                      (_) => navigatorKey.currentState
+                          ?.pushReplacementNamed(Routes.settingsScreen),
+                    ),
+                  ),
+                ),
+                KAnimate(
+                  controller: t3Controller,
+                  slideDirection: SlideDirection.downToUp,
+                  delay: 200,
+                  child: KButton.green(
+                    text: translate('home.buttons.shop'),
+                    isExpanded: false,
+                    onPressed: () async => _reverseAnimations().then(
+                      (_) => navigatorKey.currentState
+                          ?.pushReplacementNamed(Routes.shop),
+                    ),
+                  ),
+                ),
+              ],
+            ).separated(
+              separator: const SizedBox(height: kDefaultTinyPadding),
+            ),
+          ),
         ],
       ),
     );
   }
-
-  Widget _buttons(
-          BuildContext context,
-          WidgetRef ref,
-          AnimationController t1Controller,
-          AnimationController t2Controller,
-          AnimationController t3Controller,
-          Future<void> Function() funcBeforeCallBack) =>
-      Positioned(
-        bottom: kDefaultLargePadding,
-        left: kDefaultLargePadding,
-        right: kDefaultLargePadding,
-        top: kDefaultLargePadding * 3,
-        child: Column(
-          children: [
-            KAnimate(controller: t1Controller, child: const HomeTitle()),
-            const Spacer(),
-            KAnimate(
-              controller: t2Controller,
-              slideDirection: SlideDirection.downToUp,
-              child: KButton.blue(
-                text: translate('home.buttons.play'),
-                isExpanded: false,
-                onPressed: () async {
-                  await funcBeforeCallBack();
-                  ref.read(isUserPlayingProvider.notifier).state = true;
-                  navigatorKey.currentState
-                      ?.pushReplacementNamed(Routes.gameScreen);
-                },
-              ),
-            ),
-            KAnimate(
-              controller: t3Controller,
-              slideDirection: SlideDirection.downToUp,
-              delay: 200,
-              child: KButton.yellow(
-                text: translate('home.buttons.settings'),
-                onPressed: () async => funcBeforeCallBack().then(
-                  (_) => navigatorKey.currentState
-                      ?.pushReplacementNamed(Routes.settingsScreen),
-                ),
-              ),
-            ),
-            // KButton.green(
-            //   text: translate('home.buttons.about'),
-            //   isExpanded: false,
-            // ),
-          ],
-        ).separated(
-          separator: const SizedBox(height: kDefaultTinyPadding),
-        ),
-      );
 }

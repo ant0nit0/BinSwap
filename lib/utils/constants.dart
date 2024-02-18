@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/item.dart';
+import 'package:recycling_master/models/shop_item.dart';
 import 'package:recycling_master/utils/bin_enums.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -122,4 +123,35 @@ final allItems = [
   ...papersItems,
   ...plasticsItems,
   ...textilesItems,
+];
+
+// final backgrounds = [
+//   'assets/images/backgrounds/snow_bg.png',
+//   'assets/images/backgrounds/forest_bg.png',
+// 'assets/images/backgrounds/sea_bg.png',
+// 'assets/images/backgrounds/city_bg.png',
+// 'assets/images/backgrounds/desert_bg.png',
+// 'assets/images/backgrounds/mountain_bg.png',
+// 'assets/images/backgrounds/night_bg.png',
+// 'assets/images/backgrounds/space_bg.png',
+// 'assets/images/backgrounds/underwater_bg.png',
+// 'assets/images/backgrounds/urban_bg.png',
+// ];
+
+const backgrounds = <ShopItem>[
+  ShopItem(
+      name: 'Spring',
+      price: 0,
+      imagePath: 'backgrounds/spring.png',
+      fullPath: 'assets/images/backgrounds/spring.png'),
+  ShopItem(
+      name: 'Desert',
+      price: 1000,
+      imagePath: 'backgrounds/desert_bg_1.png',
+      fullPath: 'assets/images/backgrounds/desert_bg_1.png'),
+  ShopItem(
+      name: 'Winter',
+      price: 3000,
+      imagePath: 'backgrounds/snow_bg.png',
+      fullPath: 'assets/images/backgrounds/snow_bg.png'),
 ];
