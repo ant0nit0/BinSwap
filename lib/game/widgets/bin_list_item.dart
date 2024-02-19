@@ -42,7 +42,7 @@ class BinListItem extends HookConsumerWidget {
           children: [
             Row(
               children: [
-                BinImage(color: bin.color, category: bin.category),
+                BinImage(color: binColor, category: bin.category),
                 const SizedBox(width: kDefaultSmallPadding),
                 Expanded(
                   child: Column(

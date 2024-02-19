@@ -7,7 +7,7 @@ import 'package:recycling_master/utils/bin_enums.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-const defaultLife = 1.0;
+const defaultLife = 3.0;
 
 const kNumberOfStoredScores = 10;
 
@@ -164,4 +164,14 @@ const backgrounds = <ShopItem>[
       price: 10000,
       imagePath: 'backgrounds/space.png',
       fullPath: 'assets/images/backgrounds/space.png'),
+  ShopItem(
+      name: 'Street',
+      price: 15000,
+      imagePath: 'backgrounds/street.png',
+      fullPath: 'assets/images/backgrounds/street.png'),
+  ShopItem(
+      name: 'Night road',
+      price: 20000,
+      imagePath: 'backgrounds/night.png',
+      fullPath: 'assets/images/backgrounds/night.png'),
 ];

@@ -23,6 +23,9 @@ class ShopScreen extends HookConsumerWidget {
       contentTopPadding: kDefaultSmallPadding,
       title: 'Shop',
       automaticallyImplementClosing: true,
+      padding: const EdgeInsets.symmetric(
+          horizontal: kDefaultLargePadding - 4.0,
+          vertical: kDefaultLargePadding),
       onClose: () =>
           navigatorKey.currentState!.pushReplacementNamed(Routes.homeScreen),
       child: SingleChildScrollView(
