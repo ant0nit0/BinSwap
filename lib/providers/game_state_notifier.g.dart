@@ -6,7 +6,7 @@ part of 'game_state_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameStateNotifierHash() => r'24fce51f52aecdf0c66c5dbc603003bbb0c6748c';
+String _$gameStateNotifierHash() => r'0d067e23c928540e816a12e1fb8279b914e93c05';
 
 /// See also [GameStateNotifier].
 @ProviderFor(GameStateNotifier)

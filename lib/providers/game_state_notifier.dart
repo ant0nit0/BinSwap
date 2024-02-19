@@ -2,6 +2,7 @@ import 'package:recycling_master/audio/background_audio_state_notifier.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/game_state.dart';
 import 'package:recycling_master/providers/bin_colors.dart';
+import 'package:recycling_master/providers/bins_number.dart';
 import 'package:recycling_master/providers/selected_background.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,10 +33,11 @@ class GameStateNotifier extends _$GameStateNotifier {
   }
 
   List<Bin> chooseBins() {
+    final binsNumber = ref.read(binsNumberProvider);
     List<Bin> bins = [...allBins];
     // Randomly pick 3 bins
     bins.shuffle();
-    bins.removeRange(3, bins.length);
+    bins.removeRange(binsNumber, bins.length);
     // Create new bin instances with their colors fetched from the BinColors provider
     final list = bins.map((e) {
       final color =
