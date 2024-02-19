@@ -11,6 +11,10 @@ const defaultLife = 3.0;
 
 const kNumberOfStoredScores = 10;
 
+const kFreezeDuration = 4000;
+
+const kMaxItemSpeed = 300;
+
 final allBins = [
   Bin(
     category: BinCategory.organics,

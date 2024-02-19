@@ -70,6 +70,7 @@ flutter:
     - assets/images/icons/other/
     - assets/images/icons/papers/
     - assets/images/icons/plastics/
+    - assets/images/icons/specials/
     - assets/images/icons/textiles/
     - assets/i18n/
     - assets/audio/

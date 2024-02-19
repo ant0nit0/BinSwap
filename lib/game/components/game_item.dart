@@ -59,7 +59,7 @@ class GameItem extends SpriteComponent
   void onRemove() {
     super.onRemove();
     // Remove the item from the game
-    gameRef.removeLastItemPerColumn(_columnIndex, this);
+    gameRef.removeItemPerColumn(_columnIndex, this);
   }
 
   @override
@@ -93,7 +93,7 @@ class GameItem extends SpriteComponent
     );
 
     // Store this as the last item of the column
-    gameRef.addLastItemPerColumn(_columnIndex, this);
+    gameRef.addItemPerColumn(_columnIndex, this);
 
     await add(CircleHitbox(
       radius: (size.x / 2 + padding * 2),
@@ -112,8 +112,14 @@ class GameItem extends SpriteComponent
     final whitePaint = Paint()..color = Colors.white.withOpacity(.5);
     final paint = Paint()
       ..color = color.withOpacity(game.levelNotifier.value.itemOpacity);
+    final strokePaint = Paint()
+      ..color =
+          color.withOpacity(max(1, game.levelNotifier.value.itemOpacity * 2))
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
     canvas.drawCircle(circleOffset, circleRadius, whitePaint);
     canvas.drawCircle(circleOffset, circleRadius, paint);
+    canvas.drawCircle(circleOffset, circleRadius, strokePaint);
 
     super.render(canvas); // Render the sprite
   }
@@ -123,6 +129,8 @@ class GameItem extends SpriteComponent
     super.update(dt);
     position.y += gameRef.levelNotifier.value.itemSpeed *
         dt *
-        (isAccelerate.value ? 3 : 1);
+        (isAccelerate.value ? 3 : 1) *
+        // We don't need to multiply by the item speed factor if the item is accelerating
+        (isAccelerate.value ? 1 : game.itemSpeedFactor.value);
   }
 }

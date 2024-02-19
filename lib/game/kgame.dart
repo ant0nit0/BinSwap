@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/events.dart';
@@ -7,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_item_spawner.dart';
 import 'package:recycling_master/game/components/game_level_bar.dart';
+import 'package:recycling_master/game/components/game_special_items_spawner.dart';
 import 'package:recycling_master/game/components/game_text_level.dart';
 import 'package:recycling_master/game/components/game_text_score.dart';
 import 'package:recycling_master/game/components/game_text_time.dart';
@@ -21,7 +23,11 @@ import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/utils/constants.dart';
 
 class KGame extends FlameGame
-    with HorizontalDragDetector, VerticalDragDetector, HasCollisionDetection {
+    with
+        HorizontalDragDetector,
+        VerticalDragDetector,
+        HasCollisionDetection,
+        TapDetector {
   final WidgetRef ref;
 
   final bool isTutorial;
@@ -68,7 +74,7 @@ class KGame extends FlameGame
   /// Used to keep track of the bins positions when swapping them
   final Map<int, GameBin> columnBinMap = {};
 
-  final Map<int, List<GameItem?>> lastItemPerColumn = {};
+  final Map<int, List<GameItem?>> itemPerColumn = {};
 
   /// The level notifier, used to keep track of the current level
   final levelNotifier = ValueNotifier(Level.one());
@@ -77,6 +83,8 @@ class KGame extends FlameGame
   /// Used to increase the level when the number of items sorted
   /// reaches the number of items to sort for the current level.
   final itemCountForLevel = ValueNotifier(0);
+
+  final itemSpeedFactor = ValueNotifier(1.0);
 
   KGame(
     this.state,
@@ -109,6 +117,8 @@ class KGame extends FlameGame
 
     // Launch the spawning of the items
     await add(_itemSpawner);
+    final specialSpawner = GameSpecialItemSpawner();
+    await add(specialSpawner);
 
     if (isTutorial && !tutorialHasBeenDone.value) {
       _launchTutorial();
@@ -157,24 +167,24 @@ class KGame extends FlameGame
     final columnIndex =
         (info.eventPosition.global.x / (size.x / state.nbCol)).floor();
 
-    final itemList = lastItemPerColumn[columnIndex];
+    final itemList = itemPerColumn[columnIndex];
     if (itemList == null || itemList.isEmpty) return;
     final firstItem = itemList.first;
     if (firstItem != null) firstItem.accelerate();
   }
 
-  void addLastItemPerColumn(int columnIndex, GameItem item) {
+  void addItemPerColumn(int columnIndex, GameItem item) {
     // Check if a list is already present for this index
-    if (lastItemPerColumn.containsKey(columnIndex)) {
-      lastItemPerColumn[columnIndex]!.add(item);
+    if (itemPerColumn.containsKey(columnIndex)) {
+      itemPerColumn[columnIndex]!.add(item);
     } else {
-      lastItemPerColumn[columnIndex] = [item];
+      itemPerColumn[columnIndex] = [item];
     }
   }
 
-  void removeLastItemPerColumn(int columnIndex, GameItem item) {
-    if (!lastItemPerColumn.containsKey(columnIndex)) return;
-    lastItemPerColumn[columnIndex]!.remove(item);
+  void removeItemPerColumn(int columnIndex, GameItem item) {
+    if (!itemPerColumn.containsKey(columnIndex)) return;
+    itemPerColumn[columnIndex]!.remove(item);
   }
 
   @override
@@ -242,7 +252,8 @@ class KGame extends FlameGame
       number: levelNotifier.value.number + 1,
       nbItemsToSort: (levelNotifier.value.nbItemsToSort * 1.2).round(),
       itemOpacity: max(0, levelNotifier.value.itemOpacity - .075),
-      itemSpeed: (levelNotifier.value.itemSpeed * 1.2).round(),
+      itemSpeed:
+          min(kMaxItemSpeed, (levelNotifier.value.itemSpeed * 1.2).round()),
       score: (levelNotifier.value.score + 5),
       minPeriod: levelNotifier.value.minPeriod * 0.8,
       maxPeriod: levelNotifier.value.maxPeriod * 0.8,
@@ -254,11 +265,12 @@ class KGame extends FlameGame
     );
   }
 
-  Future<void> decreaseScore() async {
+  Future<void> decreaseScore({double value = 1.0}) async {
     scoreNotifier.value = max(0, scoreNotifier.value - 1);
-    lifeNotifier.value -= 1;
+    lifeNotifier.value -= value;
     if (lifeNotifier.value <= 0) {
       pauseEngine();
+      // TODO: check if we really have to wait
       await Future.delayed(const Duration(milliseconds: 1000), () {
         overlays.add(GameScreen.endGameDialogKey);
       });
@@ -280,5 +292,32 @@ class KGame extends FlameGame
     itemCountForLevel.value = 0;
     tutorialHasBeenDone.value = true;
     resumeEngine();
+  }
+
+  void freeze() async {
+    itemSpeedFactor.value = 0.2;
+    _itemSpawner.updatePeriods(
+      levelNotifier.value.minPeriod * 3,
+      levelNotifier.value.maxPeriod * 3,
+    );
+    unawaited(
+      Future.delayed(
+        const Duration(milliseconds: kFreezeDuration ~/ 2),
+        () {
+          _itemSpawner.updatePeriods(
+            levelNotifier.value.minPeriod,
+            levelNotifier.value.maxPeriod,
+          );
+        },
+      ),
+    );
+    unawaited(
+      Future.delayed(
+        const Duration(milliseconds: kFreezeDuration),
+        () {
+          itemSpeedFactor.value = 1;
+        },
+      ),
+    );
   }
 }

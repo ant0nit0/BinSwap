@@ -3,20 +3,15 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:recycling_master/game/components/game_item.dart';
+import 'package:recycling_master/game/components/game_snowflake.dart';
 import 'package:recycling_master/game/kgame.dart';
-import 'package:recycling_master/models/item.dart';
-import 'package:recycling_master/utils/utils.dart';
 
-class GameItemSpawner extends Component with HasGameRef<KGame> {
-  final List<GameItem> _spawnedItems = [];
+class GameSpecialItemSpawner extends Component with HasGameRef<KGame> {
+  final List<dynamic> _spawnedItems = [];
 
   /// The random generator used to generate the items
   /// If not provided, a new one will be created
   final Random _random;
-
-  /// The list of items to spawn
-  final List<Item> _items;
 
   /// The minimum period between item generations
   double _minPeriod;
@@ -26,12 +21,9 @@ class GameItemSpawner extends Component with HasGameRef<KGame> {
 
   SpawnComponent? _spawner;
 
-  List<GameItem> get spawnedItems => _spawnedItems;
-
-  GameItemSpawner(List<Item> items,
-      {double minPeriod = 1, double maxPeriod = 3, Random? random})
+  GameSpecialItemSpawner(
+      {double minPeriod = 15, double maxPeriod = 35, Random? random})
       : _random = random ?? Random(),
-        _items = items,
         _minPeriod = minPeriod,
         _maxPeriod = maxPeriod;
 
@@ -41,21 +33,16 @@ class GameItemSpawner extends Component with HasGameRef<KGame> {
 
     _spawner = SpawnComponent.periodRange(
       factory: (_) {
-        final i = _items[_random.nextInt(_items.length)];
-        final _color =
-            getColorFromBinColor(game.state.colorDistribution[i.category]!);
-        final gameItem = GameItem(
-          item: i,
-          color: _color,
-        );
-        _spawnedItems.add(gameItem);
-        return gameItem;
+        final i = GameSnowflake();
+        _spawnedItems.add(i);
+        return i;
       },
       minPeriod: _minPeriod,
       maxPeriod: _maxPeriod,
       selfPositioning: false,
       random: _random,
     );
+    print('Special items spawner created');
 
     await add(_spawner!);
   }
