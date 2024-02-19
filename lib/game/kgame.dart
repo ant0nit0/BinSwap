@@ -158,7 +158,8 @@ class KGame extends FlameGame
         (info.eventPosition.global.x / (size.x / state.nbCol)).floor();
 
     final itemList = lastItemPerColumn[columnIndex];
-    final firstItem = itemList?.first;
+    if (itemList == null || itemList.isEmpty) return;
+    final firstItem = itemList.first;
     if (firstItem != null) firstItem.accelerate();
   }
 

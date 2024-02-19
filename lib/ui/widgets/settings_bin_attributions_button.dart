@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
 
-class SettingsBinColorAttributionsButton extends StatelessWidget {
+class SettingsBinColorAttributionsButton extends HookConsumerWidget {
   const SettingsBinColorAttributionsButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(langProvider);
     return GestureDetector(
       onTap: () =>
           navigatorKey.currentState!.pushNamed(Routes.colorAttributions),

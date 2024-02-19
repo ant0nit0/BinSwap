@@ -54,7 +54,7 @@ class HomeScreen extends HookConsumerWidget {
         children: [
           const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
           Positioned(
-            bottom: kDefaultLargePadding,
+            bottom: kDefaultPadding,
             left: kDefaultLargePadding,
             right: kDefaultLargePadding,
             top: kDefaultLargePadding * 3,

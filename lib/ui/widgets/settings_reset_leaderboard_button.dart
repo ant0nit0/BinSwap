@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -9,6 +10,7 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(langProvider);
     return Align(
       alignment: Alignment.centerLeft,
       child: GestureDetector(
