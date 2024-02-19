@@ -7,6 +7,7 @@ import 'package:recycling_master/game/widgets/pause_button.dart';
 import 'package:recycling_master/game/widgets/game_top_icons.dart';
 import 'package:recycling_master/game/overlays/settings_game_dialog.dart';
 import 'package:recycling_master/models/score.dart';
+import 'package:recycling_master/providers/coins.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/game/overlays/end_game_screen.dart';
 import 'package:recycling_master/game/kgame.dart';
@@ -29,11 +30,9 @@ class GameScreen extends HookConsumerWidget {
     final showTutorial = useState(false);
     // We get the highscore in order to know if the user as already played the game
     // If not, we show the onBoarding
-    //
-    // This also allow the leaderboard to load the previous scores when the game screen loads,
-    // So that going to the endGameScreen will not be waiting while loading the scores
     final highScore = ref.watch(leaderboardProvider.notifier).highScore;
-    if (highScore == null) {
+    final coins = ref.read(coinsProvider).valueOrNull ?? 0;
+    if (highScore == null && coins <= 0) {
       showTutorial.value = true;
     }
 
