@@ -18,7 +18,8 @@ import 'package:recycling_master/utils/router.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class HomeScreen extends HookConsumerWidget {
-  const HomeScreen({super.key});
+  final bool comeFromSplash;
+  const HomeScreen({this.comeFromSplash = false, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,15 +39,14 @@ class HomeScreen extends HookConsumerWidget {
     );
 
     Future<void> _reverseAnimations() async {
-      unawaited(t1Controller.reverse());
-      unawaited(t2Controller.reverse());
-      unawaited(t3Controller.reverse());
-      await t4Controller.reverse().then((value) {
-        t1Controller.reset();
-        t2Controller.reset();
-        t3Controller.reset();
-        t4Controller.reset();
-      });
+      t1Controller.reverse();
+      t2Controller.reverse();
+      await t3Controller.reverse();
+      await t4Controller.reverse();
+      t1Controller.reset();
+      t2Controller.reset();
+      t3Controller.reset();
+      t4Controller.reset();
     }
 
     return Scaffold(
@@ -60,9 +60,14 @@ class HomeScreen extends HookConsumerWidget {
             top: kDefaultLargePadding * 3,
             child: Column(
               children: [
-                KAnimate(controller: t1Controller, child: const HomeTitle()),
+                KAnimate(
+                    controller: t1Controller,
+                    delay: 300,
+                    animate: !comeFromSplash,
+                    child: const Hero(tag: 'home_title', child: HomeTitle())),
                 const Spacer(),
                 KAnimate(
+                  delay: 100,
                   controller: t2Controller,
                   slideDirection: SlideDirection.downToUp,
                   child: KButton.blue(
@@ -82,7 +87,7 @@ class HomeScreen extends HookConsumerWidget {
                   delay: 200,
                   child: KButton.yellow(
                     text: translate('home.buttons.settings'),
-                    onPressed: () async => _reverseAnimations().then(
+                    onPressed: () async => await _reverseAnimations().then(
                       (_) => navigatorKey.currentState
                           ?.pushReplacementNamed(Routes.settingsScreen),
                     ),
@@ -91,7 +96,7 @@ class HomeScreen extends HookConsumerWidget {
                 KAnimate(
                   controller: t3Controller,
                   slideDirection: SlideDirection.downToUp,
-                  delay: 200,
+                  delay: 300,
                   child: KButton.green(
                     text: translate('home.buttons.shop'),
                     isExpanded: false,

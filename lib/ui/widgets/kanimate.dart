@@ -33,11 +33,10 @@ class KAnimate extends HookWidget {
   @override
   Widget build(BuildContext context) {
     // ANIMATION
-    final animationController = controller ??
-        useAnimationController(
-            duration: duration ?? const Duration(milliseconds: 2000));
+    final animationController = useAnimationController(
+        duration: duration ?? const Duration(milliseconds: 2000));
 
-    final offsetAnimation = animationController.drive(
+    final offsetAnimation = (controller ?? animationController).drive(
       Tween<Offset>(
         begin: getBeginOffset(),
         end: Offset.zero,
@@ -49,8 +48,8 @@ class KAnimate extends HookWidget {
     useEffect(() {
       Future.delayed(Duration(milliseconds: delay ?? 0), () {
         reversed
-            ? animationController.reverse()
-            : animationController.forward();
+            ? (controller ?? animationController).reverse()
+            : (controller ?? animationController).forward();
       });
 
       return null;
@@ -58,7 +57,7 @@ class KAnimate extends HookWidget {
 
     return animate
         ? FadeTransition(
-            opacity: animationController,
+            opacity: controller ?? animationController,
             child: SlideTransition(
               position: offsetAnimation,
               child: child,

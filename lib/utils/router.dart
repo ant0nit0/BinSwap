@@ -23,38 +23,40 @@ class RouteGenerator {
     if (kDebugMode) print('RouteGenerator.generateRoute: ${settings.name}');
     switch (settings.name) {
       case Routes.homeScreen:
-        return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
-          pageBuilder: (_, __, ___) => const HomeScreen(),
-        );
+        try {
+          final comeFromSplash = settings.arguments as bool;
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>
+                HomeScreen(comeFromSplash: comeFromSplash),
+          );
+        } catch (e) {
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>
+                const HomeScreen(comeFromSplash: false),
+          );
+        }
       case Routes.settingsScreen:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const SettingsScreen(),
         );
       case Routes.gameScreen:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const GameScreen(),
         );
       case Routes.splashScreen:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const SplashScreen(),
         );
       case Routes.devSettingsScreen:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const DevSettingsScreen(),
         );
       case Routes.colorAttributions:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const ColorDistributionScreen(),
         );
       case Routes.shop:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => const ShopScreen(),
         );
       default:

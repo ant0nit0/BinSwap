@@ -10,6 +10,8 @@ import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/providers/selected_background.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
+import 'package:recycling_master/ui/widgets/home_title.dart';
+import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
@@ -33,6 +35,10 @@ class SplashScreen extends HookConsumerWidget {
       ).chain(CurveTween(curve: Curves.easeInOutExpo)),
     );
 
+    final textAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 500),
+    );
+
     onFirstBuild(() async {
       // Initialize the background audio service
       ref.read(backgroundAudioStateNotifierProvider.notifier);
@@ -51,10 +57,8 @@ class SplashScreen extends HookConsumerWidget {
         !fakeLoadingAnimationController.isCompleted) {
       fakeLoadingAnimationController.forward().then((value) => {
             // Navigate to the home screen
-            navigatorKey.currentState!.pushNamedAndRemoveUntil(
-              Routes.homeScreen,
-              (route) => false,
-            )
+            navigatorKey.currentState!
+                .pushReplacementNamed(Routes.homeScreen, arguments: true)
           });
     }
 
@@ -62,6 +66,21 @@ class SplashScreen extends HookConsumerWidget {
       body: Stack(
         children: [
           const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
+          Positioned(
+            bottom: kDefaultPadding,
+            left: kDefaultLargePadding,
+            right: kDefaultLargePadding,
+            top: kDefaultLargePadding * 3,
+            child: Column(
+              children: [
+                KAnimate(
+                  controller: textAnimationController,
+                  delay: 500,
+                  child: const Hero(tag: 'home_title', child: HomeTitle()),
+                ),
+              ],
+            ),
+          ),
           Positioned(
             bottom: kDefaultLargePadding * 2,
             left: (MediaQuery.of(context).size.width - loadingFullWidth) / 2,
