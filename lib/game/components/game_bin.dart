@@ -49,7 +49,7 @@ class GameBin extends SpriteComponent
     // If there is a new position (swapping bins), move towards it
     if (newPosition != null) {
       final distance = newPosition! - position.x;
-      final movement = velocity * dt;
+      final movement = (velocity + game.levelNotifier.value.number * 20) * dt;
 
       if (distance.abs() <= movement) {
         // If the bin is close enough to the target, set it directly to the target

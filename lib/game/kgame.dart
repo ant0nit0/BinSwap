@@ -302,7 +302,7 @@ class KGame extends FlameGame
     );
     unawaited(
       Future.delayed(
-        const Duration(milliseconds: kFreezeDuration ~/ 2),
+        const Duration(milliseconds: kFreezeDuration ~/ 1.75),
         () {
           _itemSpawner.updatePeriods(
             levelNotifier.value.minPeriod,
