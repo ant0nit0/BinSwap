@@ -50,7 +50,7 @@ class GameSnowflake extends SpriteComponent
     );
 
     await add(CircleHitbox(
-      radius: (size.x / 2 + padding * 2),
+      radius: (size.x / 2 + padding * 4),
       anchor: Anchor.center,
     ));
   }
@@ -94,7 +94,6 @@ class GameSnowflake extends SpriteComponent
       if (scaleFactor.value >= 20) {
         shouldScale.value = false;
         game.freeze();
-        // TODO: Add animation
         removeFromParent();
       }
     }

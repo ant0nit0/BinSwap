@@ -7,7 +7,7 @@ part of 'selected_background.dart';
 // **************************************************************************
 
 String _$selectedBackgroundHash() =>
-    r'd889f67e7497919fa04a6606a60c28c79620e262';
+    r'e5a5f536eec887371ce6cbe1bad5e68f49277e2f';
 
 /// See also [SelectedBackground].
 @ProviderFor(SelectedBackground)

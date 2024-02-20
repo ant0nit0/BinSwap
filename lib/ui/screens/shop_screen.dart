@@ -88,11 +88,9 @@ class ShopScreen extends HookConsumerWidget {
                 spacing: kDefaultSmallPadding,
                 children: bgs.map(
                   (bg) {
-                    print('Data: $data');
                     final dataBgsName = data.backgrounds
                         .map((e) => e.name.toLowerCase())
                         .toList();
-                    print('dataBgsName: $dataBgsName');
                     final item = ShopItem(
                       name: bg.name,
                       price: bg.price,
@@ -100,11 +98,7 @@ class ShopScreen extends HookConsumerWidget {
                       isBought: dataBgsName.contains(bg.name.toLowerCase()),
                       fullPath: bg.fullPath,
                     );
-                    return GestureDetector(
-                        onTap: () {
-                          // TODO: open pop up
-                        },
-                        child: ShopItemWidget(item: item));
+                    return ShopItemWidget(item: item);
                   },
                 ).toList(),
               );

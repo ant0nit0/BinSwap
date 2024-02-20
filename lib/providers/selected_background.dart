@@ -19,7 +19,6 @@ class SelectedBackground extends _$SelectedBackground {
     final storage = ref.read(storageServiceProvider).storage;
     final storedBackgroundString =
         await storage.read(key: StorageKeys.selectedBackground);
-    print('bgString : $storedBackgroundString');
     try {
       final storedBackground = storedBackgroundString != null
           ? ShopItem.fromJson(json.decode(storedBackgroundString))
@@ -31,6 +30,7 @@ class SelectedBackground extends _$SelectedBackground {
       }
     } catch (e) {
       state = AsyncData(ShopItem.defaultBGSpring());
+      // ignore: avoid_print
       print(
           'Error while trying to parse selected background from local storage : \n$e');
     }

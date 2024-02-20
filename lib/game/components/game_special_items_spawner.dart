@@ -42,7 +42,6 @@ class GameSpecialItemSpawner extends Component with HasGameRef<KGame> {
       selfPositioning: false,
       random: _random,
     );
-    print('Special items spawner created');
 
     await add(_spawner!);
   }
