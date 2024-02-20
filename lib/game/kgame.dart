@@ -170,7 +170,10 @@ class KGame extends FlameGame
     final itemList = itemPerColumn[columnIndex];
     if (itemList == null || itemList.isEmpty) return;
     final firstItem = itemList.first;
-    if (firstItem != null) firstItem.accelerate();
+    if (firstItem != null) {
+      firstItem.accelerate();
+      itemPerColumn[columnIndex]!.remove(firstItem);
+    }
   }
 
   void addItemPerColumn(int columnIndex, GameItem item) {
@@ -240,6 +243,7 @@ class KGame extends FlameGame
     scoreNotifier.value += score;
     sortedItemsNotifier.value += 1;
     itemCountForLevel.value += 1;
+    lifeNotifier.value = min(defaultLife, lifeNotifier.value + 0.2);
     if (itemCountForLevel.value >= levelNotifier.value.nbItemsToSort) {
       itemCountForLevel.value = 0;
       scoreNotifier.value += levelNotifier.value.score;
@@ -266,14 +270,16 @@ class KGame extends FlameGame
   }
 
   Future<void> decreaseScore({double value = 1.0}) async {
-    scoreNotifier.value = max(0, scoreNotifier.value - 1);
     lifeNotifier.value -= value;
     if (lifeNotifier.value <= 0) {
-      pauseEngine();
-      // TODO: check if we really have to wait
-      await Future.delayed(const Duration(milliseconds: 1000), () {
+      await Future.delayed(const Duration(milliseconds: 100), () {
+        pauseEngine();
+      });
+      await Future.delayed(const Duration(milliseconds: 500), () {
         overlays.add(GameScreen.endGameDialogKey);
       });
+    } else {
+      scoreNotifier.value = max(0, scoreNotifier.value - 1);
     }
   }
 

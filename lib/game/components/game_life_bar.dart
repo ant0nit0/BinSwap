@@ -23,9 +23,9 @@ class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
   void update(double dt) {
     super.update(dt);
     _width = size.x * (max(0, gameRef.lifeNotifier.value) / defaultLife);
-    if (_width < size.x) {
-      gameRef.lifeNotifier.value += refillSpeed * dt;
-    }
+    // if (_width < size.x) {
+    //   gameRef.lifeNotifier.value += refillSpeed * dt;
+    // }
   }
 
   @override
