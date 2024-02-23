@@ -13,6 +13,8 @@ import 'package:recycling_master/game/widgets/game_leaderboard.dart';
 import 'package:recycling_master/models/score.dart';
 import 'package:recycling_master/providers/coins.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
+import 'package:recycling_master/ui/widgets/coins_widget.dart';
+import 'package:recycling_master/utils/theme.dart';
 import 'package:recycling_master/utils/widgets_utils.dart';
 
 class EndGameScreen extends HookConsumerWidget {
@@ -46,6 +48,17 @@ class EndGameScreen extends HookConsumerWidget {
 
     return BlurredScaffold(
       mainAxisAlignment: MainAxisAlignment.center,
+      additionalPositioned: const [
+        Positioned(
+          top: kDefaultPadding,
+          right: 0,
+          child: CoinsWidget(),
+        ),
+      ],
+      padding: const EdgeInsets.symmetric(
+        horizontal: kDefaultLargePadding,
+        vertical: kDefaultLargePadding,
+      ).copyWith(top: kDefaultLargePadding * 2),
       title: translate('endGame.title'),
       child: Stack(
         children: [

@@ -14,7 +14,7 @@ class EndGameScoreWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const textStyle = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16.0,
+      fontSize: 18.0,
       fontWeight: FontWeight.w600,
       color: neutralLight,
     );
@@ -54,8 +54,8 @@ class EndGameScoreWidget extends HookConsumerWidget {
   Widget _score(TextStyle textStyle, int highScore) => Column(
         children: [
           _texts(translate('endGame.score'), '${score.value}', textStyle),
-          const SizedBox(height: kDefaultTinyPadding),
-          _texts(translate('endGame.highScore'), '$highScore', textStyle),
+          // const SizedBox(height: kDefaultTinyPadding),
+          // _texts(translate('endGame.highScore'), '$highScore', textStyle),
         ],
       );
 

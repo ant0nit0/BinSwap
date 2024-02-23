@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
+import 'package:recycling_master/ui/widgets/coins_widget.dart';
 import 'package:recycling_master/ui/widgets/home_title.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
@@ -53,6 +54,21 @@ class HomeScreen extends HookConsumerWidget {
       body: Stack(
         children: [
           const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
+          Positioned(
+            top: kDefaultLargePadding,
+            right: 0,
+            child: KAnimate(
+              slideDirection: SlideDirection.rightToLeft,
+              controller: t4Controller,
+              child: GestureDetector(
+                onTap: () async => _reverseAnimations().then(
+                  (_) => navigatorKey.currentState
+                      ?.pushReplacementNamed(Routes.shop),
+                ),
+                child: const CoinsWidget(),
+              ),
+            ),
+          ),
           Positioned(
             bottom: kDefaultPadding,
             left: kDefaultLargePadding,

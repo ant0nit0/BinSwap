@@ -55,6 +55,8 @@ class BlurredScaffold extends StatelessWidget {
 
   final double contentTopPadding;
 
+  final List<Positioned>? additionalPositioned;
+
   const BlurredScaffold({
     this.child,
     this.padding = const EdgeInsets.fromLTRB(
@@ -71,6 +73,7 @@ class BlurredScaffold extends StatelessWidget {
     this.onClose,
     this.automaticallyImplementClosing = false,
     this.contentTopPadding = kDefaultPadding,
+    this.additionalPositioned,
     super.key,
   }) : assert(
           !automaticallyImplementClosing || onClose != null,
@@ -147,6 +150,7 @@ class BlurredScaffold extends StatelessWidget {
               ),
             ),
           ),
+          if (additionalPositioned != null) ...additionalPositioned!,
         ],
       ),
     );
