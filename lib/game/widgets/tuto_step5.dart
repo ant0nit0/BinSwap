@@ -19,11 +19,12 @@ class TutorialStep5 extends HookConsumerWidget {
     final t1AnimationController = useAnimationController(
       duration: const Duration(milliseconds: 600),
     );
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * size,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(
+          horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * size -
+            2 * kDefaultLargePadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

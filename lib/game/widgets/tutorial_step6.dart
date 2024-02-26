@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +18,9 @@ class TutorialStep6 extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const ts = TextStyle(color: neutralLight, fontSize: 16.0, height: 1.3);
 
+    final confettiController =
+        ConfettiController(duration: const Duration(seconds: 1));
+
     const littleTs =
         TextStyle(color: neutralLight, fontSize: 14.0, height: 1.3);
     final t1AnimationController = useAnimationController(
@@ -24,52 +30,76 @@ class TutorialStep6 extends HookConsumerWidget {
     final t2AnimationController = useAnimationController(
       duration: const Duration(milliseconds: 600),
     );
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
-                    .copyWith(top: kDefaultLargePadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                KAnimate(
-                  controller: t1AnimationController,
-                  slideDirection: SlideDirection.downToUp,
-                  child: const Text(
-                    'Well played, you completed the tutorial ! (I\'ve told you it will not be long !)',
-                    style: ts,
-                  ),
+
+    useEffect(() {
+      confettiController.play();
+
+      return confettiController.dispose;
+    }, []);
+
+    return Stack(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
+                        .copyWith(top: kDefaultLargePadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    KAnimate(
+                      controller: t1AnimationController,
+                      slideDirection: SlideDirection.downToUp,
+                      child: const Text(
+                        'Well played, you completed the tutorial ! (I\'ve told you it will not be long !)',
+                        style: ts,
+                      ),
+                    ),
+                    const SizedBox(height: kDefaultLargePadding),
+                    KAnimate(
+                      controller: t2AnimationController,
+                      slideDirection: SlideDirection.downToUp,
+                      child: const Text(
+                        'You can always redo this tutorial in the home screen, or you can get some help in game by pressing the little I button on the top right of the screen',
+                        style: littleTs,
+                      ),
+                    ),
+                    const SizedBox(height: kDefaultPadding),
+                    NextButtonWidget(
+                      text: 'PLAY',
+                      controller: t2AnimationController,
+                      beforeAnimationCallback: () {
+                        t1AnimationController.reverse();
+                        t2AnimationController.reverse();
+                      },
+                      afterAnimationCallback: () {
+                        game.launchGameAfterTutorial();
+                      },
+                    )
+                  ],
                 ),
-                const SizedBox(height: kDefaultLargePadding),
-                KAnimate(
-                  controller: t2AnimationController,
-                  slideDirection: SlideDirection.downToUp,
-                  child: const Text(
-                    'You can always redo this tutorial in the home screen, or you can get some help in game by pressing the little I button on the top right of the screen',
-                    style: littleTs,
-                  ),
-                ),
-                const SizedBox(height: kDefaultPadding),
-                NextButtonWidget(
-                  text: 'PLAY',
-                  controller: t2AnimationController,
-                  beforeAnimationCallback: () {
-                    t1AnimationController.reverse();
-                    t2AnimationController.reverse();
-                  },
-                  afterAnimationCallback: () {
-                    game.launchGameAfterTutorial();
-                  },
-                )
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: ConfettiWidget(
+            confettiController: confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            blastDirection: -pi / 2,
+            maxBlastForce: 35, // set a lower max blast force
+            minBlastForce: 10, // set a lower min blast force
+            emissionFrequency: 0.05,
+            numberOfParticles: 75, // a lot of particles at once
+            gravity: .1,
+          ),
+        ),
+      ],
     );
   }
 }
