@@ -61,12 +61,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
+    final localizationDelegate = LocalizedApp.of(context).delegate;
     return MaterialApp(
       title: 'BinSwap',
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
-          // FIXME: using a provi der
           seedColor: const Color(0xff308AD1),
         ),
         useMaterial3: true,
