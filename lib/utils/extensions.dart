@@ -8,7 +8,7 @@ extension SeparatedColumn on Column {
     bool addLastSeparator = false,
   }) {
     final List<Widget> _children = [];
-    for (var i = 0; i < children.length; i++) {
+    for (int i = 0; i < children.length; i++) {
       _children.add(children[i]);
       if (i != children.length - 1 || addLastSeparator) {
         _children.add(separator);

@@ -56,7 +56,7 @@ class GameSpecialItemSpawner extends Component with HasGameRef<KGame> {
   }
 
   void clear() {
-    for (var element in _spawnedItems) {
+    for (final element in _spawnedItems) {
       element.removeFromParent();
     }
     _spawnedItems.clear();

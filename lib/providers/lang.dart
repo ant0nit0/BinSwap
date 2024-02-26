@@ -26,7 +26,7 @@ class LangProvider extends StateNotifier<String> {
     if (lang != null && langs.contains(lang) && lang != state) {
       state = lang;
 
-      var delegate = LocalizedApp.of(context).delegate; // Access context
+      final delegate = LocalizedApp.of(context).delegate; // Access context
       await delegate.changeLocale(Locale(state));
 
       // Save the new language to the storage
