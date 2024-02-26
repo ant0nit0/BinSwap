@@ -40,6 +40,43 @@ class HowToPlayOverlay extends StatelessWidget {
               translate('game.infos.how-to-play.how-to-description'),
               style: Theme.of(context).textTheme.bodySmall,
             ),
+            const SizedBox(height: kDefaultSmallPadding),
+            Text(
+              translate('game.infos.how-to-play.bonus-title'),
+              style: titleTextStyle,
+            ),
+            const SizedBox(height: kDefaultTinyPadding),
+            Text(
+              translate('game.infos.how-to-play.bonus-description'),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: kDefaultSmallPadding),
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: neutralLight,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: blueMainColor,
+                        width: 2.0,
+                      )),
+                  height: 50.0,
+                  padding: const EdgeInsets.all(8.0),
+                  width: 50.0,
+                  child: Image.asset(
+                    'assets/images/icons/specials/snowflake.png',
+                  ),
+                ),
+                const SizedBox(width: kDefaultSmallPadding),
+                Expanded(
+                  child: Text(
+                    translate('game.infos.how-to-play.snow-description'),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

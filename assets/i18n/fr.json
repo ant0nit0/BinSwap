@@ -60,7 +60,10 @@
                 "goal-title": "Le but du jeu",
                 "goal-description": "Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
                 "how-to-description": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagnez à chaque fois qu'un déchet tombe dans la bonne poubelle. La partie s'arrête lorsque vous n'avez plus de vie. Bonne chance !",
-                "how-to-title": "Ok, mais on joue comment ?"
+                "how-to-title": "Ok, mais on joue comment ?",
+                "bonus-title": "Les bonus",
+                "bonus-description": "Certains bonus sont présents dans la partie ! Si vous en voyez un, cliquez dessus pour activer son effet !",
+                "snow-description": "Ralentit la vitesse des déchets pendant 4 secondes"
             },
             "bins": {
                 "plastics": {

@@ -60,7 +60,10 @@
                 "goal-title": "Game's goal",
                 "goal-description": "The goal of the game is to sort as many waste items as possible, without making mistakes. Swap the bins around to make the trash fall into the correct bins, and try to survive as long as you can!",
                 "how-to-description": "Swipe between two columns to swap the bins' places. You lose life every time you make a mistake, but you regain it when trash are sorted correctly. You can also drag down onto the column you want to accelerate the last item of this column. The game ends when you run out of life. Good luck !",
-                "how-to-title": "Okay, but how ?"
+                "how-to-title": "Okay, but how ?",
+                "bonus-title": "Bonuses",
+                "bonus-description": "Some bonuses are present in the game! If you see one, click on it to activate its effect!",
+                "snow-description": "Slow down the speed of the game for 4 seconds."
             },
             "bins": {
                 "plastics": {
