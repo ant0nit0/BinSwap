@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
@@ -31,13 +32,11 @@ class TutorialStep5 extends HookConsumerWidget {
             KAnimate(
               slideDirection: SlideDirection.downToUp,
               controller: t1AnimationController,
-              child: const Text(
-                  '''If you feel confident, you can also drag down onto the column you want to accelerate the last item of this column !''',
-                  style: ts),
+              child: Text(translate('game.tuto.5.text'), style: ts),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(
-              text: 'GOT IT',
+              text: translate('game.tuto.5.button'),
               beforeAnimationCallback: () async {
                 unawaited(t1AnimationController.reverse());
               },

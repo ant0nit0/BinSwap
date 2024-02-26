@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
@@ -54,8 +55,8 @@ class TutorialStep6 extends HookConsumerWidget {
                     KAnimate(
                       controller: t1AnimationController,
                       slideDirection: SlideDirection.downToUp,
-                      child: const Text(
-                        'Well played, you completed the tutorial ! (I\'ve told you it will not be long !)',
+                      child: Text(
+                        translate('game.tuto.6.top'),
                         style: ts,
                       ),
                     ),
@@ -63,14 +64,14 @@ class TutorialStep6 extends HookConsumerWidget {
                     KAnimate(
                       controller: t2AnimationController,
                       slideDirection: SlideDirection.downToUp,
-                      child: const Text(
-                        'You can always redo this tutorial in the home screen, or you can get some help in game by pressing the little I button on the top right of the screen',
+                      child: Text(
+                        translate('game.tuto.6.bottom'),
                         style: littleTs,
                       ),
                     ),
                     const SizedBox(height: kDefaultPadding),
                     NextButtonWidget(
-                      text: 'PLAY',
+                      text: translate('game.tuto.6.button'),
                       controller: t2AnimationController,
                       beforeAnimationCallback: () {
                         t1AnimationController.reverse();

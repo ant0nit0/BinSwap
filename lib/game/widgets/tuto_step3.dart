@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
@@ -26,10 +27,7 @@ class TutorialStep3 extends HookConsumerWidget {
           KAnimate(
             // slideDirection: SlideDirection.downToUp,
             controller: t1AnimationController,
-            child: const Text(
-                '''As you can see, garbages are falling from the sky ! Your goal is to make them fall in the right bin. 
-\nYou can use their background color to help you sort the items, but pay attention, the color ir less visible as far as the game forward.''',
-                style: ts),
+            child: Text(translate('game.tuto.3'), style: ts),
           ),
           const SizedBox(height: kDefaultPadding),
           NextButtonWidget(

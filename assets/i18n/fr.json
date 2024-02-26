@@ -6,18 +6,42 @@
             "settings": "Paramètres",
             "about": "A propos",
             "shop": "Boutique"
-        }	
+        }
     },
     "game": {
         "score": "Score : ",
         "time": "Temps : ",
         "level": "Niveau : ",
+        "tuto": {
+            "1": {
+                "title": "Bienvenue dans BinSwap !",
+                "description": "Vous allez apprendre à jouer en quelques étapes. Je vous promets, cela ne prendra pas plus de 30 secondes !"
+            },
+            "2": {
+                "top": "Dans la partie supérieure, vous pouvez trouver toutes les informations dont vous avez besoin. Le score, la progression du niveau, le temps écoulé et bien sûr quelques boutons de réglages.",
+                "bottom": "Si vous avez besoin d'aide pendant le jeu, vous trouverez toutes les informations nécessaires en appuyant sur le petit « i » en haut à droite de l'écran."
+            },
+            "3": "Comme vous pouvez le voir, des déchets tombent du ciel ! Votre objectif est de les faire tomber dans la bonne poubelle.\nVous pouvez utiliser la couleur de fond pour vous aider à trier les objets, mais attention, la couleur est moins visible au fur et à mesure que le jeu avance.",
+            "4": {
+                "text": "Pour faire tomber les objets dans la bonne poubelle, faites glisser entre deux colonnes pour changer leur place !",
+                "button": "COMPRIS"
+            },
+            "5": {
+                "text": "Si vous vous sentez confiant, vous pouvez également faire glisser vers le bas sur la colonne que vous souhaitez pour accélérer le dernier objet de cette colonne !",
+                "button": "D'ACCORD"
+            },
+            "6": {
+                "top": "Bien joué, vous avez terminé le tutoriel ! (Je vous avais dit que cela ne serait pas long !)",
+                "bottom": "Vous pouvez toujours obtenir de l'aide en jeu en appuyant sur le petit bouton I en haut à droite de l'écran",
+                "button": "JOUER"
+            }
+        },
         "settings": {
             "title": "Paramètres",
             "lang": "Langue",
             "audio": "Audio",
             "restart": "Recommencer",
-        "quit": "Quitter"
+            "quit": "Quitter"
         },
         "infos": {
             "title": "Besoin d'aide ?",
@@ -64,7 +88,7 @@
                     "description": "TODO: Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
                 }
             }
-        }     
+        }
     },
     "endGame": {
         "title": "GAME OVER",
@@ -80,7 +104,7 @@
         }
     },
     "settings": {
-            "color-attributions":"Couleurs des poubelles",
+        "color-attributions": "Couleurs des poubelles",
         "title": "Paramètres",
         "lang": "Langue",
         "audio": "Musique",

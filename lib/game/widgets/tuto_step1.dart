@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
@@ -33,8 +34,8 @@ class TutorialStep1 extends HookConsumerWidget {
               KAnimate(
                 controller: t1AnimationController,
                 slideDirection: SlideDirection.downToUp,
-                child: const Text(
-                  'Welcome to Recycling Master !',
+                child: Text(
+                  translate('game.tuto.1.title'),
                   style: ts,
                 ),
               ),
@@ -42,8 +43,8 @@ class TutorialStep1 extends HookConsumerWidget {
               KAnimate(
                 controller: t2AnimationController,
                 slideDirection: SlideDirection.downToUp,
-                child: const Text(
-                  'You are going to learn how to play in a few steps. I promise, it will not take more than 30 seconds !',
+                child: Text(
+                  translate('game.tuto.1.description'),
                   style: ts,
                 ),
               ),

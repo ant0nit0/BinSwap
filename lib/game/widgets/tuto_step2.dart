@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
@@ -30,18 +31,14 @@ class TutorialStep2 extends HookConsumerWidget {
           KAnimate(
             controller: t1AnimationController,
             slideDirection: SlideDirection.downToUp,
-            child: const Text(
-                'In the top part, you can find all the informations you need. The score, level progress, elapsed time and of course some settings buttons. ',
-                style: ts),
+            child: Text(translate('game.tuto.2.top'), style: ts),
           ),
           const SizedBox(height: kDefaultPadding),
           KAnimate(
             slideDirection: SlideDirection.downToUp,
             controller: t2AnimationController,
             delay: 200,
-            child: const Text(
-                'If you need some help during the game, you will find all the necessary informations by pressing on the little “i” at the top right of the screen.',
-                style: ts),
+            child: Text(translate('game.tuto.2.bottom'), style: ts),
           ),
           const SizedBox(height: kDefaultPadding),
           NextButtonWidget(

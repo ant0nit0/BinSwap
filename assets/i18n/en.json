@@ -6,12 +6,36 @@
             "settings": "Settings",
             "about": "About",
             "shop": "Shop"
-        }	
+        }
     },
     "game": {
         "score": "Score : ",
         "time": "Time : ",
         "level": "Level : ",
+        "tuto": {
+            "1": {
+                "title": "Welcome to BinSwap !",
+                "description": "You are going to learn how to play in a few steps. I promise, it will not take more than 30 seconds !"
+            },
+            "2": {
+                "top": "In the top part, you can find all the informations you need. The score, level progress, elapsed time and of course some settings buttons. ",
+                "bottom": "If you need some help during the game, you will find all the necessary informations by pressing on the little “i” at the top right of the screen."
+            },
+            "3": "As you can see, garbages are falling from the sky ! Your goal is to make them fall in the right bin.\nYou can use their background color to help you sort the items, but pay attention, the color ir less visible as far as the game forward.",
+            "4": {
+                "text": "To make items fall in the right bin, swipe between two columns to change their places !",
+                "button": "GOT IT"
+            },
+            "5": {
+                "text": "If you feel confident, you can also drag down onto the column you want to accelerate the last item of this column !",
+                "button": "OKAY"
+            },
+            "6": {
+                "top": "Well played, you completed the tutorial ! (I've told you it will not be long !)",
+                "bottom": "You can always get some help in game by pressing the little I button on the top right of the screen",
+                "button": "PLAY"
+            }
+        },
         "settings": {
             "title": "Settings",
             "lang": "Lang",
@@ -64,7 +88,7 @@
                     "description": "Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
                 }
             }
-        }     
+        }
     },
     "endGame": {
         "title": "GAME OVER",

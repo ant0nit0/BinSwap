@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
@@ -30,13 +31,11 @@ class TutorialStep4 extends HookConsumerWidget {
             KAnimate(
               // slideDirection: SlideDirection.downToUp,
               controller: t1AnimationController,
-              child: const Text(
-                  '''To make items fall in the right bin, swipe between two columns to change their places !''',
-                  style: ts),
+              child: Text(translate('game.tuto.4.text'), style: ts),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(
-              text: 'GOT IT',
+              text: translate('game.tuto.4.button'),
               beforeAnimationCallback: () async {
                 unawaited(t1AnimationController.reverse());
               },

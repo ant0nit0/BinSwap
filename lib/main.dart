@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
     return MaterialApp(
-      title: 'Recycling Master',
+      title: 'BinSwap',
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
           // FIXME: using a provi der
