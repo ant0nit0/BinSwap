@@ -84,6 +84,15 @@ class KButton extends StatelessWidget {
         secondaryColor = redSecondaryColor,
         shadowColor = redShadowColor;
 
+  const KButton.black({
+    required this.text,
+    this.onPressed,
+    this.isExpanded = true,
+    super.key,
+  })  : mainColor = const Color(0xff000000),
+        secondaryColor = const Color(0xff23282C),
+        shadowColor = const Color(0xff121212);
+
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(50);

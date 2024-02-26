@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
       title: 'Recycling Master',
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
-          // FIXME: using a provider
+          // FIXME: using a provi der
           seedColor: const Color(0xff308AD1),
         ),
         useMaterial3: true,

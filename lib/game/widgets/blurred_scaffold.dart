@@ -82,76 +82,85 @@ class BlurredScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        children: [
-          if (backgroundImagePath != null)
-            Positioned.fill(
-              child: Image.asset(
-                backgroundImagePath!,
-                fit: BoxFit.cover,
-              ),
-            ),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(bgOpacity),
+    return WillPopScope(
+      onWillPop: () async {
+        if (automaticallyImplementClosing) {
+          onClose!();
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            if (backgroundImagePath != null)
+              Positioned.fill(
+                child: Image.asset(
+                  backgroundImagePath!,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-          ),
-          if (automaticallyImplementClosing)
-            Positioned(
-              top: 0,
-              right: 0,
-              // We set it to top: 0 and right: 0 to use padding instead
-              // This allow users to have a bigger tap detection on the icon
-              child: GestureDetector(
-                onTap: onClose,
-                child: const Padding(
-                  padding: EdgeInsets.all(kDefaultPadding),
-                  child: KSVG(
-                    'close',
-                    color: neutralLight,
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(bgOpacity),
                   ),
                 ),
               ),
             ),
-          Positioned.fill(
-            child: Padding(
-              padding: padding,
-              child: Column(
-                mainAxisAlignment: mainAxisAlignment,
-                children: [
-                  if (title != null) ...[
-                    const SizedBox(height: kDefaultPadding),
-                    Text(
-                      title!,
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                color: neutralLight,
-                                fontSize: 36.0,
-                                fontFamily: 'LilitaOne',
-                              ),
+            if (automaticallyImplementClosing)
+              Positioned(
+                top: 0,
+                right: 0,
+                // We set it to top: 0 and right: 0 to use padding instead
+                // This allow users to have a bigger tap detection on the icon
+                child: GestureDetector(
+                  onTap: onClose,
+                  child: const Padding(
+                    padding: EdgeInsets.all(kDefaultPadding),
+                    child: KSVG(
+                      'close',
+                      color: neutralLight,
                     ),
-                    const SizedBox(height: kDefaultSmallPadding),
-                    const Divider(
-                      color: grayBorderColor,
-                      thickness: 1.0,
-                    ),
-                    SizedBox(height: contentTopPadding),
+                  ),
+                ),
+              ),
+            Positioned.fill(
+              child: Padding(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: mainAxisAlignment,
+                  children: [
+                    if (title != null) ...[
+                      const SizedBox(height: kDefaultPadding),
+                      Text(
+                        title!,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                  color: neutralLight,
+                                  fontSize: 36.0,
+                                  fontFamily: 'LilitaOne',
+                                ),
+                      ),
+                      const SizedBox(height: kDefaultSmallPadding),
+                      const Divider(
+                        color: grayBorderColor,
+                        thickness: 1.0,
+                      ),
+                      SizedBox(height: contentTopPadding),
+                    ],
+                    if (child != null) Expanded(child: child!),
                   ],
-                  if (child != null) Expanded(child: child!),
-                ],
+                ),
               ),
             ),
-          ),
-          if (additionalPositioned != null) ...additionalPositioned!,
-        ],
+            if (additionalPositioned != null) ...additionalPositioned!,
+          ],
+        ),
       ),
     );
   }

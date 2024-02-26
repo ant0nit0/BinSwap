@@ -37,3 +37,7 @@ const binRedColor = Color(0xffE05252);
 const binOrangeColor = Color(0xffFF942A);
 const binGrayColor = Color(0xffB7B4B4);
 const binPurpleColor = Color(0xffAA66E0);
+
+const onBoardingFirstColor = Color(0xff38E54D);
+const onBoardingSecondColor = Color(0xff2192FF);
+const onBoardingThirdColor = Color(0xffFDFF00);

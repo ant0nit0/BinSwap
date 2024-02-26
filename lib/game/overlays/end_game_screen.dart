@@ -58,7 +58,7 @@ class EndGameScreen extends HookConsumerWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: kDefaultLargePadding,
         vertical: kDefaultLargePadding,
-      ).copyWith(top: kDefaultLargePadding * 2),
+      ).copyWith(top: kDefaultLargePadding * 2, bottom: 0),
       title: translate('endGame.title'),
       child: Stack(
         children: [
@@ -69,6 +69,7 @@ class EndGameScreen extends HookConsumerWidget {
                 EndGameScoreWidget(score),
                 GameLeaderboard(score),
                 const EndGameButtons(),
+                const SizedBox(height: kDefaultLargePadding),
               ],
             ),
           ),

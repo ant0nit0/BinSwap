@@ -4,9 +4,11 @@ import 'package:recycling_master/ui/screens/color_distribution_screen.dart';
 import 'package:recycling_master/ui/screens/dev_settings.dart';
 import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/screens/home_screen.dart';
+import 'package:recycling_master/ui/screens/onboarding_screen.dart';
 import 'package:recycling_master/ui/screens/settings_screen.dart';
 import 'package:recycling_master/ui/screens/shop_screen.dart';
 import 'package:recycling_master/ui/screens/splash_screen.dart';
+import 'package:recycling_master/utils/route_bottom_transition.dart';
 
 class Routes {
   static const homeScreen = '/home';
@@ -16,6 +18,7 @@ class Routes {
   static const devSettingsScreen = '/dev';
   static const colorAttributions = '/colors';
   static const shop = '/shop';
+  static const onBoarding = '/onboarding';
 }
 
 class RouteGenerator {
@@ -30,14 +33,13 @@ class RouteGenerator {
                 HomeScreen(comeFromSplash: comeFromSplash),
           );
         } catch (e) {
-          return PageRouteBuilder(
-            pageBuilder: (_, __, ___) =>
-                const HomeScreen(comeFromSplash: false),
+          return BottomToTopPageRoute(
+            page: const HomeScreen(comeFromSplash: false),
           );
         }
       case Routes.settingsScreen:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const SettingsScreen(),
+        return BottomToTopPageRoute(
+          page: const SettingsScreen(),
         );
       case Routes.gameScreen:
         return PageRouteBuilder(
@@ -56,9 +58,11 @@ class RouteGenerator {
           pageBuilder: (_, __, ___) => const ColorDistributionScreen(),
         );
       case Routes.shop:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const ShopScreen(),
+        return BottomToTopPageRoute(
+          page: const ShopScreen(),
         );
+      case Routes.onBoarding:
+        return BottomToTopPageRoute(page: const OnBoardingScreen());
       default:
         return _errorRoute(settings.name ?? '', settings);
     }

@@ -50,84 +50,87 @@ class HomeScreen extends HookConsumerWidget {
       t4Controller.reset();
     }
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
-          Positioned(
-            top: kDefaultLargePadding,
-            right: 0,
-            child: KAnimate(
-              slideDirection: SlideDirection.rightToLeft,
-              controller: t4Controller,
-              child: GestureDetector(
-                onTap: () async => _reverseAnimations().then(
-                  (_) => navigatorKey.currentState
-                      ?.pushReplacementNamed(Routes.shop),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            const Hero(tag: 'splash_bg', child: BackgroundImage('home')),
+            Positioned(
+              top: kDefaultLargePadding,
+              right: 0,
+              child: KAnimate(
+                slideDirection: SlideDirection.rightToLeft,
+                controller: t4Controller,
+                child: GestureDetector(
+                  onTap: () async => _reverseAnimations().then(
+                    (_) => navigatorKey.currentState
+                        ?.pushReplacementNamed(Routes.shop),
+                  ),
+                  child: const CoinsWidget(),
                 ),
-                child: const CoinsWidget(),
               ),
             ),
-          ),
-          Positioned(
-            bottom: kDefaultPadding,
-            left: kDefaultLargePadding,
-            right: kDefaultLargePadding,
-            top: kDefaultLargePadding * 3,
-            child: Column(
-              children: [
-                KAnimate(
-                    controller: t1Controller,
+            Positioned(
+              bottom: kDefaultPadding,
+              left: kDefaultLargePadding,
+              right: kDefaultLargePadding,
+              top: kDefaultLargePadding * 3,
+              child: Column(
+                children: [
+                  KAnimate(
+                      controller: t1Controller,
+                      delay: 300,
+                      animate: !comeFromSplash,
+                      child: const Hero(tag: 'home_title', child: HomeTitle())),
+                  const Spacer(),
+                  KAnimate(
+                    delay: 100,
+                    controller: t2Controller,
+                    slideDirection: SlideDirection.downToUp,
+                    child: KButton.blue(
+                      text: translate('home.buttons.play'),
+                      isExpanded: false,
+                      onPressed: () async {
+                        await _reverseAnimations();
+                        ref.read(isUserPlayingProvider.notifier).state = true;
+                        navigatorKey.currentState
+                            ?.pushReplacementNamed(Routes.gameScreen);
+                      },
+                    ),
+                  ),
+                  KAnimate(
+                    controller: t3Controller,
+                    slideDirection: SlideDirection.downToUp,
+                    delay: 200,
+                    child: KButton.yellow(
+                      text: translate('home.buttons.settings'),
+                      onPressed: () async => await _reverseAnimations().then(
+                        (_) => navigatorKey.currentState
+                            ?.pushReplacementNamed(Routes.settingsScreen),
+                      ),
+                    ),
+                  ),
+                  KAnimate(
+                    controller: t3Controller,
+                    slideDirection: SlideDirection.downToUp,
                     delay: 300,
-                    animate: !comeFromSplash,
-                    child: const Hero(tag: 'home_title', child: HomeTitle())),
-                const Spacer(),
-                KAnimate(
-                  delay: 100,
-                  controller: t2Controller,
-                  slideDirection: SlideDirection.downToUp,
-                  child: KButton.blue(
-                    text: translate('home.buttons.play'),
-                    isExpanded: false,
-                    onPressed: () async {
-                      await _reverseAnimations();
-                      ref.read(isUserPlayingProvider.notifier).state = true;
-                      navigatorKey.currentState
-                          ?.pushReplacementNamed(Routes.gameScreen);
-                    },
-                  ),
-                ),
-                KAnimate(
-                  controller: t3Controller,
-                  slideDirection: SlideDirection.downToUp,
-                  delay: 200,
-                  child: KButton.yellow(
-                    text: translate('home.buttons.settings'),
-                    onPressed: () async => await _reverseAnimations().then(
-                      (_) => navigatorKey.currentState
-                          ?.pushReplacementNamed(Routes.settingsScreen),
+                    child: KButton.green(
+                      text: translate('home.buttons.shop'),
+                      isExpanded: false,
+                      onPressed: () async => _reverseAnimations().then(
+                        (_) => navigatorKey.currentState
+                            ?.pushReplacementNamed(Routes.shop),
+                      ),
                     ),
                   ),
-                ),
-                KAnimate(
-                  controller: t3Controller,
-                  slideDirection: SlideDirection.downToUp,
-                  delay: 300,
-                  child: KButton.green(
-                    text: translate('home.buttons.shop'),
-                    isExpanded: false,
-                    onPressed: () async => _reverseAnimations().then(
-                      (_) => navigatorKey.currentState
-                          ?.pushReplacementNamed(Routes.shop),
-                    ),
-                  ),
-                ),
-              ],
-            ).separated(
-              separator: const SizedBox(height: kDefaultTinyPadding),
+                ],
+              ).separated(
+                separator: const SizedBox(height: kDefaultTinyPadding),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

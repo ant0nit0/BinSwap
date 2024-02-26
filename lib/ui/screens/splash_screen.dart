@@ -39,6 +39,12 @@ class SplashScreen extends HookConsumerWidget {
       duration: const Duration(milliseconds: 500),
     );
 
+    final showTutorial = useState(false);
+    // We get the highscore in order to know if the user as already played the game
+    // If not, we show the onBoarding
+    final highScore = ref.watch(leaderboardProvider);
+    final coins = ref.watch(coinsProvider);
+
     onFirstBuild(() async {
       // Initialize the background audio service
       ref.read(backgroundAudioStateNotifierProvider.notifier);
@@ -46,19 +52,22 @@ class SplashScreen extends HookConsumerWidget {
       unawaited(ref.read(langProvider.notifier).initLang(context));
       // Load the color distributions preferences
       ref.read(binColorsProvider.notifier);
-      // Load the leaderboard
-      ref.read(leaderboardProvider.notifier);
-      // Load selected background and coins
-      ref.read(coinsProvider.notifier);
+      // Load selected background
       ref.read(selectedBackgroundProvider.notifier);
     });
 
+    coins.whenData((value) =>
+        value > 0 ? showTutorial.value = false : showTutorial.value = true);
+    highScore.whenData((value) =>
+        value.isEmpty ? showTutorial.value = true : showTutorial.value = false);
+
     if (!fakeLoadingAnimationController.isAnimating &&
         !fakeLoadingAnimationController.isCompleted) {
-      fakeLoadingAnimationController.forward().then((value) => {
+      fakeLoadingAnimationController.forward().then((value) async => {
             // Navigate to the home screen
-            navigatorKey.currentState!
-                .pushReplacementNamed(Routes.homeScreen, arguments: true)
+            navigatorKey.currentState!.pushReplacementNamed(
+                showTutorial.value ? Routes.onBoarding : Routes.homeScreen,
+                arguments: true)
           });
     }
 
