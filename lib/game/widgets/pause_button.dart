@@ -18,6 +18,7 @@ class PauseButton extends HookConsumerWidget {
     return RoundedIconButton(
       icon: KSVG(isPlaying ? 'pause' : 'play'),
       onPressed: () {
+        if (game.isTutorial) return;
         if (isPlaying) {
           game.pauseEngine();
         } else {
