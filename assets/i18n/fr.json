@@ -59,33 +59,33 @@
                 "title": "Comment jouer ?",
                 "goal-title": "Le but du jeu",
                 "goal-description": "Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
-                "how-to-description": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !",
+                "how-to-description": "Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagnez à chaque fois qu'un déchet tombe dans la bonne poubelle. La partie s'arrête lorsque vous n'avez plus de vie. Bonne chance !",
                 "how-to-title": "Ok, mais on joue comment ?"
             },
             "bins": {
                 "plastics": {
-                    "title": "Plastique",
-                    "description": "TODO: Recycling plastics reduces pollution, conserves resources, and minimizes the impact on wildlife and the environment."
+                    "title": "Plastiques",
+                    "description": "Recycler les plastiques réduit la pollution, économise les ressources et minimise l'impact sur la faune et l'environnement."
                 },
                 "organics": {
-                    "title": "Compost",
-                    "description": "TODO: Recycling organic waste into compost enriches soil, reduces the need for chemical fertilizers, and decreases methane emissions from landfills."
+                    "title": "Organiques",
+                    "description": "Recycler les déchets organiques en compost enrichit le sol, réduit le besoin en fertilisants chimiques et diminue les émissions de méthane des décharges."
                 },
                 "electronics": {
-                    "title": "Electronique",
-                    "description": "TODO: Proper recycling of e-waste prevents the release of toxic substances into the environment and recovers valuable materials."
+                    "title": "Électroniques",
+                    "description": "Recycler correctement les déchets électroniques empêche la libération de substances toxiques dans l'environnement et récupère des matériaux précieux."
                 },
                 "glass": {
                     "title": "Verre",
-                    "description": "TODO: Glass can be recycled indefinitely without loss of quality, reducing raw material use and lowering energy consumption."
+                    "description": "Le verre peut être recyclé indéfiniment sans perte de qualité, réduisant l'utilisation de matières premières et diminuant la consommation d'énergie."
                 },
                 "papers": {
                     "title": "Papiers",
-                    "description": "TODO: Recycling paper conserves trees and forest habitats, reduces greenhouse gas emissions, and saves energy compared to producing new paper."
+                    "description": "Recycler le papier préserve les arbres et les habitats forestiers, réduit les émissions de gaz à effet de serre et économise l'énergie par rapport à la production de nouveau papier."
                 },
                 "textiles": {
                     "title": "Textiles",
-                    "description": "TODO: Recycling textiles reduces landfill waste, saves resources, and decreases the environmental impact of producing new fabrics."
+                    "description": "Recycler les textiles réduit les déchets en décharge, économise les ressources et diminue l'impact environnemental de la production de nouveaux tissus."
                 }
             }
         }

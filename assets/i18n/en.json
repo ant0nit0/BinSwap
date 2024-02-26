@@ -58,8 +58,8 @@
             "how-to-play": {
                 "title": "How to play ?",
                 "goal-title": "Game's goal",
-                "goal-description": "TODO: Le but du jeu est de trier un maximum de déchets, sans se tromper. Échangez les poubelles de places pour faire tomber les détritus dans les bonnes poubelles, et essayez de survivre un maximum de temps !",
-                "how-to-description": "TODO: Swipez entre deux colonnes pour faire échanger de places les poubelles. Vous perdez de la vie à chaque fois que vous vous trompez, mais en regagner au  fur et à mesure que le  temps s’écoule !",
+                "goal-description": "The goal of the game is to sort as many waste items as possible, without making mistakes. Swap the bins around to make the trash fall into the correct bins, and try to survive as long as you can!",
+                "how-to-description": "Swipe between two columns to swap the bins' places. You lose life every time you make a mistake, but you regain it when trash are sorted correctly. You can also drag down onto the column you want to accelerate the last item of this column. The game ends when you run out of life. Good luck !",
                 "how-to-title": "Okay, but how ?"
             },
             "bins": {
