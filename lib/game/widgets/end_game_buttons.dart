@@ -3,6 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
+import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
@@ -29,6 +30,8 @@ class EndGameButtons extends HookConsumerWidget {
         Routes.homeScreen,
       );
     }
+
+    ref.watch(langProvider);
 
     return Column(
       children: [
