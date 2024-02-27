@@ -65,6 +65,7 @@ flutter:
     - assets/fonts/
     - assets/images/backgrounds/
     - assets/images/icons/
+    - assets/images/overlays/
     - assets/images/icons/bins/
     - assets/images/icons/electronics/
     - assets/images/icons/glass/

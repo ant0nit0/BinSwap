@@ -2,6 +2,8 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/game/overlays/fire_overlay.dart';
+import 'package:recycling_master/game/overlays/snow_overlay.dart';
 import 'package:recycling_master/game/overlays/tutorial_overlay.dart';
 import 'package:recycling_master/game/widgets/pause_button.dart';
 import 'package:recycling_master/game/widgets/game_top_icons.dart';
@@ -22,6 +24,8 @@ class GameScreen extends HookConsumerWidget {
   static const String pausePlayKey = 'pause_play';
   static const String settingsDialogKey = 'settings_dialog';
   static const String tutorial1 = 'tuto1';
+  static const String snow = 'snow';
+  static const String fire = 'fire';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -73,6 +77,12 @@ class GameScreen extends HookConsumerWidget {
                     tutorial1: (BuildContext context, KGame game) {
                       return TutorialOverlay(game);
                     },
+                    snow: (BuildContext context, KGame game) {
+                      return const SnowOverlay();
+                    },
+                    fire: (BuildContext context, KGame game) {
+                      return const FireOverlay();
+                    }
                   },
                 ),
                 error: (_, __) => const SizedBox.shrink(),

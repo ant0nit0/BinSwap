@@ -10,7 +10,7 @@ import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/colors.dart';
 
-class GameSnowflake extends SpriteComponent
+class GameX2 extends SpriteComponent
     with HasGameRef<KGame>, TapCallbacks, CollisionCallbacks {
   static const double padding = 2.0;
   static const color = neutralLight;
@@ -18,14 +18,14 @@ class GameSnowflake extends SpriteComponent
   final shouldScale = ValueNotifier(false);
   final scaleFactor = ValueNotifier(1.0);
 
-  GameSnowflake();
+  GameX2();
 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
     // Load the sprite
     sprite = Sprite(
-      await Flame.images.load('icons/specials/snowflake.png'),
+      await Flame.images.load('icons/specials/x2.png'),
       srcSize: Vector2(136, 136),
     );
 
@@ -75,7 +75,7 @@ class GameSnowflake extends SpriteComponent
     final paint = Paint()
       ..color = color.withOpacity(shouldScale.value ? .75 : 1);
     final strokePaint = Paint()
-      ..color = Colors.blue
+      ..color = Colors.amber
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawCircle(circleOffset, circleRadius, paint);
@@ -92,7 +92,7 @@ class GameSnowflake extends SpriteComponent
       scaleFactor.value += 50 * dt;
       if (scaleFactor.value >= 20) {
         shouldScale.value = false;
-        game.freeze();
+        game.x2();
         removeFromParent();
       }
     }

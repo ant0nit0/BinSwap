@@ -85,6 +85,7 @@ class KGame extends FlameGame
   final itemCountForLevel = ValueNotifier(0);
 
   final itemSpeedFactor = ValueNotifier(1.0);
+  final scoreFactor = ValueNotifier(1);
 
   KGame(
     this.state,
@@ -240,7 +241,7 @@ class KGame extends FlameGame
   }
 
   void increaseScore(int score) {
-    scoreNotifier.value += score;
+    scoreNotifier.value += score * scoreFactor.value;
     sortedItemsNotifier.value += 1;
     itemCountForLevel.value += 1;
     lifeNotifier.value = min(defaultLife, lifeNotifier.value + 0.2);
@@ -306,6 +307,7 @@ class KGame extends FlameGame
       levelNotifier.value.minPeriod * 3,
       levelNotifier.value.maxPeriod * 3,
     );
+    overlays.add(GameScreen.snow);
     unawaited(
       Future.delayed(
         const Duration(milliseconds: kFreezeDuration ~/ 1.75),
@@ -322,6 +324,21 @@ class KGame extends FlameGame
         const Duration(milliseconds: kFreezeDuration),
         () {
           itemSpeedFactor.value = 1;
+          overlays.remove(GameScreen.snow);
+        },
+      ),
+    );
+  }
+
+  void x2() async {
+    scoreFactor.value = 2;
+    overlays.add(GameScreen.fire);
+    unawaited(
+      Future.delayed(
+        const Duration(milliseconds: kX2Duration),
+        () {
+          scoreFactor.value = 1;
+          overlays.remove(GameScreen.fire);
         },
       ),
     );

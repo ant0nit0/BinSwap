@@ -34,7 +34,7 @@ class GameItem extends SpriteComponent
         _createScoreIndicator(
             Vector2(
                 other.position.x + other.size.x, other.position.y - size.y / 2),
-            item.score.toString());
+            (item.score * game.scoreFactor.value).toString());
       } else {
         // Wrong category, decrease the score
         await game.decreaseScore();
