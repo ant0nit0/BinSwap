@@ -5,19 +5,23 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
+import 'package:recycling_master/game/widgets/snow_info.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class TutorialStep4 extends HookConsumerWidget {
-  static const size = .8;
-  const TutorialStep4({super.key});
+class TutorialStep6 extends HookConsumerWidget {
+  static const size = .55;
+  const TutorialStep6({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const ts = TextStyle(color: neutralLight, fontSize: 16.0, height: 1.3);
     final t1AnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 600),
+    );
+    final t2AnimationController = useAnimationController(
       duration: const Duration(milliseconds: 600),
     );
     return SingleChildScrollView(
@@ -30,15 +34,23 @@ class TutorialStep4 extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             KAnimate(
-              // slideDirection: SlideDirection.downToUp,
+              slideDirection: SlideDirection.downToUp,
               controller: t1AnimationController,
-              child: Text(translate('game.tuto.4.text'), style: ts),
+              child: Text(translate('game.tuto.6.text'), style: ts),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            KAnimate(
+              delay: 200,
+              slideDirection: SlideDirection.downToUp,
+              controller: t2AnimationController,
+              child: const SnowInfo(isDark: false),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(
-              text: translate('game.tuto.4.button'),
+              text: translate('game.tuto.6.button'),
               beforeAnimationCallback: () async {
                 unawaited(t1AnimationController.reverse());
+                await t2AnimationController.reverse();
               },
               afterAnimationCallback: () {
                 ref.read(tutorialStateNotifierProvider.notifier).nextStep();

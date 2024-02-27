@@ -9,6 +9,7 @@
         }
     },
     "game": {
+        "next": "Suivant",
         "score": "Score : ",
         "time": "Temps : ",
         "level": "Niveau : ",
@@ -31,6 +32,10 @@
                 "button": "D'ACCORD"
             },
             "6": {
+                "text": "Certains bonus apparaissent également ! Cliquez dessus pour activer leur pouvoir !",
+                "button": "OK"
+            },
+            "7": {
                 "top": "Bien joué, vous avez terminé le tutoriel ! (Je vous avais dit que cela ne serait pas long !)",
                 "bottom": "Vous pouvez toujours obtenir de l'aide en jeu en appuyant sur le petit bouton \"I\" en haut à droite de l'écran",
                 "button": "JOUER"

@@ -6,7 +6,8 @@ import 'package:recycling_master/game/widgets/tuto_step2.dart';
 import 'package:recycling_master/game/widgets/tuto_step3.dart';
 import 'package:recycling_master/game/widgets/tuto_step4.dart';
 import 'package:recycling_master/game/widgets/tuto_step5.dart';
-import 'package:recycling_master/game/widgets/tutorial_step6.dart';
+import 'package:recycling_master/game/widgets/tuto_step6.dart';
+import 'package:recycling_master/game/widgets/tuto_step7.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 
 enum TutorialStep {
@@ -18,6 +19,7 @@ enum TutorialStep {
   step4,
   step5,
   step6,
+  step7,
 }
 
 class TutorialOverlay extends HookConsumerWidget {
@@ -75,7 +77,9 @@ class TutorialOverlay extends HookConsumerWidget {
       case TutorialStep.step5:
         return const TutorialStep5();
       case TutorialStep.step6:
-        return TutorialStep6(game);
+        return const TutorialStep6();
+      case TutorialStep.step7:
+        return TutorialStep7(game);
       default:
         return const SizedBox.shrink();
     }
@@ -84,18 +88,20 @@ class TutorialOverlay extends HookConsumerWidget {
   double _getHeightFromState(TutorialStep state) {
     switch (state) {
       case TutorialStep.step1:
-      case TutorialStep.step6:
+      case TutorialStep.step7:
       case TutorialStep.step3_1:
       case TutorialStep.step3_2:
         return 1;
       case TutorialStep.step2:
-        return 0.75;
+        return TutorialStep2.size;
       case TutorialStep.step3:
         return TutorialStep3.size;
       case TutorialStep.step4:
         return TutorialStep4.size;
       case TutorialStep.step5:
         return TutorialStep5.size;
+      case TutorialStep.step6:
+        return TutorialStep6.size;
     }
   }
 }

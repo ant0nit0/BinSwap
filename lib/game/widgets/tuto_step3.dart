@@ -19,33 +19,37 @@ class TutorialStep3 extends HookConsumerWidget {
       duration: const Duration(milliseconds: 600),
     );
 
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
-      child: Column(
-        children: [
-          KAnimate(
-            // slideDirection: SlideDirection.downToUp,
-            controller: t1AnimationController,
-            child: Text(translate('game.tuto.3'), style: ts),
-          ),
-          const SizedBox(height: kDefaultPadding),
-          NextButtonWidget(
-            afterAnimationCallback: () async {
-              ref
-                  .read(tutorialStateNotifierProvider.notifier)
-                  .nextStep(); // Go to 3.1 (full screen, achor bottom)
-              t1AnimationController.reverse();
-              await Future.delayed(const Duration(milliseconds: 600));
-              ref
-                  .read(tutorialStateNotifierProvider.notifier)
-                  .nextStep(); // Go to 3.2 (full screen, achor top)
-              ref
-                  .read(tutorialStateNotifierProvider.notifier)
-                  .nextStep(); // Go to 4
-            },
-          ),
-        ],
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * size -
+            2 * kDefaultLargePadding,
+        child: Column(
+          children: [
+            KAnimate(
+              // slideDirection: SlideDirection.downToUp,
+              controller: t1AnimationController,
+              child: Text(translate('game.tuto.3'), style: ts),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            NextButtonWidget(
+              afterAnimationCallback: () async {
+                ref
+                    .read(tutorialStateNotifierProvider.notifier)
+                    .nextStep(); // Go to 3.1 (full screen, achor bottom)
+                t1AnimationController.reverse();
+                await Future.delayed(const Duration(milliseconds: 600));
+                ref
+                    .read(tutorialStateNotifierProvider.notifier)
+                    .nextStep(); // Go to 3.2 (full screen, achor top)
+                ref
+                    .read(tutorialStateNotifierProvider.notifier)
+                    .nextStep(); // Go to 4
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

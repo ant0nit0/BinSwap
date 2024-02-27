@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -8,12 +9,12 @@ class NextButtonWidget extends HookWidget {
   final Function? beforeAnimationCallback;
   final Function? afterAnimationCallback;
   final AnimationController? controller;
-  final String text;
+  final String? text;
   const NextButtonWidget({
     this.beforeAnimationCallback,
     this.afterAnimationCallback,
     this.controller,
-    this.text = 'NEXT',
+    this.text,
     super.key,
   });
 
@@ -38,7 +39,7 @@ class NextButtonWidget extends HookWidget {
           children: [
             const Spacer(),
             Text(
-              text,
+              text ?? translate('game.next'),
               style: ts.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(

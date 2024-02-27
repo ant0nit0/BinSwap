@@ -11,9 +11,9 @@ import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class TutorialStep6 extends HookConsumerWidget {
+class TutorialStep7 extends HookConsumerWidget {
   final KGame game;
-  const TutorialStep6(this.game, {super.key});
+  const TutorialStep7(this.game, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,7 +56,7 @@ class TutorialStep6 extends HookConsumerWidget {
                       controller: t1AnimationController,
                       slideDirection: SlideDirection.downToUp,
                       child: Text(
-                        translate('game.tuto.6.top'),
+                        translate('game.tuto.7.top'),
                         style: ts,
                       ),
                     ),
@@ -65,13 +65,13 @@ class TutorialStep6 extends HookConsumerWidget {
                       controller: t2AnimationController,
                       slideDirection: SlideDirection.downToUp,
                       child: Text(
-                        translate('game.tuto.6.bottom'),
+                        translate('game.tuto.7.bottom'),
                         style: littleTs,
                       ),
                     ),
                     const SizedBox(height: kDefaultPadding),
                     NextButtonWidget(
-                      text: translate('game.tuto.6.button'),
+                      text: translate('game.tuto.7.button'),
                       controller: t2AnimationController,
                       beforeAnimationCallback: () {
                         t1AnimationController.reverse();

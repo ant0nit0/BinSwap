@@ -47,6 +47,9 @@ class TutorialStateNotifier extends _$TutorialStateNotifier {
         state = TutorialStep.step6;
         break;
       case TutorialStep.step6:
+        state = TutorialStep.step7;
+        break;
+      case TutorialStep.step7:
         state = TutorialStep.step1;
         break;
     }

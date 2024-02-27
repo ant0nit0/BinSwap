@@ -11,6 +11,7 @@ import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class TutorialStep2 extends HookConsumerWidget {
+  static const size = .75;
   const TutorialStep2({super.key});
 
   @override
@@ -23,34 +24,38 @@ class TutorialStep2 extends HookConsumerWidget {
     final t2AnimationController = useAnimationController(
       duration: const Duration(milliseconds: 600),
     );
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
-      child: Column(
-        children: [
-          KAnimate(
-            controller: t1AnimationController,
-            slideDirection: SlideDirection.downToUp,
-            child: Text(translate('game.tuto.2.top'), style: ts),
-          ),
-          const SizedBox(height: kDefaultPadding),
-          KAnimate(
-            slideDirection: SlideDirection.downToUp,
-            controller: t2AnimationController,
-            delay: 200,
-            child: Text(translate('game.tuto.2.bottom'), style: ts),
-          ),
-          const SizedBox(height: kDefaultPadding),
-          NextButtonWidget(
-            controller: t2AnimationController,
-            beforeAnimationCallback: () async =>
-                // We don't need to wait for this animation to finish
-                unawaited(t1AnimationController.reverse()),
-            afterAnimationCallback: () {
-              ref.read(tutorialStateNotifierProvider.notifier).nextStep();
-            },
-          ),
-        ],
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * size -
+            2 * kDefaultLargePadding,
+        child: Column(
+          children: [
+            KAnimate(
+              controller: t1AnimationController,
+              slideDirection: SlideDirection.downToUp,
+              child: Text(translate('game.tuto.2.top'), style: ts),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            KAnimate(
+              slideDirection: SlideDirection.downToUp,
+              controller: t2AnimationController,
+              delay: 200,
+              child: Text(translate('game.tuto.2.bottom'), style: ts),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            NextButtonWidget(
+              controller: t2AnimationController,
+              beforeAnimationCallback: () async =>
+                  // We don't need to wait for this animation to finish
+                  unawaited(t1AnimationController.reverse()),
+              afterAnimationCallback: () {
+                ref.read(tutorialStateNotifierProvider.notifier).nextStep();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

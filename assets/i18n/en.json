@@ -9,6 +9,7 @@
         }
     },
     "game": {
+        "next": "Next",
         "score": "Score : ",
         "time": "Time : ",
         "level": "Level : ",
@@ -31,6 +32,10 @@
                 "button": "OKAY"
             },
             "6": {
+                "text": "Some specials items are also falling down ! If you see one, click on it to activate its power !",
+                "button": "GOT IT"
+            },
+            "7": {
                 "top": "Well played, you completed the tutorial ! (I've told you it will not be long !)",
                 "bottom": "You can always get some help in game by pressing the little \"I\" button on the top right of the screen",
                 "button": "PLAY"
