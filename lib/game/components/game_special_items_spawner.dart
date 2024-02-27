@@ -31,8 +31,8 @@ class GameSpecialItemSpawner extends Component with HasGameRef<KGame> {
   GameSpecialItemSpawner({
     double snowMinPeriod = 15,
     double snowMaxPeriod = 35,
-    double x2MinPeriod = 5,
-    double x2MaxPeriod = 10,
+    double x2MinPeriod = 15,
+    double x2MaxPeriod = 40,
     Random? random,
   })  : _random = random ?? Random(),
         _snowMinPeriod = snowMinPeriod,
