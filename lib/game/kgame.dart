@@ -98,6 +98,10 @@ class KGame extends FlameGame
     super.onLoad();
     if (isTutorial && !tutorialHasBeenDone.value) {
       levelNotifier.value = Level.tutorial();
+      _itemSpawner.updatePeriods(
+        levelNotifier.value.minPeriod,
+        levelNotifier.value.maxPeriod,
+      );
     }
     _addAllComponents();
   }
