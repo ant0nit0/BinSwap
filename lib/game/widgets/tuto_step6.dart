@@ -6,6 +6,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
 import 'package:recycling_master/game/widgets/snow_info.dart';
+import 'package:recycling_master/game/widgets/x2_info.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -43,7 +44,13 @@ class TutorialStep6 extends HookConsumerWidget {
               delay: 200,
               slideDirection: SlideDirection.downToUp,
               controller: t2AnimationController,
-              child: const SnowInfo(isDark: false),
+              child: const Column(
+                children: [
+                  SnowInfo(isDark: false),
+                  SizedBox(height: kDefaultSmallPadding),
+                  X2Info(isDark: false),
+                ],
+              ),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(

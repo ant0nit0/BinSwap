@@ -68,7 +68,8 @@
                 "how-to-title": "Okay, but how ?",
                 "bonus-title": "Bonuses",
                 "bonus-description": "Some bonuses are present in the game! If you see one, click on it to activate its effect!",
-                "snow-description": "Slow down the speed of the game for 4 seconds."
+                "snow-description": "Slow down the speed of the game for 4 seconds.",
+                "x2-description": "Double the score of the next items sorted for 10 seconds."
             },
             "bins": {
                 "plastics": {

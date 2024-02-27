@@ -68,7 +68,8 @@
                 "how-to-title": "Ok, mais on joue comment ?",
                 "bonus-title": "Les bonus",
                 "bonus-description": "Certains bonus sont présents dans la partie ! Si vous en voyez un, cliquez dessus pour activer son effet !",
-                "snow-description": "Ralentit la vitesse des déchets pendant 4 secondes"
+                "snow-description": "Ralentit la vitesse des déchets pendant 4 secondes",
+                "x2-description": "Double le score de chaque déchet tombé pendant 10 secondes."
             },
             "bins": {
                 "plastics": {

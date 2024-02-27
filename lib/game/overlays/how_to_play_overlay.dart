@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/overlays/game_modal_overlay.dart';
 import 'package:recycling_master/game/widgets/snow_info.dart';
+import 'package:recycling_master/game/widgets/x2_info.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
@@ -52,7 +53,9 @@ class HowToPlayOverlay extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: kDefaultSmallPadding),
-            const SnowInfo()
+            const SnowInfo(),
+            const SizedBox(height: kDefaultSmallPadding),
+            const X2Info()
           ],
         ),
       ),
