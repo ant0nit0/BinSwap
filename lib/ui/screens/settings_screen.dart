@@ -5,11 +5,10 @@ import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
 import 'package:recycling_master/ui/widgets/credentials.dart';
-import 'package:recycling_master/ui/widgets/kswitch.dart';
 import 'package:recycling_master/ui/widgets/lang_settings_selector.dart';
 import 'package:recycling_master/ui/widgets/settings_bin_attributions_button.dart';
 import 'package:recycling_master/ui/widgets/settings_reset_leaderboard_button.dart';
-import 'package:recycling_master/utils/colors.dart';
+import 'package:recycling_master/ui/widgets/sfx_switch.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/extensions.dart';
 import 'package:recycling_master/utils/router.dart';
@@ -20,13 +19,6 @@ class SettingsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const textStyle = TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      fontFamily: 'Montserrat',
-      color: neutralLight,
-    );
-
     ref.watch(langProvider);
 
     return BlurredScaffold(
@@ -40,20 +32,7 @@ class SettingsScreen extends HookConsumerWidget {
           children: [
             const LangSettingsSelector(),
             const BackgroundAudioSwitch(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  translate('settings.sfx'),
-                  style: textStyle,
-                ),
-                KSwitch(
-                  width: 60.0,
-                  initialValue: true,
-                  onActivate: () {},
-                )
-              ],
-            ),
+            const SfxSwitchRow(),
             const SettingsBinColorAttributionsButton(),
             const SizedBox(
               height: kDefaultSmallPadding,

@@ -11,8 +11,6 @@ part 'background_audio_state_notifier.g.dart';
 /// It uses the [BackgroundAudioService] to play the audio.
 ///
 /// It listens to the [SettingsNotifier] to pause or play the audio.
-///
-/// It listens to the [isUserPlayingProvider] to play the game music or the non-game music.
 @Riverpod(keepAlive: true)
 class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
   late SettingsPreferences _audioSettingsPreferences;
@@ -50,7 +48,7 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     });
   }
 
-  /// Update the audio state according to the [SettingsNotifier] and the [isUserPlayingProvider].
+  /// Update the audio state according to the [SettingsNotifier].
   Future<void> _updateAudioState(BackgroundAudioService audioService) async {
     // final pref = audioPreferences ??
     //     await ref.watch(audioSettingsNotifierProvider.future);

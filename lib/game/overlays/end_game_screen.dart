@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/audio/sfx_service.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/game/widgets/end_game_buttons.dart';
@@ -42,6 +43,10 @@ class EndGameScreen extends HookConsumerWidget {
     useEffect(() {
       if (isNewHighScore) {
         confettiController.play();
+
+        ref.read(sfxServiceProvider).playNewHighScoreSound();
+      } else {
+        ref.read(sfxServiceProvider).playGameOverSound();
       }
       return confettiController.dispose;
     }, []);

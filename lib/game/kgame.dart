@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/audio/sfx_service.dart';
 import 'package:recycling_master/game/components/game_item.dart';
 import 'package:recycling_master/game/components/game_item_spawner.dart';
 import 'package:recycling_master/game/components/game_level_bar.dart';
@@ -229,6 +230,7 @@ class KGame extends FlameGame
   }
 
   void _swapBins(int index1, int index2) {
+    ref.read(sfxServiceProvider).playSwipeSound();
     // Get the bins from the map
     final bin1Component = columnBinMap[index1];
     final bin2Component = columnBinMap[index2];
@@ -245,6 +247,7 @@ class KGame extends FlameGame
   }
 
   void increaseScore(int score) {
+    ref.read(sfxServiceProvider).playCorrectCategorySound();
     scoreNotifier.value += score * scoreFactor.value;
     sortedItemsNotifier.value += 1;
     itemCountForLevel.value += 1;
@@ -253,6 +256,7 @@ class KGame extends FlameGame
       itemCountForLevel.value = 0;
       scoreNotifier.value += levelNotifier.value.score;
       _increaseLevel();
+      // TODO: Play sound for level up
     }
   }
 

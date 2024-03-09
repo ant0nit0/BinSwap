@@ -9,6 +9,7 @@ import 'package:recycling_master/ui/screens/game_screen.dart';
 import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
 import 'package:recycling_master/ui/widgets/credentials.dart';
 import 'package:recycling_master/ui/widgets/lang_settings_selector.dart';
+import 'package:recycling_master/ui/widgets/sfx_switch.dart';
 import 'package:recycling_master/utils/extensions.dart';
 import 'package:recycling_master/utils/theme.dart';
 
@@ -31,6 +32,7 @@ class SettingsGameOverlay extends HookConsumerWidget {
           children: [
             const LangSettingsSelector(),
             const BackgroundAudioSwitch(),
+            const SfxSwitchRow(),
             SizedBox(height: MediaQuery.of(context).size.height * 0.25),
             const EndGameButtons(inGame: true),
             const CredentialsWidget(),
