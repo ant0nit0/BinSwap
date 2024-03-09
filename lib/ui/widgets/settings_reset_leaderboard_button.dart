@@ -63,14 +63,21 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
             ref.read(leaderboardProvider.notifier).clear();
           }
         },
-        child: Text(
-          translate('settings.reset-leaderboard.title'),
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            fontFamily: 'Montserrat',
-            color: neutralLight,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              translate('settings.reset-leaderboard.title'),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Montserrat',
+                color: neutralLight,
+              ),
+            ),
+            const Icon(Icons.delete_forever_rounded,
+                color: neutralLight, size: 30.0)
+          ],
         ),
       ),
     );

@@ -15,13 +15,22 @@ class CredentialsWidget extends StatelessWidget {
           fontSize: 12.0,
         );
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onLongPress: () =>
           navigatorKey.currentState!.pushNamed(Routes.devSettingsScreen),
       child: Column(
         children: [
           Text(
-            'Game developped by Dev2A\nfor the Flutter Global Games',
+            'Version 1.0.0',
             style: textStyle,
+          ),
+          const SizedBox(height: kDefaultSmallPadding),
+          const Divider(color: grayTextLightColor, height: 1.0),
+          const SizedBox(height: kDefaultSmallPadding),
+          Text(
+            'Game developped by Antoine Andréani\nfor the Flutter Global Games',
+            style: textStyle,
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: kDefaultSmallPadding),
           Text(

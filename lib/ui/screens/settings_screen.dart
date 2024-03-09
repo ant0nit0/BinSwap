@@ -28,20 +28,17 @@ class SettingsScreen extends HookConsumerWidget {
       onClose: () =>
           navigatorKey.currentState!.pushReplacementNamed(Routes.homeScreen),
       child: SingleChildScrollView(
-        child: Column(
+        child: const Column(
           children: [
-            const LangSettingsSelector(),
-            const BackgroundAudioSwitch(),
-            const SfxSwitchRow(),
-            const SettingsBinColorAttributionsButton(),
-            const SizedBox(
-              height: kDefaultSmallPadding,
-            ),
-            const ResetLeaderboardTextButton(),
+            LangSettingsSelector(),
+            BackgroundAudioSwitch(),
+            SfxSwitchRow(),
+            SettingsBinColorAttributionsButton(),
+            ResetLeaderboardTextButton(),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: kDefaultLargePadding * 2,
             ),
-            const CredentialsWidget(),
+            CredentialsWidget(),
           ],
         ).separated(
           separator: const SizedBox(
