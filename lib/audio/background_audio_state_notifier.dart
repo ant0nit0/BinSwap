@@ -15,7 +15,6 @@ part 'background_audio_state_notifier.g.dart';
 /// It listens to the [isUserPlayingProvider] to play the game music or the non-game music.
 @Riverpod(keepAlive: true)
 class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
-  late bool _isUserPlaying;
   late SettingsPreferences _audioSettingsPreferences;
 
   @override
@@ -30,7 +29,6 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     // Wait for the service to be initialized
     final audioService = await ref.read(backgroundAudioServiceProvider.future);
 
-    _isUserPlaying = ref.read(isUserPlayingProvider);
     _audioSettingsPreferences =
         await ref.read(settingsNotifierProvider.future) ??
             const SettingsPreferences(
@@ -42,17 +40,12 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     await _updateAudioState(audioService);
   }
 
-  /// Listen to the [SettingsNotifier] and the [isUserPlayingProvider] to update the audio state.
+  /// Listen to the [SettingsNotifier] to update the audio state.
   void _listenToPreferences(BackgroundAudioService audioService) {
     ref.listen(settingsNotifierProvider, (_, next) {
       _audioSettingsPreferences = next.value ??
           const SettingsPreferences(
               isBackgroundAudioActivated: true, areSfxsEffectsActivated: true);
-      _updateAudioState(audioService);
-    });
-
-    ref.listen<bool>(isUserPlayingProvider, (_, next) {
-      _isUserPlaying = next;
       _updateAudioState(audioService);
     });
   }
@@ -64,33 +57,16 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     // final isUserPlaying = ref.read(isUserPlayingProvider);
 
     if (!_audioSettingsPreferences.isBackgroundAudioActivated) {
-      audioService.pauseMusics();
+      audioService.pauseBackgroundMusic();
       state = const AsyncData(BackgroundAudioMode.muted);
     } else {
-      if (_isUserPlaying) {
-        audioService.setGameMusic();
-        state = const AsyncData(BackgroundAudioMode.gameplay);
-      } else {
-        audioService.setNonGameMusic();
-        state = const AsyncData(BackgroundAudioMode.nonGameplay);
-      }
+      audioService.resumeBackgroundMusic();
+      state = const AsyncData(BackgroundAudioMode.playing);
     }
-  }
-
-  Future<void> refreshGameMusic() async {
-    final audioService = await ref.read(backgroundAudioServiceProvider.future);
-    audioService.refreshGameMusic(
-        play: _audioSettingsPreferences.isBackgroundAudioActivated);
-  }
-
-  Future<void> resetGameMusic() async {
-    final audioService = await ref.read(backgroundAudioServiceProvider.future);
-    await audioService.resetGameMusic();
   }
 }
 
 enum BackgroundAudioMode {
   muted,
-  gameplay,
-  nonGameplay,
+  playing,
 }
