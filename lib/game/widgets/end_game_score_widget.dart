@@ -20,7 +20,7 @@ class EndGameScoreWidget extends HookConsumerWidget {
     );
 
     final highScore = ref.watch(leaderboardProvider.notifier).highScore;
-    final isNewHighScore = highScore == null || score.value > highScore.value;
+    final isNewHighScore = highScore == null || score.value >= highScore.value;
 
     return isNewHighScore
         ? _highScore(context)
