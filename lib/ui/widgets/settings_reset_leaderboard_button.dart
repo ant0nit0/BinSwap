@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
@@ -27,7 +28,7 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: kDefaultSmallPadding,
                         horizontal: kDefaultPadding),
-                    title: const Text('Reset leaderboard'),
+                    title: Text(translate('settings.reset-leaderboard.title')),
                     titleTextStyle: const TextStyle(
                       fontFamily: 'LilitaOne',
                       fontSize: 20.0,
@@ -35,20 +36,21 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
                     ),
                     backgroundColor: neutralLight,
                     // actions
-                    content: const Text(
-                        'Are you sure you want to reset the leaderboard? This action cannot be undone.'),
+                    content: Text(
+                        translate('settings.reset-leaderboard.description')),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(false);
                         },
-                        child: const Text('Cancel'),
+                        child: Text(translate('settings.reset-leaderboard.no')),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(true);
                         },
-                        child: const Text('Reset'),
+                        child:
+                            Text(translate('settings.reset-leaderboard.yes')),
                       ),
                     ],
                   );
@@ -61,9 +63,9 @@ class ResetLeaderboardTextButton extends HookConsumerWidget {
             ref.read(leaderboardProvider.notifier).clear();
           }
         },
-        child: const Text(
-          'Reset leaderboard',
-          style: TextStyle(
+        child: Text(
+          translate('settings.reset-leaderboard.title'),
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',

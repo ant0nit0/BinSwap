@@ -117,6 +117,12 @@
         "title": "Paramètres",
         "lang": "Langue",
         "audio": "Musique",
+        "reset-leaderboard": {
+            "title": "Supprimer les scores",
+            "description": "Êtes-vous sûr de vouloir supprimer tous vos scores ? Cette action est irréversible.",
+            "yes": "Supprimer",
+            "no": "Annuler"
+        },
         "sfx": "SFX",
         "colors": {
             "title": "Répartition des couleurs",
