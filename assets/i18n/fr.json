@@ -128,5 +128,18 @@
             "title": "Répartition des couleurs",
             "subtitle": "Faites correspondre les couleurs des poubelles de votre région avec celles du jeu ! Cliquez sur une catégorie pour changer sa couleur."
         }
+    },
+    "shop": {
+        "title": "Boutique",
+        "subtitle": "Vous avez : ",
+        "backgrounds": "Fonds",
+        "popup": {
+            "title": "Acheter {name} ?",
+            "description-canbuy": "Voules vous acheter {name} pour {price} pièces ?",
+            "description-cantbuy": "Vous n'avez pas assez de pièces pour acheter {name}.",
+            "yes": "Oui",
+            "no": "Non",
+            "cancel": "Annuler"
+        }
     }
 }

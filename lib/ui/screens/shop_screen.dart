@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/models/shop_item.dart';
@@ -21,7 +22,7 @@ class ShopScreen extends HookConsumerWidget {
     return BlurredScaffold(
       backgroundImagePath: 'assets/images/backgrounds/snow_bg.png',
       contentTopPadding: kDefaultSmallPadding,
-      title: 'Shop',
+      title: translate('shop.title'),
       automaticallyImplementClosing: true,
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultLargePadding - 4.0,
@@ -34,9 +35,9 @@ class ShopScreen extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              const Text(
-                'You have : ',
-                style: TextStyle(
+              Text(
+                translate('shop.subtitle'),
+                style: const TextStyle(
                   color: neutralLight,
                   fontSize: 18.0,
                 ),
@@ -72,9 +73,9 @@ class ShopScreen extends HookConsumerWidget {
             ],
           ),
           const SizedBox(height: kDefaultSmallPadding),
-          const Text(
-            'Backgrounds',
-            style: TextStyle(
+          Text(
+            translate('shop.backgrounds'),
+            style: const TextStyle(
               color: neutralLight,
               fontSize: 20.0,
               fontFamily: 'LilitaOne',

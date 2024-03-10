@@ -112,6 +112,19 @@
             "title": "Your best scores"
         }
     },
+    "shop": {
+        "title": "Shop",
+        "subtitle": "You have : ",
+        "backgrounds": "Backgrounds",
+        "popup": {
+            "title": "Buy {{name}} ?",
+            "description-canbuy": "Do you want to buy {{name}} for {{price}} coins ?",
+            "description-cantbuy": "You don't have enough coins to buy {{name}}.",
+            "yes": "Yes",
+            "no": "No",
+            "cancel": "Cancel"
+        }
+    },
     "settings": {
         "color-attributions": "Bin colors",
         "title": "Settings",

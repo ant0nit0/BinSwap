@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/models/shop_item.dart';
 import 'package:recycling_master/providers/coins.dart';
@@ -38,7 +39,7 @@ class ShopItemWidget extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 title: Text(
-                  'Buy ${item.name} ?',
+                  translate('shop.popup.title', args: {'name': item.name}),
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: neutralDark,
                       fontSize: 22.0,
@@ -52,8 +53,13 @@ class ShopItemWidget extends HookConsumerWidget {
                       children: [
                         Text(
                           canBuy
-                              ? 'Do you want to buy ${item.name} for ${item.price} coins?'
-                              : 'You don\'t have enough coins to buy ${item.name}.',
+                              ? translate('shop.popup.description-canbuy',
+                                  args: {
+                                      'name': item.name,
+                                      'price': item.price
+                                    })
+                              : translate('shop.popup.description-cantbuy',
+                                  args: {'name': item.name}),
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: neutralDark,
@@ -70,14 +76,16 @@ class ShopItemWidget extends HookConsumerWidget {
                               onPressed: () {
                                 Navigator.of(context).pop(false);
                               },
-                              child: Text(canBuy ? 'No' : 'Cancel'),
+                              child: Text(canBuy
+                                  ? translate('shop.popup.no')
+                                  : translate('shop.popup.cancel')),
                             ),
                             if (canBuy)
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop(true);
                                 },
-                                child: const Text('Yes'),
+                                child: Text(translate('shop.popup.yes')),
                               ),
                           ],
                         ),
