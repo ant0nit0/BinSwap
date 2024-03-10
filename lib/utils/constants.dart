@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/models/bin.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/models/shop_item.dart';
@@ -21,43 +20,43 @@ final allBins = [
   Bin(
     category: BinCategory.organics,
     color: BinColor.green,
-    description: translate('game.infos.bins.organics.description'),
-    title: translate('game.infos.bins.organics.title'),
+    description: 'game.infos.bins.organics.description',
+    title: 'game.infos.bins.organics.title',
     items: organicsItems,
   ),
   Bin(
     category: BinCategory.plastics,
     color: BinColor.blue,
-    description: translate('game.infos.bins.plastics.description'),
-    title: translate('game.infos.bins.plastics.title'),
+    description: 'game.infos.bins.plastics.description',
+    title: 'game.infos.bins.plastics.title',
     items: plasticsItems,
   ),
   Bin(
     category: BinCategory.glass,
     color: BinColor.gray,
-    description: translate('game.infos.bins.glass.description'),
-    title: translate('game.infos.bins.glass.title'),
+    description: 'game.infos.bins.glass.description',
+    title: 'game.infos.bins.glass.title',
     items: glassesItems,
   ),
   Bin(
     category: BinCategory.papers,
     color: BinColor.orange,
-    description: translate('game.infos.bins.papers.description'),
-    title: translate('game.infos.bins.papers.title'),
+    description: 'game.infos.bins.papers.description',
+    title: 'game.infos.bins.papers.title',
     items: papersItems,
   ),
   Bin(
     category: BinCategory.textiles,
     color: BinColor.purple,
-    description: translate('game.infos.bins.textiles.description'),
-    title: translate('game.infos.bins.textiles.title'),
+    description: 'game.infos.bins.textiles.description',
+    title: 'game.infos.bins.textiles.title',
     items: textilesItems,
   ),
   Bin(
     category: BinCategory.electronics,
     color: BinColor.red,
-    description: translate('game.infos.bins.electronics.description'),
-    title: translate('game.infos.bins.electronics.title'),
+    description: 'game.infos.bins.electronics.description',
+    title: 'game.infos.bins.electronics.title',
     items: electronicsItems,
   ),
 ];

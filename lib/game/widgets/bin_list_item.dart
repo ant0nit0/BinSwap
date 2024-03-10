@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/bin_image.dart';
 import 'package:recycling_master/models/bin.dart';
@@ -49,14 +50,14 @@ class BinListItem extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        bin.title,
+                        translate(bin.title),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: neutralDark,
                             fontSize: 14.0,
                             fontFamily: 'LilitaOne'),
                       ),
                       Text(
-                        bin.description,
+                        translate(bin.description),
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall
