@@ -8,6 +8,21 @@
             "shop": "Shop"
         }
     },
+    "onBoarding": {
+        "1": "Because we can play while learning how to preserve our environment",
+        "2": {
+            "1": "Every year, over ",
+            "2": "2 billion ",
+            "3": "tonnes of waste are produced worldwide.",
+            "4": "On the other hand, only around 10% of waste is recycled."
+        },
+        "3": {
+            "1": "BinSwap",
+            "2": "'s aim is to teach you how to sort waste, so that you can contribute, at your own level, to the preservation of the environment.",
+            "3": "All while having fun, of course!",
+            "button": "Let's go !"
+        }
+    },
     "game": {
         "next": "Next",
         "score": "Score : ",

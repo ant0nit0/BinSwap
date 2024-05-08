@@ -8,6 +8,21 @@
             "shop": "Boutique"
         }
     },
+    "onBoarding": {
+        "1": "Parce qu'on peut jouer tout en apprenant à préserver notre planète.",
+        "2": {
+            "1": "Chaque année, plus de ",
+            "2": "2 milliards ",
+            "3": "de tonnes de déchets sont produits dans le monde.",
+            "4": "D'autre part, seulement environ 10% des déchets sont recyclés."
+        },
+        "3": {
+            "1": "BinSwap",
+            "2": " a pour but de vous apprendre à trier les déchets, afin que vous puissiez contribuer, à votre niveau, à la préservation de l'environnement.",
+            "3": "Tout en vous amusant, bien sûr !",
+            "button": "C'est parti !"
+        }
+    },
     "game": {
         "next": "Suivant",
         "score": "Score : ",

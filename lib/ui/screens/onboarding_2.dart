@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/utils/colors.dart';
 
 class OnBoardingSecondPage extends StatelessWidget {
@@ -23,22 +24,22 @@ class OnBoardingSecondPage extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w500,
                 ),
-            children: const [
+            children: [
               TextSpan(
-                text: 'Every year, over ',
+                text: translate('onBoarding.2.1'),
               ),
               TextSpan(
-                text: '2 billion ',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                text: translate('onBoarding.2.2'),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              TextSpan(text: 'tonnes of waste are produced worldwide.'),
+              TextSpan(text: translate('onBoarding.2.3')),
             ],
           ),
         ),
         Image.asset(
           'assets/images/icons/other/all_items.png',
         ),
-        Text('On the other hand, only around 10% of waste is recycled.',
+        Text(translate('onBoarding.2.4'),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: neutralDark,

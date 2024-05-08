@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/ui/widgets/kbutton.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
@@ -26,19 +27,19 @@ class OnBoardingThirsPage extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w500,
                 ),
-            children: const [
+            children: [
               TextSpan(
-                text: 'BinSwap',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                text: translate('onBoarding.3.1'),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               TextSpan(
-                  text:
-                      '\'s aim is to teach you how to sort waste, so that you can contribute, at your own level, to the preservation of the environment.'),
+                text: translate('onBoarding.3.2'),
+              ),
             ],
           ),
         ),
         Text(
-          'All while having fun, of course!',
+          translate('onBoarding.3.3'),
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 color: neutralDark,
@@ -48,7 +49,7 @@ class OnBoardingThirsPage extends StatelessWidget {
               ),
         ),
         KButton.black(
-          text: 'Let\'s go !',
+          text: translate('onBoarding.3.button'),
           onPressed: () => navigatorKey.currentState!.pushReplacementNamed(
             Routes.homeScreen,
           ),
