@@ -1,19 +1,21 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recycling_master/providers/settings_preferences.dart';
 
 class BackgroundAudioService extends WidgetsBindingObserver {
+  final Ref _ref;
   final AudioPlayer _backgroundAudioPlayer = AudioPlayer()
     ..setReleaseMode(ReleaseMode.loop);
 
   static const String _musicPath = 'audio/background.mp3';
 
   // Private constructor
-  BackgroundAudioService._();
+  BackgroundAudioService._(this._ref);
 
   // Factory constructor
-  static Future<BackgroundAudioService> create() async {
-    final service = BackgroundAudioService._();
+  static Future<BackgroundAudioService> create(Ref ref) async {
+    final service = BackgroundAudioService._(ref);
     await service._init();
     return service;
   }
@@ -52,11 +54,15 @@ class BackgroundAudioService extends WidgetsBindingObserver {
   }
 
   Future<void> resumeBackgroundMusic() async {
+    final audioPreferences = _ref.watch(settingsNotifierProvider);
+    if (audioPreferences.valueOrNull?.isBackgroundAudioActivated == false) {
+      return;
+    }
     await _backgroundAudioPlayer.resume();
   }
 }
 
 final backgroundAudioServiceProvider =
     FutureProvider<BackgroundAudioService>((ref) async {
-  return BackgroundAudioService.create();
+  return BackgroundAudioService.create(ref);
 });
