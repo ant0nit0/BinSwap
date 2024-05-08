@@ -24,8 +24,9 @@ class SettingsNotifier extends _$SettingsNotifier {
 
     state = AsyncData(
       SettingsPreferences(
-        isBackgroundAudioActivated: audioBackground == 'true',
-        areSfxsEffectsActivated: sfxsEffects == 'true',
+        isBackgroundAudioActivated:
+            audioBackground == null || audioBackground == 'true',
+        areSfxsEffectsActivated: sfxsEffects == null || sfxsEffects == 'true',
         language: lang,
       ),
     );
