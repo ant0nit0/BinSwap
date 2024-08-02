@@ -82,6 +82,9 @@ class BlurredScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final paddingTop = MediaQuery.of(context).padding.top == 0
+        ? kDefaultPadding
+        : MediaQuery.of(context).padding.top;
     return WillPopScope(
       onWillPop: () async {
         if (automaticallyImplementClosing) {
@@ -120,9 +123,12 @@ class BlurredScaffold extends StatelessWidget {
                 // This allow users to have a bigger tap detection on the icon
                 child: GestureDetector(
                   onTap: onClose,
-                  child: const Padding(
-                    padding: EdgeInsets.all(kDefaultPadding),
-                    child: KSVG(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: kDefaultLargePadding,
+                      vertical: paddingTop,
+                    ),
+                    child: const KSVG(
                       'close',
                       color: neutralLight,
                     ),
@@ -130,6 +136,7 @@ class BlurredScaffold extends StatelessWidget {
                 ),
               ),
             Positioned.fill(
+              top: MediaQuery.of(context).padding.top / 2,
               child: Padding(
                 padding: padding,
                 child: Column(

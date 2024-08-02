@@ -40,58 +40,61 @@ class GameScreen extends HookConsumerWidget {
       showTutorial.value = true;
     }
 
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: state.when(
-                data: (data) => GameWidget(
-                  game: KGame(
-                    data,
-                    ref,
-                    isTutorial: showTutorial.value,
+    return SafeArea(
+      bottom: false,
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: state.when(
+                  data: (data) => GameWidget(
+                    game: KGame(
+                      data,
+                      ref,
+                      isTutorial: showTutorial.value,
+                    ),
+                    overlayBuilderMap: {
+                      endGameDialogKey: (BuildContext context, KGame game) {
+                        return EndGameScreen(
+                            Score(
+                                value: game.scoreNotifier.value,
+                                timeInSec: game.timeNotifier.value),
+                            game: game);
+                      },
+                      topIconsKey: (BuildContext context, KGame game) {
+                        return GameTopIcons(game);
+                      },
+                      pausePlayKey: (BuildContext context, KGame game) {
+                        return Positioned(
+                          top: MediaQuery.of(context).size.height * .15,
+                          right: kDefaultPadding,
+                          child: PauseButton(game),
+                        );
+                      },
+                      settingsDialogKey: (BuildContext context, KGame game) {
+                        return SettingsGameOverlay(game);
+                      },
+                      tutorial1: (BuildContext context, KGame game) {
+                        return TutorialOverlay(game);
+                      },
+                      snow: (BuildContext context, KGame game) {
+                        return const SnowOverlay();
+                      },
+                      fire: (BuildContext context, KGame game) {
+                        return const FireOverlay();
+                      }
+                    },
                   ),
-                  overlayBuilderMap: {
-                    endGameDialogKey: (BuildContext context, KGame game) {
-                      return EndGameScreen(
-                          Score(
-                              value: game.scoreNotifier.value,
-                              timeInSec: game.timeNotifier.value),
-                          game: game);
-                    },
-                    topIconsKey: (BuildContext context, KGame game) {
-                      return GameTopIcons(game);
-                    },
-                    pausePlayKey: (BuildContext context, KGame game) {
-                      return Positioned(
-                        top: MediaQuery.of(context).size.height * .15,
-                        right: kDefaultPadding,
-                        child: PauseButton(game),
-                      );
-                    },
-                    settingsDialogKey: (BuildContext context, KGame game) {
-                      return SettingsGameOverlay(game);
-                    },
-                    tutorial1: (BuildContext context, KGame game) {
-                      return TutorialOverlay(game);
-                    },
-                    snow: (BuildContext context, KGame game) {
-                      return const SnowOverlay();
-                    },
-                    fire: (BuildContext context, KGame game) {
-                      return const FireOverlay();
-                    }
-                  },
+                  error: (_, __) => const SizedBox.shrink(),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
-                error: (_, __) => const SizedBox.shrink(),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
