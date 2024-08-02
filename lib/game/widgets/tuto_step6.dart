@@ -29,11 +29,14 @@ class TutorialStep6 extends HookConsumerWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * size -
-            2 * kDefaultLargePadding,
+        // height: MediaQuery.of(context).size.height * size -
+        // 2 * kDefaultLargePadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
             KAnimate(
               slideDirection: SlideDirection.downToUp,
               controller: t1AnimationController,

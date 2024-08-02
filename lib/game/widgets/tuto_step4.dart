@@ -11,7 +11,7 @@ import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class TutorialStep4 extends HookConsumerWidget {
-  static const size = .8;
+  static const size = .4;
   const TutorialStep4({super.key});
 
   @override
@@ -23,29 +23,28 @@ class TutorialStep4 extends HookConsumerWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * size -
-            2 * kDefaultLargePadding,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            KAnimate(
-              // slideDirection: SlideDirection.downToUp,
-              controller: t1AnimationController,
-              child: Text(translate('game.tuto.4.text'), style: ts),
-            ),
-            const SizedBox(height: kDefaultPadding),
-            NextButtonWidget(
-              text: translate('game.tuto.4.button'),
-              beforeAnimationCallback: () async {
-                unawaited(t1AnimationController.reverse());
-              },
-              afterAnimationCallback: () {
-                ref.read(tutorialStateNotifierProvider.notifier).nextStep();
-              },
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).padding.top,
+          ),
+          KAnimate(
+            // slideDirection: SlideDirection.downToUp,
+            controller: t1AnimationController,
+            child: Text(translate('game.tuto.4.text'), style: ts),
+          ),
+          const SizedBox(height: kDefaultPadding),
+          NextButtonWidget(
+            text: translate('game.tuto.4.button'),
+            beforeAnimationCallback: () async {
+              unawaited(t1AnimationController.reverse());
+            },
+            afterAnimationCallback: () {
+              ref.read(tutorialStateNotifierProvider.notifier).nextStep();
+            },
+          ),
+        ],
       ),
     );
   }
