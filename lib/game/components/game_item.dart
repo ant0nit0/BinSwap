@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/game/components/game_score_added_indicator_text.dart';
@@ -65,14 +66,16 @@ class GameItem extends SpriteComponent
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
+    final img =
+        await Flame.images.load('icons/${item.category.name}/${item.name}.png');
     // Load the sprite
     sprite = Sprite(
-      await Flame.images.load('icons/${item.category.name}/${item.name}.png'),
-      srcSize: Vector2(136, 136),
+      img,
+      srcSize: Vector2(64, 64),
     );
 
     // Adjust the size  for padding
-    size = Vector2(sprite!.originalSize.x + padding * 2,
+    size = Vector2(sprite!.image.width + padding * 2,
         sprite!.originalSize.y + padding * 2);
 
     // Randomly choose a column index
@@ -102,6 +105,7 @@ class GameItem extends SpriteComponent
   }
 
   @override
+  // ignore: must_call_super
   void render(Canvas canvas) {
     final circleRadius =
         (size.x / 2) + padding; // Circle radius including padding
@@ -121,7 +125,11 @@ class GameItem extends SpriteComponent
     canvas.drawCircle(circleOffset, circleRadius, paint);
     canvas.drawCircle(circleOffset, circleRadius, strokePaint);
 
-    super.render(canvas); // Render the sprite
+    // We use this instead of 'super.render()' to render the sprite
+    // To be able to resize it properly
+    sprite!.render(canvas, size: Vector2(32, 32));
+
+    // super.render(canvas); // Render the sprite
   }
 
   @override

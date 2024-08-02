@@ -26,7 +26,7 @@ class GameSnowflake extends SpriteComponent
     // Load the sprite
     sprite = Sprite(
       await Flame.images.load('icons/specials/snowflake.png'),
-      srcSize: Vector2(136, 136),
+      srcSize: Vector2(64, 64),
     );
 
     // Adjust the size  for padding
@@ -65,6 +65,7 @@ class GameSnowflake extends SpriteComponent
   }
 
   @override
+  // ignore: must_call_super
   void render(Canvas canvas) {
     final circleRadius = ((size.x / 2) + padding) *
         scaleFactor.value; // Circle radius including padding
@@ -81,7 +82,8 @@ class GameSnowflake extends SpriteComponent
     canvas.drawCircle(circleOffset, circleRadius, paint);
     canvas.drawCircle(circleOffset, circleRadius, strokePaint);
 
-    super.render(canvas); // Render the sprite
+    sprite!.render(canvas, size: Vector2(32, 32));
+    // super.render(canvas); // Render the sprite
   }
 
   @override
