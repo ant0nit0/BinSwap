@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -26,7 +26,9 @@ class TutorialStep2 extends HookConsumerWidget {
     );
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
-          horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
+        horizontal: kDefaultPadding,
+        vertical: kDefaultLargePadding,
+      ),
       child: SizedBox(
         // height: MediaQuery.of(context).size.height * size -
         //     2 * kDefaultLargePadding,
@@ -35,14 +37,20 @@ class TutorialStep2 extends HookConsumerWidget {
             KAnimate(
               controller: t1AnimationController,
               slideDirection: SlideDirection.downToUp,
-              child: Text(translate('game.tuto.2.top'), style: ts),
+              child: Text(
+                AppLocalizations.of(context)!.gameTuto2Top,
+                style: ts,
+              ),
             ),
             const SizedBox(height: kDefaultPadding),
             KAnimate(
               slideDirection: SlideDirection.downToUp,
               controller: t2AnimationController,
               delay: 200,
-              child: Text(translate('game.tuto.2.bottom'), style: ts),
+              child: Text(
+                AppLocalizations.of(context)!.gameTuto2Bottom,
+                style: ts,
+              ),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(
@@ -51,7 +59,7 @@ class TutorialStep2 extends HookConsumerWidget {
                   // We don't need to wait for this animation to finish
                   unawaited(t1AnimationController.reverse()),
               afterAnimationCallback: () {
-                ref.read(tutorialStateNotifierProvider.notifier).nextStep();
+                ref.read(tutorialStateProvider.notifier).nextStep();
               },
             ),
           ],

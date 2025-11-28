@@ -21,7 +21,7 @@ class RoundedIconButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: neutralDark.withOpacity(.1),
+            color: neutralDark.withValues(alpha: .1),
           ),
           child: IconButton(
             icon: icon,

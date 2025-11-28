@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:recycling_master/game/kgame.dart';
 
-class GameScoreAddedIndicator extends TextComponent with HasGameRef<KGame> {
+class GameScoreAddedIndicator extends TextComponent with HasGameReference<KGame> {
   final double duration;
   final Vector2 startPosition;
   final String scoreText;

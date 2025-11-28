@@ -6,21 +6,50 @@ part of 'game_state_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameStateNotifierHash() => r'0d067e23c928540e816a12e1fb8279b914e93c05';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [GameStateNotifier].
 @ProviderFor(GameStateNotifier)
-final gameStateNotifierProvider =
-    AsyncNotifierProvider<GameStateNotifier, GameState>.internal(
-  GameStateNotifier.new,
-  name: r'gameStateNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$gameStateNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const gameStateProvider = GameStateNotifierProvider._();
 
-typedef _$GameStateNotifier = AsyncNotifier<GameState>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class GameStateNotifierProvider
+    extends $AsyncNotifierProvider<GameStateNotifier, GameState> {
+  const GameStateNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'gameStateProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$gameStateNotifierHash();
+
+  @$internal
+  @override
+  GameStateNotifier create() => GameStateNotifier();
+}
+
+String _$gameStateNotifierHash() => r'11166517b370542bb55bffa259718b6846d126fa';
+
+abstract class _$GameStateNotifier extends $AsyncNotifier<GameState> {
+  FutureOr<GameState> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<GameState>, GameState>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<GameState>, GameState>,
+              AsyncValue<GameState>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

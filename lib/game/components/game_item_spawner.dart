@@ -8,7 +8,7 @@ import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/models/item.dart';
 import 'package:recycling_master/utils/utils.dart';
 
-class GameItemSpawner extends Component with HasGameRef<KGame> {
+class GameItemSpawner extends Component with HasGameReference<KGame> {
   final List<GameItem> _spawnedItems = [];
 
   /// The random generator used to generate the items

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/providers/settings_preferences.dart';
 import 'package:recycling_master/ui/widgets/kswitch.dart';
@@ -11,14 +11,14 @@ class SfxSwitchRow extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioPreferences = ref.watch(settingsNotifierProvider);
+    final audioPreferences = ref.watch(settingsProvider);
     ref.watch(langProvider);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          translate('settings.sfx'),
+          AppLocalizations.of(context)!.settingsSfx,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -28,14 +28,12 @@ class SfxSwitchRow extends HookConsumerWidget {
         ),
         KSwitch(
           width: 60.0,
-          initialValue:
-              audioPreferences.valueOrNull?.areSfxsEffectsActivated ?? true,
+          initialValue: audioPreferences.value?.areSfxsEffectsActivated ?? true,
           onActivate: () =>
-              ref.read(settingsNotifierProvider.notifier).activateSfxsEffects(),
-          onDeactivate: () => ref
-              .read(settingsNotifierProvider.notifier)
-              .deactivateSfxsEffects(),
-        )
+              ref.read(settingsProvider.notifier).activateSfxsEffects(),
+          onDeactivate: () =>
+              ref.read(settingsProvider.notifier).deactivateSfxsEffects(),
+        ),
       ],
     );
   }

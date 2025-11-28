@@ -54,15 +54,16 @@ class BackgroundAudioService extends WidgetsBindingObserver {
   }
 
   Future<void> resumeBackgroundMusic() async {
-    final audioPreferences = _ref.watch(settingsNotifierProvider);
-    if (audioPreferences.valueOrNull?.isBackgroundAudioActivated == false) {
+    final audioPreferences = _ref.read(settingsProvider);
+    if (audioPreferences.value?.isBackgroundAudioActivated == false) {
       return;
     }
     await _backgroundAudioPlayer.resume();
   }
 }
 
-final backgroundAudioServiceProvider =
-    FutureProvider<BackgroundAudioService>((ref) async {
+final backgroundAudioServiceProvider = FutureProvider<BackgroundAudioService>((
+  ref,
+) async {
   return BackgroundAudioService.create(ref);
 });

@@ -7,7 +7,7 @@ import 'package:recycling_master/game/components/game_snowflake.dart';
 import 'package:recycling_master/game/components/game_x2.dart';
 import 'package:recycling_master/game/kgame.dart';
 
-class GameSpecialItemSpawner extends Component with HasGameRef<KGame> {
+class GameSpecialItemSpawner extends Component with HasGameReference<KGame> {
   /// The random generator used to generate the items
   /// If not provided, a new one will be created
   final Random _random;

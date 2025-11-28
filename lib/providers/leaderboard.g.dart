@@ -6,20 +6,50 @@ part of 'leaderboard.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$leaderboardHash() => r'f03106f180ae47c1df3ec754929a08b114570ea9';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [Leaderboard].
 @ProviderFor(Leaderboard)
-final leaderboardProvider =
-    AsyncNotifierProvider<Leaderboard, List<Score>>.internal(
-  Leaderboard.new,
-  name: r'leaderboardProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$leaderboardHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const leaderboardProvider = LeaderboardProvider._();
 
-typedef _$Leaderboard = AsyncNotifier<List<Score>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class LeaderboardProvider
+    extends $AsyncNotifierProvider<Leaderboard, List<Score>> {
+  const LeaderboardProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'leaderboardProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$leaderboardHash();
+
+  @$internal
+  @override
+  Leaderboard create() => Leaderboard();
+}
+
+String _$leaderboardHash() => r'98b34ec30480a5e4f0f338795f524aaf4fd61feb';
+
+abstract class _$Leaderboard extends $AsyncNotifier<List<Score>> {
+  FutureOr<List<Score>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<List<Score>>, List<Score>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<Score>>, List<Score>>,
+              AsyncValue<List<Score>>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

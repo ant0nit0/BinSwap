@@ -6,13 +6,12 @@ part of 'score.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ScoreImpl _$$ScoreImplFromJson(Map<String, dynamic> json) => _$ScoreImpl(
-      value: json['value'] as int,
-      timeInSec: (json['timeInSec'] as num).toDouble(),
-    );
+_Score _$ScoreFromJson(Map<String, dynamic> json) => _Score(
+  value: (json['value'] as num).toInt(),
+  timeInSec: (json['timeInSec'] as num).toDouble(),
+);
 
-Map<String, dynamic> _$$ScoreImplToJson(_$ScoreImpl instance) =>
-    <String, dynamic>{
-      'value': instance.value,
-      'timeInSec': instance.timeInSec,
-    };
+Map<String, dynamic> _$ScoreToJson(_Score instance) => <String, dynamic>{
+  'value': instance.value,
+  'timeInSec': instance.timeInSec,
+};

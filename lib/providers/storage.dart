@@ -19,7 +19,8 @@ class StorageService {
 
   StorageService() {
     _storage = const FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true));
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
 
     _checkInit();
 
@@ -34,7 +35,7 @@ class StorageService {
     print(all);
   }
 
-  _checkInit() async {
+  dynamic _checkInit() async {
     try {
       await _storage.read(key: StorageKeys.audioBackground);
     } on PlatformException catch (_) {

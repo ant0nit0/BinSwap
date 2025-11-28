@@ -20,15 +20,13 @@ class KSwitch extends HookWidget {
     final isActivate = useState(initialValue);
     final height = width / 1.25;
 
-    final MaterialStateProperty<Icon?> thumbIcon =
-        MaterialStateProperty.resolveWith<Icon?>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return const Icon(Icons.check);
-        }
-        return const Icon(Icons.close);
-      },
-    );
+    final WidgetStateProperty<Icon?> thumbIcon =
+        WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            return const Icon(Icons.check);
+          }
+          return const Icon(Icons.close);
+        });
 
     return SizedBox(
       height: height,
@@ -36,7 +34,7 @@ class KSwitch extends HookWidget {
       child: FittedBox(
         fit: BoxFit.fill,
         child: Switch(
-          activeColor: neutralLight,
+          activeThumbColor: neutralLight,
           activeTrackColor: neutralDark,
           inactiveThumbColor: neutralDark,
           value: isActivate.value,

@@ -41,8 +41,8 @@ String getColorStringFromBin(BinCategory binCategory) {
       return 'purple';
     case BinCategory.organics:
       return 'green';
-    default:
-      return 'red';
+    //default:
+    //  return 'red';
   }
 }
 
@@ -61,8 +61,8 @@ Color getColorFromBin(BinCategory binCategory) {
       return binPurpleColor;
     case BinCategory.organics:
       return binGreenColor;
-    default:
-      return binRedColor;
+    //default:
+    //  return binRedColor;
   }
 }
 
@@ -81,7 +81,7 @@ Color getColorFromBinColor(BinColor binColor) {
       return binPurpleColor;
     case BinColor.green:
       return binGreenColor;
-    default:
-      return binRedColor;
+    //default:
+    //  return binRedColor;
   }
 }

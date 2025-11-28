@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,180 +9,284 @@ part of 'shop_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-ShopState _$ShopStateFromJson(Map<String, dynamic> json) {
-  return _ShopState.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ShopState {
-  List<ShopItem> get backgrounds => throw _privateConstructorUsedError;
-  List<String> get characters => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ShopStateCopyWith<ShopState> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<ShopItem> get backgrounds; List<String> get characters;
+/// Create a copy of ShopState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ShopStateCopyWith<ShopState> get copyWith => _$ShopStateCopyWithImpl<ShopState>(this as ShopState, _$identity);
+
+  /// Serializes this ShopState to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ShopState&&const DeepCollectionEquality().equals(other.backgrounds, backgrounds)&&const DeepCollectionEquality().equals(other.characters, characters));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(backgrounds),const DeepCollectionEquality().hash(characters));
+
+@override
+String toString() {
+  return 'ShopState(backgrounds: $backgrounds, characters: $characters)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ShopStateCopyWith<$Res> {
-  factory $ShopStateCopyWith(ShopState value, $Res Function(ShopState) then) =
-      _$ShopStateCopyWithImpl<$Res, ShopState>;
-  @useResult
-  $Res call({List<ShopItem> backgrounds, List<String> characters});
-}
+abstract mixin class $ShopStateCopyWith<$Res>  {
+  factory $ShopStateCopyWith(ShopState value, $Res Function(ShopState) _then) = _$ShopStateCopyWithImpl;
+@useResult
+$Res call({
+ List<ShopItem> backgrounds, List<String> characters
+});
 
+
+
+
+}
 /// @nodoc
-class _$ShopStateCopyWithImpl<$Res, $Val extends ShopState>
+class _$ShopStateCopyWithImpl<$Res>
     implements $ShopStateCopyWith<$Res> {
-  _$ShopStateCopyWithImpl(this._value, this._then);
+  _$ShopStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ShopState _self;
+  final $Res Function(ShopState) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? backgrounds = null,
-    Object? characters = null,
-  }) {
-    return _then(_value.copyWith(
-      backgrounds: null == backgrounds
-          ? _value.backgrounds
-          : backgrounds // ignore: cast_nullable_to_non_nullable
-              as List<ShopItem>,
-      characters: null == characters
-          ? _value.characters
-          : characters // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
+/// Create a copy of ShopState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? backgrounds = null,Object? characters = null,}) {
+  return _then(_self.copyWith(
+backgrounds: null == backgrounds ? _self.backgrounds : backgrounds // ignore: cast_nullable_to_non_nullable
+as List<ShopItem>,characters: null == characters ? _self.characters : characters // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$ShopStateImplCopyWith<$Res>
-    implements $ShopStateCopyWith<$Res> {
-  factory _$$ShopStateImplCopyWith(
-          _$ShopStateImpl value, $Res Function(_$ShopStateImpl) then) =
-      __$$ShopStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<ShopItem> backgrounds, List<String> characters});
 }
 
-/// @nodoc
-class __$$ShopStateImplCopyWithImpl<$Res>
-    extends _$ShopStateCopyWithImpl<$Res, _$ShopStateImpl>
-    implements _$$ShopStateImplCopyWith<$Res> {
-  __$$ShopStateImplCopyWithImpl(
-      _$ShopStateImpl _value, $Res Function(_$ShopStateImpl) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? backgrounds = null,
-    Object? characters = null,
-  }) {
-    return _then(_$ShopStateImpl(
-      backgrounds: null == backgrounds
-          ? _value._backgrounds
-          : backgrounds // ignore: cast_nullable_to_non_nullable
-              as List<ShopItem>,
-      characters: null == characters
-          ? _value._characters
-          : characters // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
+/// Adds pattern-matching-related methods to [ShopState].
+extension ShopStatePatterns on ShopState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ShopState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ShopState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ShopState value)  $default,){
+final _that = this;
+switch (_that) {
+case _ShopState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ShopState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ShopState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ShopItem> backgrounds,  List<String> characters)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ShopState() when $default != null:
+return $default(_that.backgrounds,_that.characters);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ShopItem> backgrounds,  List<String> characters)  $default,) {final _that = this;
+switch (_that) {
+case _ShopState():
+return $default(_that.backgrounds,_that.characters);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ShopItem> backgrounds,  List<String> characters)?  $default,) {final _that = this;
+switch (_that) {
+case _ShopState() when $default != null:
+return $default(_that.backgrounds,_that.characters);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ShopStateImpl implements _ShopState {
-  const _$ShopStateImpl(
-      {required final List<ShopItem> backgrounds,
-      required final List<String> characters})
-      : _backgrounds = backgrounds,
-        _characters = characters;
 
-  factory _$ShopStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ShopStateImplFromJson(json);
+class _ShopState implements ShopState {
+  const _ShopState({required final  List<ShopItem> backgrounds, required final  List<String> characters}): _backgrounds = backgrounds,_characters = characters;
+  factory _ShopState.fromJson(Map<String, dynamic> json) => _$ShopStateFromJson(json);
 
-  final List<ShopItem> _backgrounds;
-  @override
-  List<ShopItem> get backgrounds {
-    if (_backgrounds is EqualUnmodifiableListView) return _backgrounds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_backgrounds);
-  }
-
-  final List<String> _characters;
-  @override
-  List<String> get characters {
-    if (_characters is EqualUnmodifiableListView) return _characters;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_characters);
-  }
-
-  @override
-  String toString() {
-    return 'ShopState(backgrounds: $backgrounds, characters: $characters)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ShopStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._backgrounds, _backgrounds) &&
-            const DeepCollectionEquality()
-                .equals(other._characters, _characters));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_backgrounds),
-      const DeepCollectionEquality().hash(_characters));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ShopStateImplCopyWith<_$ShopStateImpl> get copyWith =>
-      __$$ShopStateImplCopyWithImpl<_$ShopStateImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ShopStateImplToJson(
-      this,
-    );
-  }
+ final  List<ShopItem> _backgrounds;
+@override List<ShopItem> get backgrounds {
+  if (_backgrounds is EqualUnmodifiableListView) return _backgrounds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_backgrounds);
 }
 
-abstract class _ShopState implements ShopState {
-  const factory _ShopState(
-      {required final List<ShopItem> backgrounds,
-      required final List<String> characters}) = _$ShopStateImpl;
-
-  factory _ShopState.fromJson(Map<String, dynamic> json) =
-      _$ShopStateImpl.fromJson;
-
-  @override
-  List<ShopItem> get backgrounds;
-  @override
-  List<String> get characters;
-  @override
-  @JsonKey(ignore: true)
-  _$$ShopStateImplCopyWith<_$ShopStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+ final  List<String> _characters;
+@override List<String> get characters {
+  if (_characters is EqualUnmodifiableListView) return _characters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_characters);
 }
+
+
+/// Create a copy of ShopState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ShopStateCopyWith<_ShopState> get copyWith => __$ShopStateCopyWithImpl<_ShopState>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ShopStateToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShopState&&const DeepCollectionEquality().equals(other._backgrounds, _backgrounds)&&const DeepCollectionEquality().equals(other._characters, _characters));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_backgrounds),const DeepCollectionEquality().hash(_characters));
+
+@override
+String toString() {
+  return 'ShopState(backgrounds: $backgrounds, characters: $characters)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ShopStateCopyWith<$Res> implements $ShopStateCopyWith<$Res> {
+  factory _$ShopStateCopyWith(_ShopState value, $Res Function(_ShopState) _then) = __$ShopStateCopyWithImpl;
+@override @useResult
+$Res call({
+ List<ShopItem> backgrounds, List<String> characters
+});
+
+
+
+
+}
+/// @nodoc
+class __$ShopStateCopyWithImpl<$Res>
+    implements _$ShopStateCopyWith<$Res> {
+  __$ShopStateCopyWithImpl(this._self, this._then);
+
+  final _ShopState _self;
+  final $Res Function(_ShopState) _then;
+
+/// Create a copy of ShopState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? backgrounds = null,Object? characters = null,}) {
+  return _then(_ShopState(
+backgrounds: null == backgrounds ? _self._backgrounds : backgrounds // ignore: cast_nullable_to_non_nullable
+as List<ShopItem>,characters: null == characters ? _self._characters : characters // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
+// dart format on

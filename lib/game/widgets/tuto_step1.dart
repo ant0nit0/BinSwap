@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -25,8 +25,9 @@ class TutorialStep1 extends HookConsumerWidget {
       height: MediaQuery.of(context).size.height,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
-              .copyWith(top: kDefaultLargePadding),
+          padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultLargePadding,
+          ).copyWith(top: kDefaultLargePadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +36,7 @@ class TutorialStep1 extends HookConsumerWidget {
                 controller: t1AnimationController,
                 slideDirection: SlideDirection.downToUp,
                 child: Text(
-                  translate('game.tuto.1.title'),
+                  AppLocalizations.of(context)!.gameTuto1Title,
                   style: ts,
                 ),
               ),
@@ -44,7 +45,7 @@ class TutorialStep1 extends HookConsumerWidget {
                 controller: t2AnimationController,
                 slideDirection: SlideDirection.downToUp,
                 child: Text(
-                  translate('game.tuto.1.description'),
+                  AppLocalizations.of(context)!.gameTuto1Description,
                   style: ts,
                 ),
               ),
@@ -53,9 +54,9 @@ class TutorialStep1 extends HookConsumerWidget {
                 controller: t2AnimationController,
                 beforeAnimationCallback: () => t1AnimationController.reverse(),
                 afterAnimationCallback: () {
-                  ref.read(tutorialStateNotifierProvider.notifier).nextStep();
+                  ref.read(tutorialStateProvider.notifier).nextStep();
                 },
-              )
+              ),
             ],
           ),
         ),

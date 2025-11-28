@@ -4,8 +4,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_image.dart';
@@ -50,8 +50,8 @@ class HomeScreen extends HookConsumerWidget {
       t4Controller.reset();
     }
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: Stack(
           children: [
@@ -64,8 +64,9 @@ class HomeScreen extends HookConsumerWidget {
                 controller: t4Controller,
                 child: GestureDetector(
                   onTap: () async => _reverseAnimations().then(
-                    (_) => navigatorKey.currentState
-                        ?.pushReplacementNamed(Routes.shop),
+                    (_) => navigatorKey.currentState?.pushReplacementNamed(
+                      Routes.shop,
+                    ),
                   ),
                   child: const CoinsWidget(),
                 ),
@@ -76,58 +77,71 @@ class HomeScreen extends HookConsumerWidget {
               left: kDefaultLargePadding,
               right: kDefaultLargePadding,
               top: kDefaultLargePadding * 3,
-              child: Column(
-                children: [
-                  KAnimate(
-                      controller: t1Controller,
-                      delay: 300,
-                      animate: !comeFromSplash,
-                      child: const Hero(tag: 'home_title', child: HomeTitle())),
-                  const Spacer(),
-                  KAnimate(
-                    delay: 100,
-                    controller: t2Controller,
-                    slideDirection: SlideDirection.downToUp,
-                    child: KButton.blue(
-                      text: translate('home.buttons.play'),
-                      isExpanded: false,
-                      onPressed: () async {
-                        await _reverseAnimations();
-                        ref.read(isUserPlayingProvider.notifier).state = true;
-                        navigatorKey.currentState
-                            ?.pushReplacementNamed(Routes.gameScreen);
-                      },
-                    ),
-                  ),
-                  KAnimate(
-                    controller: t3Controller,
-                    slideDirection: SlideDirection.downToUp,
-                    delay: 200,
-                    child: KButton.yellow(
-                      text: translate('home.buttons.settings'),
-                      onPressed: () async => await _reverseAnimations().then(
-                        (_) => navigatorKey.currentState
-                            ?.pushReplacementNamed(Routes.settingsScreen),
+              child:
+                  Column(
+                    children: [
+                      KAnimate(
+                        controller: t1Controller,
+                        delay: 300,
+                        animate: !comeFromSplash,
+                        child: const Hero(
+                          tag: 'home_title',
+                          child: HomeTitle(),
+                        ),
                       ),
-                    ),
-                  ),
-                  KAnimate(
-                    controller: t3Controller,
-                    slideDirection: SlideDirection.downToUp,
-                    delay: 300,
-                    child: KButton.green(
-                      text: translate('home.buttons.shop'),
-                      isExpanded: false,
-                      onPressed: () async => _reverseAnimations().then(
-                        (_) => navigatorKey.currentState
-                            ?.pushReplacementNamed(Routes.shop),
+                      const Spacer(),
+                      KAnimate(
+                        delay: 100,
+                        controller: t2Controller,
+                        slideDirection: SlideDirection.downToUp,
+                        child: KButton.blue(
+                          text: AppLocalizations.of(context)!.homeButtonsPlay,
+                          isExpanded: false,
+                          onPressed: () async {
+                            await _reverseAnimations();
+                            ref
+                                .read(isUserPlayingProvider.notifier)
+                                .setPlaying(true);
+                            navigatorKey.currentState?.pushReplacementNamed(
+                              Routes.gameScreen,
+                            );
+                          },
+                        ),
                       ),
-                    ),
+                      KAnimate(
+                        controller: t3Controller,
+                        slideDirection: SlideDirection.downToUp,
+                        delay: 200,
+                        child: KButton.yellow(
+                          text: AppLocalizations.of(
+                            context,
+                          )!.homeButtonsSettings,
+                          onPressed: () async =>
+                              await _reverseAnimations().then(
+                                (_) => navigatorKey.currentState
+                                    ?.pushReplacementNamed(
+                                      Routes.settingsScreen,
+                                    ),
+                              ),
+                        ),
+                      ),
+                      KAnimate(
+                        controller: t3Controller,
+                        slideDirection: SlideDirection.downToUp,
+                        delay: 300,
+                        child: KButton.green(
+                          text: AppLocalizations.of(context)!.homeButtonsShop,
+                          isExpanded: false,
+                          onPressed: () async => _reverseAnimations().then(
+                            (_) => navigatorKey.currentState
+                                ?.pushReplacementNamed(Routes.shop),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).separated(
+                    separator: const SizedBox(height: kDefaultTinyPadding),
                   ),
-                ],
-              ).separated(
-                separator: const SizedBox(height: kDefaultTinyPadding),
-              ),
             ),
           ],
         ),

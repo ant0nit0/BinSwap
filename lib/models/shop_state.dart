@@ -1,11 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recycling_master/models/shop_item.dart';
 
+// ignore_for_file: non_abstract_class_inherits_abstract_member
+
 part 'shop_state.freezed.dart';
 part 'shop_state.g.dart';
 
 @freezed
-class ShopState with _$ShopState {
+abstract class ShopState with _$ShopState {
   const factory ShopState({
     required List<ShopItem> backgrounds,
     required List<String> characters,

@@ -9,7 +9,7 @@ import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/theme.dart';
 
 class GameBin extends SpriteComponent
-    with HasGameRef<KGame>, CollisionCallbacks {
+    with HasGameReference<KGame>, CollisionCallbacks {
   final Bin bin;
   final int columnIndex;
   double? newPosition;
@@ -27,11 +27,11 @@ class GameBin extends SpriteComponent
     size = Vector2(55, 80);
     // And set the position
     final x = columnIndex *
-            gameRef.size.x /
-            gameRef.state.nbCol + // Left border of the column
-        (gameRef.size.x / gameRef.state.nbCol / 2 - // Center of the column
+            game.size.x /
+            game.state.nbCol + // Left border of the column
+        (game.size.x / game.state.nbCol / 2 - // Center of the column
             size.x / 2); // Move it to center, according to its size
-    final y = gameRef.size.y -
+    final y = game.size.y -
         size.y -
         kDefaultLargePadding; // kDefaultLargePadding of bottom
     position = Vector2(x, y);

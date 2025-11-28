@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -22,10 +22,9 @@ class NextButtonWidget extends HookWidget {
   Widget build(BuildContext context) {
     const ts = TextStyle(color: neutralLight, fontSize: 16.0, height: 1.3);
     // ignore: no_leading_underscores_for_local_identifiers
-    final _controller = controller ??
-        useAnimationController(
-          duration: const Duration(milliseconds: 600),
-        );
+    final _controller =
+        controller ??
+        useAnimationController(duration: const Duration(milliseconds: 600));
     return GestureDetector(
       onTap: () async {
         beforeAnimationCallback?.call();
@@ -39,12 +38,10 @@ class NextButtonWidget extends HookWidget {
           children: [
             const Spacer(),
             Text(
-              text ?? translate('game.next'),
+              text ?? AppLocalizations.of(context)!.gameNext,
               style: ts.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
-              width: kDefaultTinyPadding,
-            ),
+            const SizedBox(width: kDefaultTinyPadding),
             const Icon(
               Icons.arrow_forward_ios,
               color: neutralLight,

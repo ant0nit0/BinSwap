@@ -76,22 +76,19 @@ class BlurredScaffold extends StatelessWidget {
     this.additionalPositioned,
     super.key,
   }) : assert(
-          !automaticallyImplementClosing || onClose != null,
-          'If automaticallyImplementClosing is true, onClose should not be null',
-        );
+         !automaticallyImplementClosing || onClose != null,
+         'If automaticallyImplementClosing is true, onClose should not be null',
+       );
 
   @override
   Widget build(BuildContext context) {
     final paddingTop = MediaQuery.of(context).padding.top == 0
         ? kDefaultPadding
         : MediaQuery.of(context).padding.top;
-    return WillPopScope(
-      onWillPop: () async {
-        if (automaticallyImplementClosing) {
-          onClose!();
-          return false;
-        }
-        return true;
+    return PopScope(
+      canPop: !automaticallyImplementClosing,
+      onPopInvokedWithResult: (didPop, result) => {
+        if (!didPop && automaticallyImplementClosing) {onClose!()},
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -100,17 +97,14 @@ class BlurredScaffold extends StatelessWidget {
           children: [
             if (backgroundImagePath != null)
               Positioned.fill(
-                child: Image.asset(
-                  backgroundImagePath!,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(backgroundImagePath!, fit: BoxFit.cover),
               ),
             Positioned.fill(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(bgOpacity),
+                    color: Colors.black.withValues(alpha: bgOpacity),
                   ),
                 ),
               ),
@@ -128,10 +122,7 @@ class BlurredScaffold extends StatelessWidget {
                       horizontal: kDefaultLargePadding,
                       vertical: paddingTop,
                     ),
-                    child: const KSVG(
-                      'close',
-                      color: neutralLight,
-                    ),
+                    child: const KSVG('close', color: neutralLight),
                   ),
                 ),
               ),
@@ -146,18 +137,15 @@ class BlurredScaffold extends StatelessWidget {
                       const SizedBox(height: kDefaultPadding),
                       Text(
                         title!,
-                        style:
-                            Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                  color: neutralLight,
-                                  fontSize: 36.0,
-                                  fontFamily: 'LilitaOne',
-                                ),
+                        style: Theme.of(context).textTheme.headlineLarge
+                            ?.copyWith(
+                              color: neutralLight,
+                              fontSize: 36.0,
+                              fontFamily: 'LilitaOne',
+                            ),
                       ),
                       const SizedBox(height: kDefaultSmallPadding),
-                      const Divider(
-                        color: grayBorderColor,
-                        thickness: 1.0,
-                      ),
+                      const Divider(color: grayBorderColor, thickness: 1.0),
                       SizedBox(height: contentTopPadding),
                     ],
                     if (child != null) Expanded(child: child!),

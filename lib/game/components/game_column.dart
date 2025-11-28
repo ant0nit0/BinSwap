@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/colors.dart';
 
-class GameColumn extends PositionComponent with HasGameRef<KGame> {
+class GameColumn extends PositionComponent with HasGameReference<KGame> {
   final int columnIndex;
   final Paint _borderPaint;
 
@@ -21,13 +21,13 @@ class GameColumn extends PositionComponent with HasGameRef<KGame> {
 
     final columnWidth =
         // We add the nbCol as pixels to hide the left and right borders
-        (gameRef.size.x + gameRef.state.nbCol) / gameRef.state.nbCol;
-    final columnHeight = gameRef.size.y * 0.75;
+        (game.size.x + game.state.nbCol) / game.state.nbCol;
+    final columnHeight = game.size.y * 0.75;
 
     size = Vector2(columnWidth, columnHeight);
     position = Vector2(
       columnWidth * columnIndex,
-      (gameRef.size.y - columnHeight) + 1.5, // + 1.5 to hide the bottom border
+      (game.size.y - columnHeight) + 1.5, // + 1.5 to hide the bottom border
     );
   }
 

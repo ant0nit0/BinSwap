@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:recycling_master/game/kgame.dart';
 
-class GameBinIcon extends SpriteComponent with HasGameRef<KGame> {
+class GameBinIcon extends SpriteComponent with HasGameReference<KGame> {
   static const iconSize = 24.0;
   final String iconName;
 

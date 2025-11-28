@@ -11,7 +11,7 @@ import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/colors.dart';
 
 class GameSnowflake extends SpriteComponent
-    with HasGameRef<KGame>, TapCallbacks, CollisionCallbacks {
+    with HasGameReference<KGame>, TapCallbacks, CollisionCallbacks {
   static const double padding = 2.0;
   static const color = neutralLight;
 
@@ -34,19 +34,19 @@ class GameSnowflake extends SpriteComponent
         sprite!.originalSize.y + padding * 2);
 
     // Randomly choose a column index
-    final rand = Random().nextInt(gameRef.state.nbCol);
+    final rand = Random().nextInt(game.state.nbCol);
     // The position of the top left corner of the random column
-    final columnPosition = gameRef.size.x * (1 / gameRef.state.nbCol) * rand;
+    final columnPosition = game.size.x * (1 / game.state.nbCol) * rand;
 
     // To center items, we need to first add the half a to the left position
     // and then subtract half of the item size.
     // In this way, the center of the item will be at the center of the column
-    final halfOfColumnWidth = (gameRef.size.x * (1 / gameRef.state.nbCol)) / 2;
+    final halfOfColumnWidth = (game.size.x * (1 / game.state.nbCol)) / 2;
     final halfOfItemSize = (size.x / 2 - padding) / 2;
     // Niw we can set the position of the item
     position = Vector2(
       columnPosition + halfOfColumnWidth - halfOfItemSize,
-      gameRef.size.y * .25 + (padding + size.y / 2) / 2,
+      game.size.y * .25 + (padding + size.y / 2) / 2,
     );
 
     await add(CircleHitbox(
@@ -74,7 +74,7 @@ class GameSnowflake extends SpriteComponent
 
     // Draw the background circle
     final paint = Paint()
-      ..color = color.withOpacity(shouldScale.value ? .75 : 1);
+      ..color = color.withValues(alpha: shouldScale.value ? .75 : 1);
     final strokePaint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.stroke
@@ -89,7 +89,7 @@ class GameSnowflake extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    position.y += gameRef.levelNotifier.value.itemSpeed * .5 * dt;
+    position.y += game.levelNotifier.value.itemSpeed * .5 * dt;
     if (shouldScale.value) {
       scaleFactor.value += 50 * dt;
       if (scaleFactor.value >= 20) {

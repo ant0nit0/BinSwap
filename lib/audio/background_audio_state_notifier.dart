@@ -1,7 +1,6 @@
 import 'package:recycling_master/audio/background_audio_service.dart';
 import 'package:recycling_master/models/settings_preferences.dart';
 import 'package:recycling_master/providers/settings_preferences.dart';
-import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'background_audio_state_notifier.g.dart';
@@ -28,11 +27,11 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
     final audioService = await ref.read(backgroundAudioServiceProvider.future);
 
     _audioSettingsPreferences =
-        await ref.read(settingsNotifierProvider.future) ??
-            const SettingsPreferences(
-              isBackgroundAudioActivated: true,
-              areSfxsEffectsActivated: true,
-            );
+        await ref.read(settingsProvider.future) ??
+        const SettingsPreferences(
+          isBackgroundAudioActivated: true,
+          areSfxsEffectsActivated: true,
+        );
 
     _listenToPreferences(audioService);
     await _updateAudioState(audioService);
@@ -40,10 +39,13 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
 
   /// Listen to the [SettingsNotifier] to update the audio state.
   void _listenToPreferences(BackgroundAudioService audioService) {
-    ref.listen(settingsNotifierProvider, (_, next) {
-      _audioSettingsPreferences = next.value ??
+    ref.listen(settingsProvider, (_, next) {
+      _audioSettingsPreferences =
+          next.value ??
           const SettingsPreferences(
-              isBackgroundAudioActivated: true, areSfxsEffectsActivated: true);
+            isBackgroundAudioActivated: true,
+            areSfxsEffectsActivated: true,
+          );
       _updateAudioState(audioService);
     });
   }
@@ -64,7 +66,4 @@ class BackgroundAudioStateNotifier extends _$BackgroundAudioStateNotifier {
   }
 }
 
-enum BackgroundAudioMode {
-  muted,
-  playing,
-}
+enum BackgroundAudioMode { muted, playing }

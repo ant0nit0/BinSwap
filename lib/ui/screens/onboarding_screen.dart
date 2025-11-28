@@ -28,8 +28,8 @@ class OnBoardingScreen extends HookWidget {
     final currentIndex = useState(0);
     final controller = usePageController();
     const dotsBottomPadding = 60.0;
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: Stack(
           children: [

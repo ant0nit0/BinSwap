@@ -9,7 +9,7 @@ import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class GameLevelBar extends PositionComponent with HasGameRef<KGame> {
+class GameLevelBar extends PositionComponent with HasGameReference<KGame> {
   static const refillSpeed = 5;
   double currentProgress = 0; // Current progress for smooth transition
   double targetProgress = 0; // Target progress based on game state
@@ -19,16 +19,16 @@ class GameLevelBar extends PositionComponent with HasGameRef<KGame> {
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
-    size = Vector2((gameRef.size.x - 2 * kDefaultPadding) / 2, 8);
+    size = Vector2((game.size.x - 2 * kDefaultPadding) / 2, 8);
     position =
-        Vector2(gameRef.size.x / 2 - size.x / 2, kDefaultLargePadding * 2);
+        Vector2(game.size.x / 2 - size.x / 2, kDefaultLargePadding * 2);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    targetProgress = gameRef.itemCountForLevel.value /
-        gameRef.levelNotifier.value.nbItemsToSort;
+    targetProgress = game.itemCountForLevel.value /
+        game.levelNotifier.value.nbItemsToSort;
     if (targetProgress > currentProgress || isLevelAnimationPlaying) {
       // Smoothly interpolate current progress towards the target progress
       currentProgress = min(

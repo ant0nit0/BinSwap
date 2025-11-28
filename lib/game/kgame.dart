@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/sfx_service.dart';
@@ -28,7 +29,7 @@ class KGame extends FlameGame
         HorizontalDragDetector,
         VerticalDragDetector,
         HasCollisionDetection,
-        TapDetector {
+        TapCallbacks {
   final WidgetRef ref;
 
   final bool isTutorial;
@@ -88,11 +89,8 @@ class KGame extends FlameGame
   final itemSpeedFactor = ValueNotifier(1.0);
   final scoreFactor = ValueNotifier(1);
 
-  KGame(
-    this.state,
-    this.ref, {
-    this.isTutorial = false,
-  }) : _itemSpawner = GameItemSpawner(state.items);
+  KGame(this.state, this.ref, {this.isTutorial = false})
+    : _itemSpawner = GameItemSpawner(state.items);
 
   @override
   Future<void> onLoad() async {
@@ -108,7 +106,7 @@ class KGame extends FlameGame
   }
 
   Future<void> _launchTutorial() async {
-    ref.read(tutorialStateNotifierProvider.notifier).reset();
+    ref.read(tutorialStateProvider.notifier).reset();
     await Future.delayed(const Duration(milliseconds: 2500), () {
       pauseEngine();
       overlays.add(GameScreen.tutorial1);
@@ -145,9 +143,7 @@ class KGame extends FlameGame
 
   Future<void> _loadColumnsAndBins() async {
     for (int i = 0; i < state.nbCol; i++) {
-      final column = GameColumn(
-        columnIndex: i,
-      );
+      final column = GameColumn(columnIndex: i);
       final bin = GameBin(bin: state.bins[i], columnIndex: i);
       columnBinMap[i] = bin;
       // Add the column to the game
@@ -170,8 +166,8 @@ class KGame extends FlameGame
     super.onVerticalDragStart(info);
 
     // Get the column index where the drag started
-    final columnIndex =
-        (info.eventPosition.global.x / (size.x / state.nbCol)).floor();
+    final columnIndex = (info.eventPosition.global.x / (size.x / state.nbCol))
+        .floor();
 
     final itemList = itemPerColumn[columnIndex];
     if (itemList == null || itemList.isEmpty) return;
@@ -202,8 +198,8 @@ class KGame extends FlameGame
 
     if (_dragStartPosition != null) {
       // Calculate the index of the column where the drag started
-      final columnIndex =
-          (_dragStartPosition!.x / (size.x / state.nbCol)).floor();
+      final columnIndex = (_dragStartPosition!.x / (size.x / state.nbCol))
+          .floor();
 
       // Determine the bins to swap
       if (_dragDirection == 1 && columnIndex < state.nbCol - 1) {
@@ -236,10 +232,14 @@ class KGame extends FlameGame
     final bin2Component = columnBinMap[index2];
 
     // Swap the bins in the game
-    bin1Component!.setNewPosition(index2 * size.x / state.nbCol +
-        (size.x / state.nbCol / 2 - bin1Component.size.x / 2));
-    bin2Component!.setNewPosition(index1 * size.x / state.nbCol +
-        (size.x / state.nbCol / 2 - bin2Component.size.x / 2));
+    bin1Component!.setNewPosition(
+      index2 * size.x / state.nbCol +
+          (size.x / state.nbCol / 2 - bin1Component.size.x / 2),
+    );
+    bin2Component!.setNewPosition(
+      index1 * size.x / state.nbCol +
+          (size.x / state.nbCol / 2 - bin2Component.size.x / 2),
+    );
 
     // Swap the bins in the map
     columnBinMap[index1] = bin2Component;
@@ -265,8 +265,10 @@ class KGame extends FlameGame
       number: levelNotifier.value.number + 1,
       nbItemsToSort: (levelNotifier.value.nbItemsToSort * 1.2).round(),
       itemOpacity: max(0, levelNotifier.value.itemOpacity - .075),
-      itemSpeed:
-          min(kMaxItemSpeed, (levelNotifier.value.itemSpeed * 1.2).round()),
+      itemSpeed: min(
+        kMaxItemSpeed,
+        (levelNotifier.value.itemSpeed * 1.2).round(),
+      ),
       score: (levelNotifier.value.score + 5),
       minPeriod: levelNotifier.value.minPeriod * 0.8,
       maxPeriod: levelNotifier.value.maxPeriod * 0.8,
@@ -317,24 +319,18 @@ class KGame extends FlameGame
     );
     overlays.add(GameScreen.snow);
     unawaited(
-      Future.delayed(
-        const Duration(milliseconds: kFreezeDuration ~/ 1.75),
-        () {
-          _itemSpawner.updatePeriods(
-            levelNotifier.value.minPeriod,
-            levelNotifier.value.maxPeriod,
-          );
-        },
-      ),
+      Future.delayed(const Duration(milliseconds: kFreezeDuration ~/ 1.75), () {
+        _itemSpawner.updatePeriods(
+          levelNotifier.value.minPeriod,
+          levelNotifier.value.maxPeriod,
+        );
+      }),
     );
     unawaited(
-      Future.delayed(
-        const Duration(milliseconds: kFreezeDuration),
-        () {
-          itemSpeedFactor.value = 1;
-          overlays.remove(GameScreen.snow);
-        },
-      ),
+      Future.delayed(const Duration(milliseconds: kFreezeDuration), () {
+        itemSpeedFactor.value = 1;
+        overlays.remove(GameScreen.snow);
+      }),
     );
   }
 
@@ -342,13 +338,10 @@ class KGame extends FlameGame
     scoreFactor.value = 2;
     overlays.add(GameScreen.fire);
     unawaited(
-      Future.delayed(
-        const Duration(milliseconds: kX2Duration),
-        () {
-          scoreFactor.value = 1;
-          overlays.remove(GameScreen.fire);
-        },
-      ),
+      Future.delayed(const Duration(milliseconds: kX2Duration), () {
+        scoreFactor.value = 1;
+        overlays.remove(GameScreen.fire);
+      }),
     );
   }
 }

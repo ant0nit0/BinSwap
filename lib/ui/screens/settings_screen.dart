@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/background_audio_switch.dart';
 import 'package:recycling_master/ui/widgets/credentials.dart';
@@ -23,7 +23,7 @@ class SettingsScreen extends HookConsumerWidget {
 
     return BlurredScaffold(
       backgroundImagePath: 'assets/images/backgrounds/snow_bg.png',
-      title: translate('settings.title'),
+      title: AppLocalizations.of(context)!.settingsTitle,
       automaticallyImplementClosing: true,
       onClose: () =>
           navigatorKey.currentState!.pushReplacementNamed(Routes.homeScreen),
@@ -35,16 +35,10 @@ class SettingsScreen extends HookConsumerWidget {
             SfxSwitchRow(),
             SettingsBinColorAttributionsButton(),
             ResetLeaderboardTextButton(),
-            SizedBox(
-              height: kDefaultLargePadding * 2,
-            ),
+            SizedBox(height: kDefaultLargePadding * 2),
             CredentialsWidget(),
           ],
-        ).separated(
-          separator: const SizedBox(
-            height: kDefaultPadding,
-          ),
-        ),
+        ).separated(separator: const SizedBox(height: kDefaultPadding)),
       ),
     );
   }

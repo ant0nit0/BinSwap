@@ -29,7 +29,7 @@ class RouteGenerator {
         try {
           final comeFromSplash = settings.arguments as bool;
           return PageRouteBuilder(
-            pageBuilder: (_, __, ___) =>
+            pageBuilder: (_, _, _) =>
                 HomeScreen(comeFromSplash: comeFromSplash),
           );
         } catch (e) {
@@ -38,29 +38,21 @@ class RouteGenerator {
           );
         }
       case Routes.settingsScreen:
-        return BottomToTopPageRoute(
-          page: const SettingsScreen(),
-        );
+        return BottomToTopPageRoute(page: const SettingsScreen());
       case Routes.gameScreen:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const GameScreen(),
-        );
+        return PageRouteBuilder(pageBuilder: (_, _, _) => const GameScreen());
       case Routes.splashScreen:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const SplashScreen(),
-        );
+        return PageRouteBuilder(pageBuilder: (_, _, _) => const SplashScreen());
       case Routes.devSettingsScreen:
         return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const DevSettingsScreen(),
+          pageBuilder: (_, _, _) => const DevSettingsScreen(),
         );
       case Routes.colorAttributions:
         return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const ColorDistributionScreen(),
+          pageBuilder: (_, _, _) => const ColorDistributionScreen(),
         );
       case Routes.shop:
-        return BottomToTopPageRoute(
-          page: const ShopScreen(),
-        );
+        return BottomToTopPageRoute(page: const ShopScreen());
       case Routes.onBoarding:
         return BottomToTopPageRoute(page: const OnBoardingScreen());
       default:
@@ -73,9 +65,12 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('Erreur')),
         body: Center(
-            child: Text(name.isEmpty
+          child: Text(
+            name.isEmpty
                 ? 'No name passed. RouteSettings: $routeSettings'
-                : 'View $name not found')),
+                : 'View $name not found',
+          ),
+        ),
       ),
     );
   }

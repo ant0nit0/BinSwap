@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/leaderboard_item.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/models/score.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -45,7 +45,7 @@ class GameLeaderboard extends HookConsumerWidget {
                     // Highlight the last game score in the list
                     final isLastGameScore =
                         score.value == scores[index].value &&
-                            score.timeInSec == scores[index].timeInSec;
+                        score.timeInSec == scores[index].timeInSec;
 
                     return LeaderboardItem(
                       scores[index],
@@ -55,12 +55,9 @@ class GameLeaderboard extends HookConsumerWidget {
                   },
                 );
               },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              error: (error, stackTrace) => Center(
-                child: Text('Error: $error'),
-              ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) =>
+                  Center(child: Text('Error: $error')),
             ),
           ),
         ],
@@ -75,19 +72,19 @@ class GameLeaderboard extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            translate('endGame.leaderboard.title'),
+            AppLocalizations.of(context)!.endGameLeaderboardTitle,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: neutralDark,
-                  fontSize: 16.0,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                ),
+              color: neutralDark,
+              fontSize: 16.0,
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.w600,
+            ),
           ),
           Image.asset(
             'assets/images/icons/other/crown.png',
             width: 30.0,
             height: 30.0,
-          )
+          ),
         ],
       ),
     );

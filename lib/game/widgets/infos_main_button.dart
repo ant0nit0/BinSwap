@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/game/overlays/infos_main_overlay.dart';
@@ -23,6 +24,7 @@ class InfosMainButton extends HookConsumerWidget {
       ),
       onPressed: () async {
         game.pauseEngine();
+        // ignore: invalid_use_of_protected_member
         ref.read(isUserPlayingProvider.notifier).state = false;
         await showModalBottomSheet(
           context: context,

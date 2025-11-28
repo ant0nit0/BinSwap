@@ -118,10 +118,10 @@ class KButton extends StatelessWidget {
           ),
           width: isExpanded ? double.infinity : null,
           child: InkWell(
-            overlayColor: MaterialStateProperty.all(
+            overlayColor: WidgetStateProperty.all(
               shadowColor == null
                   ? Colors.transparent
-                  : shadowColor!.withOpacity(.2),
+                  : shadowColor!.withValues(alpha: .2),
             ),
             borderRadius: borderRadius,
             onTap: () => onPressed?.call(),

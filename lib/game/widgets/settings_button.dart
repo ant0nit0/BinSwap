@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
@@ -13,17 +14,16 @@ class SettingsGameButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final color = game.state.backgroundPath == 'backgrounds/space.png' ||
+    final color =
+        game.state.backgroundPath == 'backgrounds/space.png' ||
             game.state.backgroundPath == 'backgrounds/forest.png'
         ? grayTextLightColor
         : neutralDark;
     return RoundedIconButton(
-      icon: KSVG(
-        'gear',
-        color: color,
-      ),
+      icon: KSVG('gear', color: color),
       onPressed: () {
         game.pauseEngine();
+        // ignore: invalid_use_of_protected_member
         ref.read(isUserPlayingProvider.notifier).state = false;
         game.overlays.add(GameScreen.settingsDialogKey);
       },

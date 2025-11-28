@@ -6,19 +6,49 @@ part of 'coins.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(Coins)
+const coinsProvider = CoinsProvider._();
+
+final class CoinsProvider extends $AsyncNotifierProvider<Coins, int> {
+  const CoinsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'coinsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$coinsHash();
+
+  @$internal
+  @override
+  Coins create() => Coins();
+}
+
 String _$coinsHash() => r'6dac25aea04b1d0128c92e914d36a41389d99aa6';
 
-/// See also [Coins].
-@ProviderFor(Coins)
-final coinsProvider = AsyncNotifierProvider<Coins, int>.internal(
-  Coins.new,
-  name: r'coinsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$coinsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$Coins = AsyncNotifier<int>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$Coins extends $AsyncNotifier<int> {
+  FutureOr<int> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<int>, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<int>, int>,
+              AsyncValue<int>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

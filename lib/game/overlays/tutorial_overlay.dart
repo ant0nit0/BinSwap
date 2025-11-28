@@ -28,29 +28,28 @@ class TutorialOverlay extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(tutorialStateNotifierProvider);
+    final state = ref.watch(tutorialStateProvider);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           Positioned(
-            bottom:
-                ref.watch(tutorialStateNotifierProvider.notifier).isDownOnScreen
-                    ? null
-                    : 0,
-            top:
-                ref.watch(tutorialStateNotifierProvider.notifier).isDownOnScreen
-                    ? 0
-                    : null,
+            bottom: ref.watch(tutorialStateProvider.notifier).isDownOnScreen
+                ? null
+                : 0,
+            top: ref.watch(tutorialStateProvider.notifier).isDownOnScreen
+                ? 0
+                : null,
             left: 0,
             right: 0,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 600),
-              height: _getHeightFromState(state) *
+              height:
+                  _getHeightFromState(state) *
                   MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.75),
+                color: Colors.black.withValues(alpha: 0.75),
               ),
               child: SingleChildScrollView(child: _getWidgetFromState(state)),
             ),
@@ -80,8 +79,8 @@ class TutorialOverlay extends HookConsumerWidget {
         return const TutorialStep6();
       case TutorialStep.step7:
         return TutorialStep7(game);
-      default:
-        return const SizedBox.shrink();
+      //default:
+      //  return const SizedBox.shrink();
     }
   }
 

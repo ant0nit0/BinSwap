@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/ui/widgets/ksvg.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -15,7 +15,7 @@ class LangSettingsSelector extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          translate('settings.lang'),
+          AppLocalizations.of(context)!.settingsLang,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -26,17 +26,14 @@ class LangSettingsSelector extends HookConsumerWidget {
         GestureDetector(
           onTap: () {
             if (currentLang == 'en') {
-              ref.read(langProvider.notifier).changeLang('fr', context);
-            } else {
-              ref.read(langProvider.notifier).changeLang('en', context);
+              ref.read(langProvider.notifier).changeLang('fr');
+            } else if (currentLang == 'fr') {
+              ref.read(langProvider.notifier).changeLang('it');
+            } else if (currentLang == 'it') {
+              ref.read(langProvider.notifier).changeLang('en');
             }
           },
-          child: KSVG(
-            currentLang,
-            noColor: true,
-            width: 40,
-            borderRadius: 4.0,
-          ),
+          child: KSVG(currentLang, noColor: true, width: 40, borderRadius: 4.0),
         ),
       ],
     );

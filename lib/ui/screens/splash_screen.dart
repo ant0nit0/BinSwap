@@ -47,28 +47,36 @@ class SplashScreen extends HookConsumerWidget {
 
     onFirstBuild(() async {
       // Initialize the background audio service
-      ref.read(backgroundAudioStateNotifierProvider.notifier);
+      ref.read(backgroundAudioStateProvider.notifier);
       // Iniitalize the language (if a preference is stored and is different than the device default language)
-      unawaited(ref.read(langProvider.notifier).initLang(context));
+      unawaited(ref.read(langProvider.notifier).initLang());
       // Load the color distributions preferences
       ref.read(binColorsProvider.notifier);
       // Load selected background
       ref.read(selectedBackgroundProvider.notifier);
     });
 
-    coins.whenData((value) =>
-        value > 0 ? showTutorial.value = false : showTutorial.value = true);
-    highScore.whenData((value) =>
-        value.isEmpty ? showTutorial.value = true : showTutorial.value = false);
+    coins.whenData(
+      (value) =>
+          value > 0 ? showTutorial.value = false : showTutorial.value = true,
+    );
+    highScore.whenData(
+      (value) => value.isEmpty
+          ? showTutorial.value = true
+          : showTutorial.value = false,
+    );
 
     if (!fakeLoadingAnimationController.isAnimating &&
         !fakeLoadingAnimationController.isCompleted) {
-      fakeLoadingAnimationController.forward().then((value) async => {
-            // Navigate to the home screen
-            navigatorKey.currentState!.pushReplacementNamed(
-                showTutorial.value ? Routes.onBoarding : Routes.homeScreen,
-                arguments: true)
-          });
+      fakeLoadingAnimationController.forward().then(
+        (value) async => {
+          // Navigate to the home screen
+          navigatorKey.currentState!.pushReplacementNamed(
+            showTutorial.value ? Routes.onBoarding : Routes.homeScreen,
+            arguments: true,
+          ),
+        },
+      );
     }
 
     return Scaffold(

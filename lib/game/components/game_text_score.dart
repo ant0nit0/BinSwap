@@ -2,19 +2,27 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/utils/colors.dart';
+import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class GameTextScore extends TextComponent with HasGameRef<KGame> {
+class GameTextScore extends TextComponent with HasGameReference<KGame> {
   late final TextComponent scoreComponent;
+
+  /// BuildContext used for localization
+  late BuildContext _context;
 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
-    text = translate('game.score');
-    position = Vector2(kDefaultPadding, gameRef.size.y * 0.15);
+    final context = navigatorKey.currentContext;
+    if (context != null) {
+      _context = context;
+      text = AppLocalizations.of(_context)!.gameScore;
+    }
+    position = Vector2(kDefaultPadding, game.size.y * 0.15);
     textRenderer = TextPaint(
       style: const TextStyle(
         fontSize: 30,
@@ -23,15 +31,16 @@ class GameTextScore extends TextComponent with HasGameRef<KGame> {
       ),
     );
     scoreComponent = TextComponent(
-        text: '${game.scoreNotifier.value}',
-        position: Vector2(size.x + kDefaultSmallPadding, 0),
-        textRenderer: TextPaint(
-          style: const TextStyle(
-            fontSize: 34,
-            color: yellowMainColor,
-            fontFamily: 'LilitaOne',
-          ),
-        ));
+      text: '${game.scoreNotifier.value}',
+      position: Vector2(size.x + kDefaultSmallPadding, 0),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          fontSize: 34,
+          color: yellowMainColor,
+          fontFamily: 'LilitaOne',
+        ),
+      ),
+    );
 
     await add(scoreComponent);
   }

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/tutorial_state.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
@@ -22,29 +22,32 @@ class TutorialStep5 extends HookConsumerWidget {
     );
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
-          horizontal: kDefaultPadding, vertical: kDefaultLargePadding),
+        horizontal: kDefaultPadding,
+        vertical: kDefaultLargePadding,
+      ),
       child: SizedBox(
         // height: MediaQuery.of(context).size.height * size -
         //     2 * kDefaultLargePadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
+            SizedBox(height: MediaQuery.of(context).padding.top),
             KAnimate(
               slideDirection: SlideDirection.downToUp,
               controller: t1AnimationController,
-              child: Text(translate('game.tuto.5.text'), style: ts),
+              child: Text(
+                AppLocalizations.of(context)!.gameTuto5Text,
+                style: ts,
+              ),
             ),
             const SizedBox(height: kDefaultPadding),
             NextButtonWidget(
-              text: translate('game.tuto.5.button'),
+              text: AppLocalizations.of(context)!.gameTuto5Button,
               beforeAnimationCallback: () async {
                 unawaited(t1AnimationController.reverse());
               },
               afterAnimationCallback: () {
-                ref.read(tutorialStateNotifierProvider.notifier).nextStep();
+                ref.read(tutorialStateProvider.notifier).nextStep();
               },
             ),
           ],

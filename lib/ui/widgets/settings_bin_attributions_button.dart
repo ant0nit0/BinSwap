@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
@@ -19,7 +19,7 @@ class SettingsBinColorAttributionsButton extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            translate('settings.color-attributions'),
+            AppLocalizations.of(context)!.settingsColorAttributions,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -27,8 +27,11 @@ class SettingsBinColorAttributionsButton extends HookConsumerWidget {
               color: neutralLight,
             ),
           ),
-          const Icon(Icons.chevron_right_rounded,
-              color: neutralLight, size: 34.0)
+          const Icon(
+            Icons.chevron_right_rounded,
+            color: neutralLight,
+            size: 34.0,
+          ),
         ],
       ),
     );

@@ -1,10 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+// ignore_for_file: non_abstract_class_inherits_abstract_member
+
 part 'shop_item.freezed.dart';
 part 'shop_item.g.dart';
 
 @freezed
-class ShopItem with _$ShopItem {
+abstract class ShopItem with _$ShopItem {
   const factory ShopItem({
     bool? isBought,
     required String name,
@@ -17,10 +19,10 @@ class ShopItem with _$ShopItem {
       _$ShopItemFromJson(json);
 
   factory ShopItem.defaultBGSpring() => const ShopItem(
-        isBought: true,
-        name: 'Spring',
-        price: 0,
-        imagePath: 'backgrounds/spring.png',
-        fullPath: 'assets/images/backgrounds/spring.png',
-      );
+    isBought: true,
+    name: 'Spring',
+    price: 0,
+    imagePath: 'backgrounds/spring.png',
+    fullPath: 'assets/images/backgrounds/spring.png',
+  );
 }

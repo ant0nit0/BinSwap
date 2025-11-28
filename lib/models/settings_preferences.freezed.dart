@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,176 +9,269 @@ part of 'settings_preferences.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
 /// @nodoc
 mixin _$SettingsPreferences {
-  bool get isBackgroundAudioActivated => throw _privateConstructorUsedError;
-  bool get areSfxsEffectsActivated => throw _privateConstructorUsedError;
-  String? get language => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $SettingsPreferencesCopyWith<SettingsPreferences> get copyWith =>
-      throw _privateConstructorUsedError;
+ bool get isBackgroundAudioActivated; bool get areSfxsEffectsActivated; String? get language;
+/// Create a copy of SettingsPreferences
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SettingsPreferencesCopyWith<SettingsPreferences> get copyWith => _$SettingsPreferencesCopyWithImpl<SettingsPreferences>(this as SettingsPreferences, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsPreferences&&(identical(other.isBackgroundAudioActivated, isBackgroundAudioActivated) || other.isBackgroundAudioActivated == isBackgroundAudioActivated)&&(identical(other.areSfxsEffectsActivated, areSfxsEffectsActivated) || other.areSfxsEffectsActivated == areSfxsEffectsActivated)&&(identical(other.language, language) || other.language == language));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isBackgroundAudioActivated,areSfxsEffectsActivated,language);
+
+@override
+String toString() {
+  return 'SettingsPreferences(isBackgroundAudioActivated: $isBackgroundAudioActivated, areSfxsEffectsActivated: $areSfxsEffectsActivated, language: $language)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SettingsPreferencesCopyWith<$Res> {
-  factory $SettingsPreferencesCopyWith(
-          SettingsPreferences value, $Res Function(SettingsPreferences) then) =
-      _$SettingsPreferencesCopyWithImpl<$Res, SettingsPreferences>;
-  @useResult
-  $Res call(
-      {bool isBackgroundAudioActivated,
-      bool areSfxsEffectsActivated,
-      String? language});
-}
+abstract mixin class $SettingsPreferencesCopyWith<$Res>  {
+  factory $SettingsPreferencesCopyWith(SettingsPreferences value, $Res Function(SettingsPreferences) _then) = _$SettingsPreferencesCopyWithImpl;
+@useResult
+$Res call({
+ bool isBackgroundAudioActivated, bool areSfxsEffectsActivated, String? language
+});
 
+
+
+
+}
 /// @nodoc
-class _$SettingsPreferencesCopyWithImpl<$Res, $Val extends SettingsPreferences>
+class _$SettingsPreferencesCopyWithImpl<$Res>
     implements $SettingsPreferencesCopyWith<$Res> {
-  _$SettingsPreferencesCopyWithImpl(this._value, this._then);
+  _$SettingsPreferencesCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SettingsPreferences _self;
+  final $Res Function(SettingsPreferences) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isBackgroundAudioActivated = null,
-    Object? areSfxsEffectsActivated = null,
-    Object? language = freezed,
-  }) {
-    return _then(_value.copyWith(
-      isBackgroundAudioActivated: null == isBackgroundAudioActivated
-          ? _value.isBackgroundAudioActivated
-          : isBackgroundAudioActivated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      areSfxsEffectsActivated: null == areSfxsEffectsActivated
-          ? _value.areSfxsEffectsActivated
-          : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      language: freezed == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
+/// Create a copy of SettingsPreferences
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isBackgroundAudioActivated = null,Object? areSfxsEffectsActivated = null,Object? language = freezed,}) {
+  return _then(_self.copyWith(
+isBackgroundAudioActivated: null == isBackgroundAudioActivated ? _self.isBackgroundAudioActivated : isBackgroundAudioActivated // ignore: cast_nullable_to_non_nullable
+as bool,areSfxsEffectsActivated: null == areSfxsEffectsActivated ? _self.areSfxsEffectsActivated : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
+as bool,language: freezed == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SettingsPreferences].
+extension SettingsPreferencesPatterns on SettingsPreferences {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SettingsPreferences value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SettingsPreferences() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SettingsPreferences value)  $default,){
+final _that = this;
+switch (_that) {
+case _SettingsPreferences():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SettingsPreferences value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SettingsPreferences() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isBackgroundAudioActivated,  bool areSfxsEffectsActivated,  String? language)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SettingsPreferences() when $default != null:
+return $default(_that.isBackgroundAudioActivated,_that.areSfxsEffectsActivated,_that.language);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isBackgroundAudioActivated,  bool areSfxsEffectsActivated,  String? language)  $default,) {final _that = this;
+switch (_that) {
+case _SettingsPreferences():
+return $default(_that.isBackgroundAudioActivated,_that.areSfxsEffectsActivated,_that.language);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isBackgroundAudioActivated,  bool areSfxsEffectsActivated,  String? language)?  $default,) {final _that = this;
+switch (_that) {
+case _SettingsPreferences() when $default != null:
+return $default(_that.isBackgroundAudioActivated,_that.areSfxsEffectsActivated,_that.language);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$SettingsPreferencesImplCopyWith<$Res>
-    implements $SettingsPreferencesCopyWith<$Res> {
-  factory _$$SettingsPreferencesImplCopyWith(_$SettingsPreferencesImpl value,
-          $Res Function(_$SettingsPreferencesImpl) then) =
-      __$$SettingsPreferencesImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {bool isBackgroundAudioActivated,
-      bool areSfxsEffectsActivated,
-      String? language});
+
+
+class _SettingsPreferences implements SettingsPreferences {
+  const _SettingsPreferences({required this.isBackgroundAudioActivated, required this.areSfxsEffectsActivated, this.language});
+  
+
+@override final  bool isBackgroundAudioActivated;
+@override final  bool areSfxsEffectsActivated;
+@override final  String? language;
+
+/// Create a copy of SettingsPreferences
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SettingsPreferencesCopyWith<_SettingsPreferences> get copyWith => __$SettingsPreferencesCopyWithImpl<_SettingsPreferences>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsPreferences&&(identical(other.isBackgroundAudioActivated, isBackgroundAudioActivated) || other.isBackgroundAudioActivated == isBackgroundAudioActivated)&&(identical(other.areSfxsEffectsActivated, areSfxsEffectsActivated) || other.areSfxsEffectsActivated == areSfxsEffectsActivated)&&(identical(other.language, language) || other.language == language));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isBackgroundAudioActivated,areSfxsEffectsActivated,language);
+
+@override
+String toString() {
+  return 'SettingsPreferences(isBackgroundAudioActivated: $isBackgroundAudioActivated, areSfxsEffectsActivated: $areSfxsEffectsActivated, language: $language)';
+}
+
+
 }
 
 /// @nodoc
-class __$$SettingsPreferencesImplCopyWithImpl<$Res>
-    extends _$SettingsPreferencesCopyWithImpl<$Res, _$SettingsPreferencesImpl>
-    implements _$$SettingsPreferencesImplCopyWith<$Res> {
-  __$$SettingsPreferencesImplCopyWithImpl(_$SettingsPreferencesImpl _value,
-      $Res Function(_$SettingsPreferencesImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$SettingsPreferencesCopyWith<$Res> implements $SettingsPreferencesCopyWith<$Res> {
+  factory _$SettingsPreferencesCopyWith(_SettingsPreferences value, $Res Function(_SettingsPreferences) _then) = __$SettingsPreferencesCopyWithImpl;
+@override @useResult
+$Res call({
+ bool isBackgroundAudioActivated, bool areSfxsEffectsActivated, String? language
+});
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isBackgroundAudioActivated = null,
-    Object? areSfxsEffectsActivated = null,
-    Object? language = freezed,
-  }) {
-    return _then(_$SettingsPreferencesImpl(
-      isBackgroundAudioActivated: null == isBackgroundAudioActivated
-          ? _value.isBackgroundAudioActivated
-          : isBackgroundAudioActivated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      areSfxsEffectsActivated: null == areSfxsEffectsActivated
-          ? _value.areSfxsEffectsActivated
-          : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      language: freezed == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$SettingsPreferencesCopyWithImpl<$Res>
+    implements _$SettingsPreferencesCopyWith<$Res> {
+  __$SettingsPreferencesCopyWithImpl(this._self, this._then);
 
-class _$SettingsPreferencesImpl implements _SettingsPreferences {
-  const _$SettingsPreferencesImpl(
-      {required this.isBackgroundAudioActivated,
-      required this.areSfxsEffectsActivated,
-      this.language});
+  final _SettingsPreferences _self;
+  final $Res Function(_SettingsPreferences) _then;
 
-  @override
-  final bool isBackgroundAudioActivated;
-  @override
-  final bool areSfxsEffectsActivated;
-  @override
-  final String? language;
-
-  @override
-  String toString() {
-    return 'SettingsPreferences(isBackgroundAudioActivated: $isBackgroundAudioActivated, areSfxsEffectsActivated: $areSfxsEffectsActivated, language: $language)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SettingsPreferencesImpl &&
-            (identical(other.isBackgroundAudioActivated,
-                    isBackgroundAudioActivated) ||
-                other.isBackgroundAudioActivated ==
-                    isBackgroundAudioActivated) &&
-            (identical(
-                    other.areSfxsEffectsActivated, areSfxsEffectsActivated) ||
-                other.areSfxsEffectsActivated == areSfxsEffectsActivated) &&
-            (identical(other.language, language) ||
-                other.language == language));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isBackgroundAudioActivated,
-      areSfxsEffectsActivated, language);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SettingsPreferencesImplCopyWith<_$SettingsPreferencesImpl> get copyWith =>
-      __$$SettingsPreferencesImplCopyWithImpl<_$SettingsPreferencesImpl>(
-          this, _$identity);
+/// Create a copy of SettingsPreferences
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isBackgroundAudioActivated = null,Object? areSfxsEffectsActivated = null,Object? language = freezed,}) {
+  return _then(_SettingsPreferences(
+isBackgroundAudioActivated: null == isBackgroundAudioActivated ? _self.isBackgroundAudioActivated : isBackgroundAudioActivated // ignore: cast_nullable_to_non_nullable
+as bool,areSfxsEffectsActivated: null == areSfxsEffectsActivated ? _self.areSfxsEffectsActivated : areSfxsEffectsActivated // ignore: cast_nullable_to_non_nullable
+as bool,language: freezed == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-abstract class _SettingsPreferences implements SettingsPreferences {
-  const factory _SettingsPreferences(
-      {required final bool isBackgroundAudioActivated,
-      required final bool areSfxsEffectsActivated,
-      final String? language}) = _$SettingsPreferencesImpl;
 
-  @override
-  bool get isBackgroundAudioActivated;
-  @override
-  bool get areSfxsEffectsActivated;
-  @override
-  String? get language;
-  @override
-  @JsonKey(ignore: true)
-  _$$SettingsPreferencesImplCopyWith<_$SettingsPreferencesImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

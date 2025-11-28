@@ -3,7 +3,7 @@
 import 'package:flame/components.dart';
 import 'package:recycling_master/game/kgame.dart';
 
-class GameBackground extends SpriteComponent with HasGameRef<KGame> {
+class GameBackground extends SpriteComponent with HasGameReference<KGame> {
   // static const backgrounds = [
   //   'backgrounds/desert_bg_1.png',
   //   'backgrounds/snow_bg.png',
@@ -21,7 +21,7 @@ class GameBackground extends SpriteComponent with HasGameRef<KGame> {
     super.onLoad();
     // sprite = await gameRef
     //     .loadSprite(backgrounds[_random.nextInt(backgrounds.length)]);
-    sprite = await gameRef.loadSprite(bgPath);
-    size = Vector2(gameRef.size.x, gameRef.size.y);
+    sprite = await game.loadSprite(bgPath);
+    size = Vector2(game.size.x, game.size.y);
   }
 }

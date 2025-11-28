@@ -8,23 +8,23 @@ import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class GameLifeBar extends PositionComponent with HasGameRef<KGame> {
+class GameLifeBar extends PositionComponent with HasGameReference<KGame> {
   static const refillSpeed = 0.05;
   double _width = 0.0;
 
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
-    size = Vector2((gameRef.size.x - 2 * kDefaultPadding), 8);
-    position = Vector2(kDefaultPadding, gameRef.size.y * 0.23);
+    size = Vector2((game.size.x - 2 * kDefaultPadding), 8);
+    position = Vector2(kDefaultPadding, game.size.y * 0.23);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    _width = size.x * (max(0, gameRef.lifeNotifier.value) / defaultLife);
+    _width = size.x * (max(0, game.lifeNotifier.value) / defaultLife);
     // if (_width < size.x) {
-    //   gameRef.lifeNotifier.value += refillSpeed * dt;
+    //   game.lifeNotifier.value += refillSpeed * dt;
     // }
   }
 

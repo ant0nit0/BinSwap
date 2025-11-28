@@ -15,7 +15,7 @@ class Leaderboard extends _$Leaderboard {
 
     await _loadFromStorage();
 
-    return state.valueOrNull ?? <Score>[];
+    return state.value ?? <Score>[];
   }
 
   Future<void> _loadFromStorage() async {
@@ -37,10 +37,10 @@ class Leaderboard extends _$Leaderboard {
     scores.add(score);
     final sortedScores = _sortAndCrop([...scores]);
 
-    await ref.read(storageServiceProvider).storage.write(
-          key: StorageKeys.leaderboard,
-          value: json.encode(sortedScores),
-        );
+    await ref
+        .read(storageServiceProvider)
+        .storage
+        .write(key: StorageKeys.leaderboard, value: json.encode(sortedScores));
 
     state = AsyncData([...sortedScores]);
   }
@@ -67,7 +67,7 @@ class Leaderboard extends _$Leaderboard {
   }
 
   Score? get highScore {
-    final scores = state.valueOrNull;
+    final scores = state.value;
     if (scores == null || scores.isEmpty) {
       return null;
     }

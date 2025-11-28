@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/audio/sfx_service.dart';
 import 'package:recycling_master/game/kgame.dart';
@@ -11,6 +10,7 @@ import 'package:recycling_master/game/widgets/blurred_scaffold.dart';
 import 'package:recycling_master/game/widgets/end_game_buttons.dart';
 import 'package:recycling_master/game/widgets/end_game_score_widget.dart';
 import 'package:recycling_master/game/widgets/game_leaderboard.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/models/score.dart';
 import 'package:recycling_master/providers/coins.dart';
 import 'package:recycling_master/providers/leaderboard.dart';
@@ -21,11 +21,7 @@ import 'package:recycling_master/utils/widgets_utils.dart';
 class EndGameScreen extends HookConsumerWidget {
   final Score score;
   final KGame game;
-  const EndGameScreen(
-    this.score, {
-    required this.game,
-    super.key,
-  });
+  const EndGameScreen(this.score, {required this.game, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,8 +33,9 @@ class EndGameScreen extends HookConsumerWidget {
     final highScore = ref.watch(leaderboardProvider.notifier).highScore;
     final isNewHighScore = highScore == null || score.value > highScore.value;
 
-    final confettiController =
-        ConfettiController(duration: const Duration(seconds: 2));
+    final confettiController = ConfettiController(
+      duration: const Duration(seconds: 2),
+    );
 
     useEffect(() {
       if (isNewHighScore) {
@@ -54,17 +51,13 @@ class EndGameScreen extends HookConsumerWidget {
     return BlurredScaffold(
       mainAxisAlignment: MainAxisAlignment.center,
       additionalPositioned: const [
-        Positioned(
-          top: kDefaultPadding,
-          right: 0,
-          child: CoinsWidget(),
-        ),
+        Positioned(top: kDefaultPadding, right: 0, child: CoinsWidget()),
       ],
       padding: const EdgeInsets.symmetric(
         horizontal: kDefaultLargePadding,
         vertical: kDefaultLargePadding,
       ).copyWith(top: kDefaultLargePadding * 2, bottom: 0),
-      title: translate('endGame.title'),
+      title: AppLocalizations.of(context)!.endGameTitle,
       child: Stack(
         children: [
           SingleChildScrollView(

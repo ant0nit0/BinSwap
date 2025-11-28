@@ -6,22 +6,59 @@ part of 'tutorial_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tutorialStateNotifierHash() =>
-    r'f5d3e93077004c57607e07e555e8f14b0daad8c9';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [TutorialStateNotifier].
 @ProviderFor(TutorialStateNotifier)
-final tutorialStateNotifierProvider =
-    NotifierProvider<TutorialStateNotifier, TutorialStep>.internal(
-  TutorialStateNotifier.new,
-  name: r'tutorialStateNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$tutorialStateNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const tutorialStateProvider = TutorialStateNotifierProvider._();
 
-typedef _$TutorialStateNotifier = Notifier<TutorialStep>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class TutorialStateNotifierProvider
+    extends $NotifierProvider<TutorialStateNotifier, TutorialStep> {
+  const TutorialStateNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'tutorialStateProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tutorialStateNotifierHash();
+
+  @$internal
+  @override
+  TutorialStateNotifier create() => TutorialStateNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TutorialStep value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TutorialStep>(value),
+    );
+  }
+}
+
+String _$tutorialStateNotifierHash() =>
+    r'903cc2873c9f58406c042214931d0f624a000c9f';
+
+abstract class _$TutorialStateNotifier extends $Notifier<TutorialStep> {
+  TutorialStep build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<TutorialStep, TutorialStep>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<TutorialStep, TutorialStep>,
+              TutorialStep,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

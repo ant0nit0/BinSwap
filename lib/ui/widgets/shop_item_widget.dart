@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/models/shop_item.dart';
 import 'package:recycling_master/providers/coins.dart';
 import 'package:recycling_master/providers/selected_background.dart';
@@ -12,16 +12,14 @@ import 'package:recycling_master/utils/theme.dart';
 class ShopItemWidget extends HookConsumerWidget {
   final ShopItem item;
 
-  const ShopItemWidget({
-    required this.item,
-    super.key,
-  });
+  const ShopItemWidget({required this.item, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final coinsState = ref.watch(coinsProvider);
     final selectedBgState = ref.watch(selectedBackgroundProvider);
-    final size = (MediaQuery.of(context).size.width -
+    final size =
+        (MediaQuery.of(context).size.width -
             (kDefaultLargePadding * 2) -
             kDefaultSmallPadding) /
         2;
@@ -39,11 +37,12 @@ class ShopItemWidget extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 title: Text(
-                  translate('shop.popup.title', args: {'name': item.name}),
+                  AppLocalizations.of(context)!.shopPopupTitle(item.name),
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: neutralDark,
-                      fontSize: 22.0,
-                      fontFamily: 'LilitaOne'),
+                    color: neutralDark,
+                    fontSize: 22.0,
+                    fontFamily: 'LilitaOne',
+                  ),
                 ),
                 content: coinsState.when(
                   data: (coins) {
@@ -53,18 +52,17 @@ class ShopItemWidget extends HookConsumerWidget {
                       children: [
                         Text(
                           canBuy
-                              ? translate('shop.popup.description-canbuy',
-                                  args: {
-                                      'name': item.name,
-                                      'price': item.price
-                                    })
-                              : translate('shop.popup.description-cantbuy',
-                                  args: {'name': item.name}),
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: neutralDark,
-                                    fontSize: 14.0,
-                                  ),
+                              ? AppLocalizations.of(
+                                  context,
+                                )!.shopPopupDescriptionCanbuy(
+                                  item.name,
+                                  item.price,
+                                )
+                              : AppLocalizations.of(
+                                  context,
+                                )!.shopPopupDescriptionCantbuy(item.name),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: neutralDark, fontSize: 14.0),
                         ),
                         const SizedBox(height: kDefaultPadding),
                         Row(
@@ -76,23 +74,29 @@ class ShopItemWidget extends HookConsumerWidget {
                               onPressed: () {
                                 Navigator.of(context).pop(false);
                               },
-                              child: Text(canBuy
-                                  ? translate('shop.popup.no')
-                                  : translate('shop.popup.cancel')),
+                              child: Text(
+                                canBuy
+                                    ? AppLocalizations.of(context)!.shopPopupNo
+                                    : AppLocalizations.of(
+                                        context,
+                                      )!.shopPopupCancel,
+                              ),
                             ),
                             if (canBuy)
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop(true);
                                 },
-                                child: Text(translate('shop.popup.yes')),
+                                child: Text(
+                                  AppLocalizations.of(context)!.shopPopupYes,
+                                ),
                               ),
                           ],
                         ),
                       ],
                     );
                   },
-                  error: (_, __) => const SizedBox.shrink(),
+                  error: (_, _) => const SizedBox.shrink(),
                   loading: () => const SizedBox.shrink(),
                 ),
               );
@@ -110,9 +114,7 @@ class ShopItemWidget extends HookConsumerWidget {
       child: Container(
         width: size,
         height: size,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
         clipBehavior: Clip.none,
         child: Stack(
           clipBehavior: Clip.none,
@@ -131,7 +133,7 @@ class ShopItemWidget extends HookConsumerWidget {
             if (!(item.isBought ?? false))
               Container(
                 decoration: BoxDecoration(
-                  color: neutralDark.withOpacity(.75),
+                  color: neutralDark.withValues(alpha: .75),
                 ),
                 height: size,
                 width: size,
@@ -157,13 +159,8 @@ class ShopItemWidget extends HookConsumerWidget {
                           const SizedBox(width: kDefaultTinyPadding),
                           Text(
                             '${item.price}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
-                                  color: neutralLight,
-                                  fontSize: 14.0,
-                                ),
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(color: neutralLight, fontSize: 14.0),
                           ),
                         ],
                       ),
@@ -172,31 +169,31 @@ class ShopItemWidget extends HookConsumerWidget {
                 ),
               ),
             selectedBgState.when(
-                data: (value) {
-                  final isSelected =
-                      value.name.toLowerCase() == item.name.toLowerCase();
-                  return isSelected
-                      ? Positioned(
-                          top: -8.0,
-                          right: -8.0,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: neutralLight,
-                              shape: BoxShape.circle,
-                            ),
-                            padding: const EdgeInsets.all(4.0),
-                            child: const Icon(
-                              Icons.check,
-                              color: neutralDark,
-                              size: 16.0,
-                            ),
+              data: (value) {
+                final isSelected =
+                    value.name.toLowerCase() == item.name.toLowerCase();
+                return isSelected
+                    ? Positioned(
+                        top: -8.0,
+                        right: -8.0,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: neutralLight,
+                            shape: BoxShape.circle,
                           ),
-                        )
-                      : const SizedBox.shrink();
-                },
-                error: (_, __) => const SizedBox.shrink(),
-                loading: () =>
-                    const Center(child: CircularProgressIndicator())),
+                          padding: const EdgeInsets.all(4.0),
+                          child: const Icon(
+                            Icons.check,
+                            color: neutralDark,
+                            size: 16.0,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink();
+              },
+              error: (_, _) => const SizedBox.shrink(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+            ),
           ],
         ),
       ),

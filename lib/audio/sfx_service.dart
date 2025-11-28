@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +30,7 @@ class SfxService {
   SfxService(this._ref) {
     _initializeListeners();
     shouldPlaySfx.value =
-        _ref.read(settingsNotifierProvider).value?.areSfxsEffectsActivated ??
-            true;
+        _ref.read(settingsProvider).value?.areSfxsEffectsActivated ?? true;
   }
 
   void _initializeListeners() {
@@ -50,7 +48,7 @@ class SfxService {
       }
     });
 
-    _ref.listen(settingsNotifierProvider, (previous, next) {
+    _ref.listen(settingsProvider, (previous, next) {
       if (next.value?.areSfxsEffectsActivated == false) {
         shouldPlaySfx.value = false;
       } else {

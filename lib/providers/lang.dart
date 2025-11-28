@@ -1,40 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+// Devi ancora importare il tuo provider di settings per il salvataggio
 import 'package:recycling_master/providers/settings_preferences.dart';
-import 'package:riverpod/riverpod.dart';
+// Rimuovi l'import di LocalizedApp
 
-class LangProvider extends StateNotifier<String> {
-  static const langs = ['fr', 'en'];
+part 'lang.g.dart';
 
-  final Ref _ref;
+@riverpod
+class Lang extends _$Lang {
+  // Ora memorizziamo il BCP 47 Language Tag completo
+  static const supportedLangs = ['fr', 'en', 'it'];
+  static const defaultLang = 'en';
 
-  LangProvider(
-    this._ref, [
-    super.initialLang = 'en',
-  ]);
+  // Lo stato (state) è ora la stringa del codice lingua selezionato
+  @override
+  String build() {
+    // Il valore iniziale è il default, finché non viene caricato dalle preferenze
+    return defaultLang;
+  }
 
-  Future<void> initLang(context) async {
-    final lang = await _ref.read(settingsNotifierProvider.notifier).getLang();
+  // Il widget che userà la lingua ha bisogno dell'oggetto Locale, non della stringa.
+  // Creiamo un provider separato per l'oggetto Locale.
 
-    if (lang != null && langs.contains(lang) && lang != state) {
+  Future<void> initLang() async {
+    // Leggiamo la lingua salvata
+    final lang = await ref.read(settingsProvider.notifier).getLang();
+
+    // Se esiste, è supportata e diversa dallo stato attuale, la impostiamo.
+    if (lang != null && supportedLangs.contains(lang) && lang != state) {
       state = lang;
-      await LocalizedApp.of(context).delegate.changeLocale(Locale(state));
     }
   }
 
-  void changeLang(String? lang, BuildContext context) async {
-    if (lang != null && langs.contains(lang) && lang != state) {
+  Future<void> changeLang(String? lang) async {
+    if (lang != null && supportedLangs.contains(lang) && lang != state) {
       state = lang;
 
-      final delegate = LocalizedApp.of(context).delegate; // Access context
-      await delegate.changeLocale(Locale(state));
+      // 1. Salva la nuova lingua nelle preferenze
+      await ref.read(settingsProvider.notifier).storeLang(state);
 
-      // Save the new language to the storage
-      await _ref.read(settingsNotifierProvider.notifier).storeLang(state);
+      // 2. Notifica Riverpod del cambio di stato
+      // Il widget MaterialApp vedrà il cambio tramite il provider languageProvider
     }
   }
 }
 
-final langProvider = StateNotifierProvider<LangProvider, String>((ref) {
-  return LangProvider(ref);
-});
+// 2. Creiamo un provider che restituisce l'oggetto Locale
+// Questo è il provider che userai nel tuo MaterialApp.
+@riverpod
+Locale language(dynamic ref) {
+  // Osserva lo stato della classe Lang
+  final langCode = ref.watch(langProvider);
+  // Restituisce il Locale corrispondente
+  return Locale(langCode);
+}

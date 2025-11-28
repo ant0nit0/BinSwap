@@ -3,12 +3,13 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:recycling_master/game/kgame.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/utils/colors.dart';
+import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/theme.dart';
 
-class GameTextLevel extends TextComponent with HasGameRef<KGame> {
+class GameTextLevel extends TextComponent with HasGameReference<KGame> {
   /// The current level of the game.
   ///
   /// Used to know when to launch the animation according to the game's level.
@@ -31,12 +32,20 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
   /// Whether to launch the animation on the first level or not.
   final bool launchAnimationOnFirstLevel;
 
+  /// BuildContext used for localization
+  late BuildContext _context;
+
   GameTextLevel({this.launchAnimationOnFirstLevel = true});
 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
-    text = '${translate('game.level')}${game.levelNotifier.value.number}';
+    final context = navigatorKey.currentContext;
+    if (context != null) {
+      _context = context;
+      text =
+          '${AppLocalizations.of(context)!.gameLevel}${game.levelNotifier.value.number}';
+    }
     position = Vector2(game.size.x / 2 - size.x / 2, initialY);
     textRenderer = TextPaint(
       style: const TextStyle(
@@ -91,10 +100,13 @@ class GameTextLevel extends TextComponent with HasGameRef<KGame> {
   }
 
   void updateText() {
-    text = '${translate('game.level')}${game.levelNotifier.value.number}';
+    text =
+        '${AppLocalizations.of(_context)!.gameLevel}${game.levelNotifier.value.number}';
     scale = Vector2(1.5, 1.5);
-    position = Vector2(game.size.x / 2 - size.x * scale.x / 2,
-        game.size.y / 2 - size.y * scale.y / 2);
+    position = Vector2(
+      game.size.x / 2 - size.x * scale.x / 2,
+      game.size.y / 2 - size.y * scale.y / 2,
+    );
     isAnimating.value = true;
   }
 }

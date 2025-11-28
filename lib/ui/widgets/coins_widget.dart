@@ -12,7 +12,7 @@ class CoinsWidget extends HookConsumerWidget {
     final coins = ref.watch(coinsProvider);
     return Container(
       decoration: BoxDecoration(
-        color: neutralDark.withOpacity(0.65),
+        color: neutralDark.withValues(alpha: 0.65),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(kDefaultLargePadding),
           bottomLeft: Radius.circular(kDefaultLargePadding),

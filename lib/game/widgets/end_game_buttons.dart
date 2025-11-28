@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/providers/is_user_playing.dart';
 import 'package:recycling_master/providers/lang.dart';
@@ -11,24 +11,20 @@ import 'package:recycling_master/utils/theme.dart';
 
 class EndGameButtons extends HookConsumerWidget {
   final bool inGame;
-  const EndGameButtons({
-    this.inGame = false,
-    super.key,
-  });
+  const EndGameButtons({this.inGame = false, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     onQuit() {
-      ref.read(isUserPlayingProvider.notifier).state = false;
-      ref.read(gameStateNotifierProvider.notifier).reset();
+      ref.read(isUserPlayingProvider.notifier).setPlaying(false);
+      ref.read(gameStateProvider.notifier).reset();
       // Pop all the routes until the first one
       // to avoid having multiple game screens
-      navigatorKey.currentState
-          ?.popUntil((route) => route.isFirst && route.isCurrent);
-      // Push the home screen
-      navigatorKey.currentState?.pushReplacementNamed(
-        Routes.homeScreen,
+      navigatorKey.currentState?.popUntil(
+        (route) => route.isFirst && route.isCurrent,
       );
+      // Push the home screen
+      navigatorKey.currentState?.pushReplacementNamed(Routes.homeScreen);
     }
 
     ref.watch(langProvider);
@@ -36,31 +32,30 @@ class EndGameButtons extends HookConsumerWidget {
     return Column(
       children: [
         KButton.green(
-          text: translate('endGame.buttons.restart'),
+          text: AppLocalizations.of(context)!.endGameButtonsRestart,
           onPressed: () async {
             // FIXME: Make a better restart
-            ref.read(isUserPlayingProvider.notifier).state = true;
+            ref.read(isUserPlayingProvider.notifier).setPlaying(true);
             await ref
-                .read(gameStateNotifierProvider.notifier)
+                .read(gameStateProvider.notifier)
                 .refresh(); // FIXME : The music does not restart
             // Pop all the routes until the first one
             // to avoid having multiple game screens
-            navigatorKey.currentState
-                ?.popUntil((route) => route.isFirst && route.isCurrent);
-            // Push the game screen
-            navigatorKey.currentState?.pushReplacementNamed(
-              Routes.gameScreen,
+            navigatorKey.currentState?.popUntil(
+              (route) => route.isFirst && route.isCurrent,
             );
+            // Push the game screen
+            navigatorKey.currentState?.pushReplacementNamed(Routes.gameScreen);
           },
         ),
         const SizedBox(height: kDefaultPadding),
         inGame
             ? KButton.red(
-                text: translate('endGame.buttons.quit'),
+                text: AppLocalizations.of(context)!.endGameButtonsQuit,
                 onPressed: onQuit,
               )
             : KButton.blue(
-                text: translate('endGame.buttons.home'),
+                text: AppLocalizations.of(context)!.endGameButtonsHome,
                 onPressed: onQuit,
               ),
       ],

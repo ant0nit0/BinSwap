@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/lang.dart';
 import 'package:recycling_master/utils/constants.dart';
 import 'package:recycling_master/utils/router.dart';
@@ -13,70 +13,69 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Put game into full screen mode on mobile devices.
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  // Lock the game to portrait mode on mobile devices.
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  try {
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // Lock the game to portrait mode on mobile devices.
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  // Transparent status bar
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+    // Transparent status bar
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+    );
+  } catch (e) {
+    // Ignore errors on web platform
+  }
 
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  final delegate = await LocalizationDelegate.create(
-    fallbackLocale: 'en',
-    supportedLocales: LangProvider.langs,
-  );
-
-  return appRunner(delegate);
+  appRunner();
 }
 
-void appRunner(LocalizationDelegate delegate) async {
-  // Fetch the current language from the delegate
-  String currentLang = delegate.currentLocale.languageCode;
+void appRunner() async {
   // For intl package
   initializeDateFormatting().then(
     (_) => runApp(
       // Riverpod
       ProviderScope(
-        // Pass the current language to the LangProvider
-        overrides: [
-          langProvider.overrideWith((ref) {
-            return LangProvider(ref, currentLang);
-          }),
-        ],
         // Internationalization
-        child: LocalizedApp(delegate, const MyApp()),
+        child: const MyApp(),
       ),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final localizationDelegate = LocalizedApp.of(context).delegate;
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'BinSwap',
       theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xff308AD1),
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff308AD1)),
         useMaterial3: true,
       ),
-      localizationsDelegates: [
-        ...GlobalMaterialLocalizations.delegates,
+      localizationsDelegates: const [
+        AppLocalizations.delegate, // Il delegate generato dai tuoi file .arb
+        GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        localizationDelegate
+        GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: localizationDelegate.supportedLocales,
-      locale: localizationDelegate.currentLocale,
+      // 2. Definisci le lingue supportate
+      supportedLocales: AppLocalizations.supportedLocales,
+      localeResolutionCallback: (locale, supportedLocales) {
+        // Controlla se il locale corrente del dispositivo è supportato
+        if (supportedLocales.contains(locale)) {
+          return locale; // Se supportato, usa il locale del dispositivo
+        }
+
+        // Se NON supportato, restituisci il tuo Locale di default (es. inglese)
+        return const Locale('en', ''); // Fallback all'inglese (Locale('en'))
+      },
+      locale: ref.watch(languageProvider),
       initialRoute: Routes.splashScreen,
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,

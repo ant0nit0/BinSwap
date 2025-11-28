@@ -29,39 +29,37 @@ class GameScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(gameStateNotifierProvider);
+    final state = ref.watch(gameStateProvider);
 
     final showTutorial = useState(false);
     // We get the highscore in order to know if the user as already played the game
     // If not, we show the onBoarding
     final highScore = ref.watch(leaderboardProvider.notifier).highScore;
-    final coins = ref.read(coinsProvider).valueOrNull ?? 0;
+    final coins = ref.read(coinsProvider).value ?? 0;
     if (highScore == null && coins <= 0) {
       showTutorial.value = true;
     }
 
     return SafeArea(
       bottom: false,
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           body: Stack(
             children: [
               Positioned.fill(
                 child: state.when(
                   data: (data) => GameWidget(
-                    game: KGame(
-                      data,
-                      ref,
-                      isTutorial: showTutorial.value,
-                    ),
+                    game: KGame(data, ref, isTutorial: showTutorial.value),
                     overlayBuilderMap: {
                       endGameDialogKey: (BuildContext context, KGame game) {
                         return EndGameScreen(
-                            Score(
-                                value: game.scoreNotifier.value,
-                                timeInSec: game.timeNotifier.value),
-                            game: game);
+                          Score(
+                            value: game.scoreNotifier.value,
+                            timeInSec: game.timeNotifier.value,
+                          ),
+                          game: game,
+                        );
                       },
                       topIconsKey: (BuildContext context, KGame game) {
                         return GameTopIcons(game);
@@ -84,15 +82,14 @@ class GameScreen extends HookConsumerWidget {
                       },
                       fire: (BuildContext context, KGame game) {
                         return const FireOverlay();
-                      }
+                      },
                     },
                   ),
-                  error: (_, __) => const SizedBox.shrink(),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  error: (_, _) => const SizedBox.shrink(),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                 ),
-              )
+              ),
             ],
           ),
         ),

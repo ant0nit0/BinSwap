@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/bin_list_item.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/game_state_notifier.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/constants.dart';
@@ -12,14 +12,17 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameBinsState = ref.watch(gameStateNotifierProvider);
+    final gameBinsState = ref.watch(gameStateProvider);
 
     return gameBinsState.when(
       data: (gameBins) {
         final bins = gameBins.bins;
         final List otherBins = [...allBins]
-            .map((e) =>
-                bins.map((f) => f.title).toList().contains(e.title) ? null : e)
+            .map(
+              (e) => bins.map((f) => f.title).toList().contains(e.title)
+                  ? null
+                  : e,
+            )
             .where((element) => element != null)
             .toList();
 
@@ -35,7 +38,9 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
               child: Text(
-                translate('game.infos.recycling-guide.current-title'),
+                AppLocalizations.of(
+                  context,
+                )!.gameInfosRecyclingGuideCurrentTitle,
                 style: miniTitleTextStyle,
               ),
             ),
@@ -43,7 +48,7 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: bins.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   const SizedBox(height: kDefaultTinyPadding),
               itemBuilder: (context, index) {
                 return BinListItem(bins[index]);
@@ -53,7 +58,7 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: kDefaultTinyPadding),
               child: Text(
-                translate('game.infos.recycling-guide.other-title'),
+                AppLocalizations.of(context)!.gameInfosRecyclingGuideOtherTitle,
                 style: miniTitleTextStyle,
               ),
             ),
@@ -61,7 +66,7 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: otherBins.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   const SizedBox(height: kDefaultTinyPadding),
               itemBuilder: (context, index) {
                 return BinListItem(otherBins[index]);
@@ -70,10 +75,8 @@ class RecyclingGuideItemsList extends HookConsumerWidget {
           ],
         );
       },
-      error: (_, __) => const SizedBox.shrink(),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      error: (_, _) => const SizedBox.shrink(),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 }

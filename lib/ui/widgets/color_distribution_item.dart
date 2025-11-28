@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/widgets/bin_image.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/providers/bin_colors.dart';
 import 'package:recycling_master/ui/widgets/bin_color_picker.dart';
 import 'package:recycling_master/utils/bin_enums.dart';
@@ -33,8 +33,29 @@ class ColorDistributionItem extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Initialize the OverlayPortalController
-    final OverlayPortalController tooltipController =
-        useMemoized(() => OverlayPortalController(), [gkey]);
+    final OverlayPortalController tooltipController = useMemoized(
+      () => OverlayPortalController(),
+      [gkey],
+    );
+
+    final binTitle = switch (category) {
+      BinCategory.plastics => AppLocalizations.of(
+        context,
+      )!.gameInfosBinsPlasticsTitle,
+      BinCategory.organics => AppLocalizations.of(
+        context,
+      )!.gameInfosBinsOrganicsTitle,
+      BinCategory.electronics => AppLocalizations.of(
+        context,
+      )!.gameInfosBinsElectronicsTitle,
+      BinCategory.papers => AppLocalizations.of(
+        context,
+      )!.gameInfosBinsPapersTitle,
+      BinCategory.glass => AppLocalizations.of(
+        context,
+      )!.gameInfosBinsGlassTitle,
+      BinCategory.textiles => throw UnimplementedError(),
+    };
 
     final state = ref.watch(binColorsProvider);
 
@@ -44,61 +65,60 @@ class ColorDistributionItem extends HookConsumerWidget {
     }
 
     return state.when(
-        error: (error, stackTrace) => const SizedBox.shrink(),
-        loading: () => const CircularProgressIndicator(),
-        data: (data) {
-          final color = data[category]!;
-          return FittedBox(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: kDefaultPadding),
-              child: LayoutBuilder(
-                builder: (ctx, constraints) => GestureDetector(
-                  key: gkey,
-                  onTap: () => tooltipController.toggle(),
-                  child: Row(
-                    children: [
-                      BinImage(color: color, category: category),
-                      const SizedBox(
-                        width: kDefaultSmallPadding,
+      error: (error, stackTrace) => const SizedBox.shrink(),
+      loading: () => const CircularProgressIndicator(),
+      data: (data) {
+        final color = data[category]!;
+        return FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: kDefaultPadding),
+            child: LayoutBuilder(
+              builder: (ctx, constraints) => GestureDetector(
+                key: gkey,
+                onTap: () => tooltipController.toggle(),
+                child: Row(
+                  children: [
+                    BinImage(color: color, category: category),
+                    const SizedBox(width: kDefaultSmallPadding),
+                    Text(
+                      binTitle,
+                      style: const TextStyle(
+                        fontSize: 24.0,
+                        fontFamily: 'LilitaOne',
+                        color: neutralDark,
                       ),
-                      Text(
-                        translate('game.infos.bins.${category.name}.title'),
-                        style: const TextStyle(
-                          fontSize: 24.0,
-                          fontFamily: 'LilitaOne',
-                          color: neutralDark,
-                        ),
+                    ),
+                    const SizedBox(width: kDefaultPadding),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: getColorFromBinColor(color),
+                        shape: BoxShape.circle,
                       ),
-                      const SizedBox(
-                        width: kDefaultPadding,
+                      height: 40,
+                      width: 40,
+                      child: OverlayPortal(
+                        controller: tooltipController,
+                        overlayChildBuilder: (BuildContext context) {
+                          final pos = _getWidgetPosition();
+                          final size = _getWidgetSize();
+                          return Positioned(
+                            left: pos.dx + size.width / 2,
+                            top: pos.dy - size.height / 2,
+                            child: BinColorPicker(
+                              category: category,
+                              onColorSelected: onColorSelected,
+                            ),
+                          );
+                        },
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: getColorFromBinColor(color),
-                            shape: BoxShape.circle),
-                        height: 40,
-                        width: 40,
-                        child: OverlayPortal(
-                          controller: tooltipController,
-                          overlayChildBuilder: (BuildContext context) {
-                            final pos = _getWidgetPosition();
-                            final size = _getWidgetSize();
-                            return Positioned(
-                                left: pos.dx + size.width / 2,
-                                top: pos.dy - size.height / 2,
-                                child: BinColorPicker(
-                                  category: category,
-                                  onColorSelected: onColorSelected,
-                                ));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

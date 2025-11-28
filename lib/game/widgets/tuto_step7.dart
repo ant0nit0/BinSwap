@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recycling_master/game/kgame.dart';
 import 'package:recycling_master/game/widgets/next_button.dart';
+import 'package:recycling_master/l10n/app_localizations.dart';
 import 'package:recycling_master/ui/widgets/kanimate.dart';
 import 'package:recycling_master/utils/colors.dart';
 import 'package:recycling_master/utils/theme.dart';
@@ -19,11 +19,15 @@ class TutorialStep7 extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const ts = TextStyle(color: neutralLight, fontSize: 16.0, height: 1.3);
 
-    final confettiController =
-        ConfettiController(duration: const Duration(seconds: 1));
+    final confettiController = ConfettiController(
+      duration: const Duration(seconds: 1),
+    );
 
-    const littleTs =
-        TextStyle(color: neutralLight, fontSize: 14.0, height: 1.3);
+    const littleTs = TextStyle(
+      color: neutralLight,
+      fontSize: 14.0,
+      height: 1.3,
+    );
     final t1AnimationController = useAnimationController(
       duration: const Duration(milliseconds: 600),
     );
@@ -45,9 +49,9 @@ class TutorialStep7 extends HookConsumerWidget {
           child: Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: kDefaultLargePadding)
-                        .copyWith(top: kDefaultLargePadding),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kDefaultLargePadding,
+                ).copyWith(top: kDefaultLargePadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +60,7 @@ class TutorialStep7 extends HookConsumerWidget {
                       controller: t1AnimationController,
                       slideDirection: SlideDirection.downToUp,
                       child: Text(
-                        translate('game.tuto.7.top'),
+                        AppLocalizations.of(context)!.gameTuto7Top,
                         style: ts,
                       ),
                     ),
@@ -65,13 +69,13 @@ class TutorialStep7 extends HookConsumerWidget {
                       controller: t2AnimationController,
                       slideDirection: SlideDirection.downToUp,
                       child: Text(
-                        translate('game.tuto.7.bottom'),
+                        AppLocalizations.of(context)!.gameTuto7Bottom,
                         style: littleTs,
                       ),
                     ),
                     const SizedBox(height: kDefaultPadding),
                     NextButtonWidget(
-                      text: translate('game.tuto.7.button'),
+                      text: AppLocalizations.of(context)!.gameTuto7Button,
                       controller: t2AnimationController,
                       beforeAnimationCallback: () {
                         t1AnimationController.reverse();
@@ -80,7 +84,7 @@ class TutorialStep7 extends HookConsumerWidget {
                       afterAnimationCallback: () {
                         game.launchGameAfterTutorial();
                       },
-                    )
+                    ),
                   ],
                 ),
               ),

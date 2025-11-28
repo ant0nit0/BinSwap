@@ -12,7 +12,7 @@ import 'package:recycling_master/game/components/game_bin.dart';
 import 'package:recycling_master/game/kgame.dart';
 
 class GameItem extends SpriteComponent
-    with HasGameRef<KGame>, CollisionCallbacks {
+    with HasGameReference<KGame>, CollisionCallbacks {
   static const double padding = 2.0;
   late final int _columnIndex;
   final Item item;
@@ -60,7 +60,7 @@ class GameItem extends SpriteComponent
   void onRemove() {
     super.onRemove();
     // Remove the item from the game
-    gameRef.removeItemPerColumn(_columnIndex, this);
+    game.removeItemPerColumn(_columnIndex, this);
   }
 
   @override
@@ -79,24 +79,24 @@ class GameItem extends SpriteComponent
         sprite!.originalSize.y + padding * 2);
 
     // Randomly choose a column index
-    final rand = Random().nextInt(gameRef.state.nbCol);
+    final rand = Random().nextInt(game.state.nbCol);
     _columnIndex = rand;
     // The position of the top left corner of the random column
-    final columnPosition = gameRef.size.x * (1 / gameRef.state.nbCol) * rand;
+    final columnPosition = game.size.x * (1 / game.state.nbCol) * rand;
 
     // To center items, we need to first add the half a to the left position
     // and then subtract half of the item size.
     // In this way, the center of the item will be at the center of the column
-    final halfOfColumnWidth = (gameRef.size.x * (1 / gameRef.state.nbCol)) / 2;
+    final halfOfColumnWidth = (game.size.x * (1 / game.state.nbCol)) / 2;
     final halfOfItemSize = (size.x / 2 - padding) / 2;
     // Niw we can set the position of the item
     position = Vector2(
       columnPosition + halfOfColumnWidth - halfOfItemSize,
-      gameRef.size.y * .25 + (padding + size.y / 2) / 2,
+      game.size.y * .25 + (padding + size.y / 2) / 2,
     );
 
     // Store this as the last item of the column
-    gameRef.addItemPerColumn(_columnIndex, this);
+    game.addItemPerColumn(_columnIndex, this);
 
     await add(CircleHitbox(
       radius: (size.x / 2 + padding * 2),
@@ -113,12 +113,12 @@ class GameItem extends SpriteComponent
         Offset(size.x / 4.4, size.y / 4.4); // Center of the sprite
 
     // Draw the background circle
-    final whitePaint = Paint()..color = Colors.white.withOpacity(.5);
+    final whitePaint = Paint()..color = Colors.white.withValues(alpha: .5);
     final paint = Paint()
-      ..color = color.withOpacity(game.levelNotifier.value.itemOpacity);
+      ..color = color.withValues(alpha: game.levelNotifier.value.itemOpacity);
     final strokePaint = Paint()
       ..color =
-          color.withOpacity(max(1, game.levelNotifier.value.itemOpacity * 2))
+          color.withValues(alpha: max(1, game.levelNotifier.value.itemOpacity * 2))
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
     canvas.drawCircle(circleOffset, circleRadius, whitePaint);
@@ -135,7 +135,7 @@ class GameItem extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    position.y += gameRef.levelNotifier.value.itemSpeed *
+    position.y += game.levelNotifier.value.itemSpeed *
         dt *
         (isAccelerate.value ? 3 : 1) *
         // We don't need to multiply by the item speed factor if the item is accelerating
